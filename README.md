@@ -9,10 +9,12 @@ Built for the coders4christ challenge.
 
 You enter your zip code or general location, answer five quick questions about
 what you're looking for (things like music style, meeting space, and
-language), and get a ranked list of nearby churches that fit. Pick one, and
-you can request to be met by a greeter when you arrive, someone who will be
-watching for you and can walk you in. From there you get a simple Sunday plan
-screen with the service time, address, parking, and what to expect.
+language), and get a ranked list of nearby churches that fit. Save the ones
+worth a second look and put them side by side, so twenty places narrow down to
+two or three on the same facts. Pick one, and you can request to be met by a
+greeter when you arrive, someone who will be watching for you and can walk you
+in. From there you get a simple Sunday plan screen with the service time,
+address, parking, and what to expect.
 
 ## The "Visit with Someone" differentiator
 

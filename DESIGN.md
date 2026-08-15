@@ -385,3 +385,39 @@ not grow.
 
 Both bands are 86px tall and masked to fade into the paper, the same treatment
 the intro hero uses, so no text ever sits on the artwork.
+
+---
+
+## 13. The shortlist and compare, added 2026-08-15
+
+Twenty ranked churches is a list, not a decision. The shortlist is what turns
+one into the other.
+
+- **Save lives on the card, not behind it.** Each result card is a container
+  with two buttons: `.pc-body` opens the church, `.save-btn` in a `.pc-foot`
+  saves it. The card used to be a single button, and a save control nested
+  inside a button is invalid markup that does not reliably fire. Do not put it
+  back.
+- **The count is in the results header, always.** It reads "Compare 3 saved"
+  once anything is saved and "Save a few to compare them" (disabled) before
+  that, so the feature explains itself instead of hiding until it is used.
+- **Compare is a real table, not cards in a row.** One column per saved church,
+  one row per field, with the field names sticky on the left so they stay put
+  while the churches scroll past. Horizontal scroll is contained to
+  `.cmp-scroll`, never the page body.
+- **Every row reads a field that already exists on a church object.** Fit,
+  denomination, music, dress, meeting space, kids, services, language, greeter
+  count, address. Nothing is inferred, so the comparison cannot claim more than
+  the church's own site said. Missing data reads "Not listed yet" in italic,
+  never as a blank or a zero.
+
+`state.shortlist` is an array of church ids in save order, persisted by the
+existing `saveState()`. It did NOT need a `STORAGE_KEY` bump: a v2 state saved
+before the shortlist existed is still fully readable, it simply has no
+`shortlist` key, and a defensive default covers it the same way `hiddenGreeters`
+is covered. Bump the key only when the shape of an existing answer changes.
+
+**The glyph follows the sky, not the screen.** Compare shares results' sky
+(`sky-results`), so it carries results' mark, the closed door. That is right on
+its own terms: on the compare screen you are still outside, weighing which door.
+A sixth mark would have broken the five-beat count in section 12.
