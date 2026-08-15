@@ -324,3 +324,64 @@ Everything this section used to list open is now decided and shipped in
   the locked card structure from section 6, mirrored to
   `data/greeters.json`. Report hides the profile immediately and cancels
   any plan that named that greeter.
+
+---
+
+## 12. The ink glyph system, added 2026-08-15
+
+Five hand-drawn SVG marks, one per screen on the main path, telling the same
+arrival story the app itself walks the reader through:
+
+| Beat | Screen | Mark |
+|---|---|---|
+| 1 | Intro | A figure walking, satchel over the shoulder |
+| 2 | Quiz | Five footprints walking away, one per question |
+| 3 | Results | The double door, closed |
+| 4 | Expanded | One leaf swung open, light reaching the step |
+| 5 | Plan | Inside: the window, the light on the floor, two rows of pews |
+
+**They are drawn by hand as path data, never generated.** A second AI
+illustration would drift in line weight and palette from the intro hero, and
+that inconsistency is the exact tell the art system exists to avoid. If a sixth
+mark is ever wanted, draw it, do not prompt for it.
+
+**The ink line never changes. The wash does.** Every mark strokes at 1.4px in
+`--ink-soft` with `vector-effect:non-scaling-stroke`. What moves across the five
+is the wash behind the line, from a dim night brown to full gold:
+
+```css
+.glyph-1{ --wash:rgba(58,36,22,0.12); }
+.glyph-2{ --wash:rgba(122,60,30,0.16); }
+.glyph-3{ --wash:rgba(193,96,47,0.18); }
+.glyph-4{ --wash:rgba(217,164,65,0.30); }
+.glyph-5{ --wash:rgba(217,164,65,0.42); }
+```
+
+That is the same night-to-morning progression the sky strip runs (section 5), so
+the glyph and the sky read as one story rather than two decorations. Change one
+and change the other.
+
+Two presentations, both the same component. `.glyph` is a block mark above a
+heading, used where the screen has no label of its own. `.chapter` puts it on a
+row beside a small uppercase label, used on the quiz and results where a label
+already exists, so the mark costs no vertical room on a short phone.
+
+Each mark carries its own tight `viewBox` in `GLYPH_BOX`. Without that, the wide
+flat marks (the footprints) render as a smudge at the same CSS height as the
+tall ones.
+
+**Off-path screens carry no glyph on purpose.** Out of area, safety, and report
+are detours, not steps in the arrival. Adding a mark there would break the count.
+
+### Reusing the hero, never re-generating it
+
+The intro illustration is embedded once as `HERO_IMG`. The results header and the
+plan screen show the SAME constant at different crops via `object-position`, not
+a second embedded image. Style consistency is then guaranteed and the page does
+not grow.
+
+- `.band-results` at `56% 18%`, the arch and the lit opening. Suits "a few places."
+- `.band-plan` at `74% 38%`, the greeter with her hand raised. Suits "[Greeter] is expecting you."
+
+Both bands are 86px tall and masked to fade into the paper, the same treatment
+the intro hero uses, so no text ever sits on the artwork.
