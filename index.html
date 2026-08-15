@@ -470,6 +470,16 @@ main.screen-root{
   font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
   color:var(--clay-deep); margin-bottom:6px;
 }
+.plan-note{ margin-top:16px; }
+.plan-note-lbl{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px; font-weight:600; letter-spacing:0.02em; }
+.plan-note-input{
+  width:100%; padding:14px 16px; border-radius:16px;
+  border:1.5px solid var(--line); background:var(--card);
+  font-family:inherit; font-size:16px; line-height:1.45; color:var(--ink);
+  resize:vertical; min-height:44px;
+}
+.plan-note-input:focus{ outline:2px solid var(--clay); outline-offset:1px; }
+.plan-note-help{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:6px; }
 .resume-card p{ font-size:13.5px; color:var(--ink); line-height:1.5; margin:0 0 10px; font-weight:500; }
 .resume-actions{ display:flex; gap:8px; }
 .resume-btn{
@@ -1288,7 +1298,17 @@ function renderExpanded(){
   Array.prototype.forEach.call(document.querySelectorAll("[data-request]"), function(btn){
     btn.addEventListener("click", function(){
       var parts = btn.getAttribute("data-request").split(":");
-      state.visitPlan = { churchId: parts[0], greeterIndex: parseInt(parts[1], 10) };
+      var churchId = parts[0], greeterIndex = parseInt(parts[1], 10);
+      /* Re-confirming the same greeter keeps any note already written. Choosing a
+         different greeter or church starts clean, since the note was addressed
+         to someone else. */
+      var prev = state.visitPlan;
+      var sameGreeter = prev && prev.churchId === churchId && prev.greeterIndex === greeterIndex;
+      state.visitPlan = {
+        churchId: churchId,
+        greeterIndex: greeterIndex,
+        note: sameGreeter ? (prev.note || "") : ""
+      };
       state.screen = "plan";
       render();
     });
@@ -1342,15 +1362,32 @@ function renderPlan(){
         (church.parkingNote ? '<div class="plan-row"><div class="plan-lbl">Parking</div><div class="plan-val">' + escapeHtml(church.parkingNote) + '</div></div>' : '') +
         (church.dressNorm ? '<div class="plan-row"><div class="plan-lbl">Wear</div><div class="plan-val">' + escapeHtml(church.dressNorm) + '</div></div>' : '') +
       '</div>' +
+      '<div class="plan-note">' +
+        '<label class="plan-note-lbl" for="planNoteInput">Anything they should know?</label>' +
+        '<textarea class="plan-note-input" id="planNoteInput" maxlength="280" rows="3" placeholder="I’ll have my two kids with me. We might be a few minutes late."></textarea>' +
+        '<div class="plan-note-help">Saved on this phone with your plan. In the full version this is what ' + escapeHtml(greeter.sign) + ' would see before Sunday.</div>' +
+      '</div>' +
       '<div class="demo-tag" style="margin-top:16px;">Demo persona, so no message was actually sent</div>' +
       '<p class="section-sub">' + escapeHtml(greeter.sign) + ' is a demo persona, invented to show how this will work. In the full version, a real greeter from ' + escapeHtml(church.name) + ' would get a heads up right now and confirm they’ll be there. Everything else on this plan is real, from the church’s own website.</p>' +
       (church.website
-        ? '<a class="site-link" href="' + escapeHtml(church.website) + '" target="_blank" rel="noopener noreferrer">Visit ' + escapeHtml(church.name) + '’s website</a>'
+        ? '<p class="section-sub">Want to ask something before Sunday? Their own site has the church’s contact details.</p>' +
+          '<a class="site-link" href="' + escapeHtml(church.website) + '" target="_blank" rel="noopener noreferrer">Visit ' + escapeHtml(church.name) + '’s website</a>'
         : '') +
       '<div class="safety-link-row"><button class="safety-link" id="planSafetyBtn" type="button">How we keep meeting up safe</button></div>' +
       '<button class="cta-btn ghost" id="planBackBtn" type="button" style="margin-top:8px;">Back to ' + escapeHtml(church.name) + '</button>' +
       '<button class="start-over" id="planClearBtn" type="button">Cancel this plan</button>' +
     '</div>';
+
+  /* Set the value as a property, never in the markup, and persist WITHOUT a
+     re-render. render() rebuilds innerHTML, so re-rendering per keystroke would
+     drop focus mid-word. */
+  var noteInput = document.getElementById("planNoteInput");
+  noteInput.value = (state.visitPlan && state.visitPlan.note) || "";
+  noteInput.addEventListener("input", function(){
+    if (!state.visitPlan) return;
+    state.visitPlan.note = noteInput.value;
+    saveState();
+  });
 
   document.getElementById("planBackBtn").addEventListener("click", function(){
     state.expandedChurchId = church.id;

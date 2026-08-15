@@ -32,6 +32,36 @@ real staff or members. This is a hard design rule, not an oversight: the app
 also ships a Report button and a safety page so a real deployment would have
 a clear path for correcting or flagging anything that reads as misleading.
 
+## Where this goes next
+
+The demo is deliberately one-sided. It works entirely on the visitor's phone,
+with no backend and no accounts, which is why the greeters are fictional and
+why nothing is actually sent to anyone. The real product is two-sided:
+
+1. **A church claims its profile.** They confirm their own service details, so
+   the data stops being something I researched and becomes something they
+   maintain.
+2. **Greeters become real volunteers.** People at that church opt in, write
+   their own note, and pick the public spot where they are happy to meet a
+   visitor. The demo personas exist to show the shape of that card before any
+   real person is asked to fill one in.
+3. **Messages route through the platform.** A visitor's note reaches the
+   greeter without either side handing over a phone number or an address.
+
+The reason that last part is not in this build is worth stating plainly.
+Messaging between a nervous stranger and a volunteer is a moderation surface,
+not a feature. It needs reporting that reaches a real person, blocking,
+retention rules, and a policy for what happens when a minor messages an adult.
+Shipping half of that would have undercut the safety posture the rest of the
+app is built on, so the app instead keeps the note on the visitor's own phone
+and says so.
+
+The same reasoning rules out a shortcut I looked at, relaying visitor messages
+into a church's social media inbox. Those APIs are permission-scoped: a page
+has to connect the app before anything can be delivered to it. So that route
+carries the same onboarding requirement as the full product, with a platform
+review on top, and it does not avoid the moderation question either.
+
 ## Data sourcing rules
 
 Every fact about every church (service times, address, dress code, music
