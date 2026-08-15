@@ -74,12 +74,6 @@ a{ color:inherit; }
 .sky-results{ background:linear-gradient(90deg,#c1602f,#d9a441,#eccf94); }
 .sky-expanded{ background:linear-gradient(90deg,#eccf94,#ffe9b8,#fff6e4); }
 
-.statusbar{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 22px 4px; font-size:13px; font-weight:600; color:var(--ink);
-  position:relative; z-index:1; flex:none;
-}
-
 main.screen-root{
   flex:1;
   overflow-y:auto;
@@ -187,6 +181,9 @@ main.screen-root{
 .answer-row.selected .knob::after{
   content:""; position:absolute; inset:4px; border-radius:50%; background:var(--clay);
 }
+/* Multi-select reads as a square so it is visibly "pick any", not "pick one". */
+.answer-row .knob.knob-multi{ border-radius:7px; }
+.answer-row.selected .knob.knob-multi::after{ border-radius:3px; }
 .answer-row .a-text{ font-size:15.5px; color:var(--ink); font-weight:500; }
 .quiz-nav{
   display:flex; justify-content:space-between; align-items:center;
@@ -268,6 +265,17 @@ main.screen-root{
   font-size:11px; background:rgba(58,32,14,0.07); color:var(--ink-soft);
   padding:5px 10px; border-radius:99px; font-weight:700;
 }
+.pc-addr{ font-size:12.5px; color:var(--ink-soft); line-height:1.45; margin-top:8px; font-weight:600; }
+.pc-addr.unset{ font-style:italic; font-weight:500; opacity:0.75; }
+.dir-row{ display:flex; gap:10px; margin-top:12px; }
+.dir-btn{
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:12px 10px; border-radius:14px; min-height:44px;
+  background:var(--card); border:1.5px solid var(--line);
+  color:var(--clay-deep); font-size:13.5px; font-weight:700; text-decoration:none;
+  white-space:nowrap;
+}
+.plan-dir .dir-row{ margin-top:0; }
 .pc-meta{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:4px; }
 .expand-hint{
   margin-top:12px; text-align:center; font-size:12px; font-weight:700;
@@ -421,6 +429,7 @@ main.screen-root{
   padding:11px 0; border-top:1px dashed var(--line); margin-top:11px;
 }
 .plan-row:first-of-type{ border-top:none; }
+.plan-dir{ padding-top:2px; }
 .plan-row .plan-lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; width:74px; flex:none; padding-top:2px; }
 .plan-row .plan-val{ font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.45; }
 .plan-row .plan-val small{ display:block; font-size:12px; color:var(--ink-soft); font-weight:500; margin-top:2px; }
@@ -506,7 +515,6 @@ main.screen-root{
 <body>
 <div class="app">
   <div class="sky-strip sky-intro" id="skyStrip"></div>
-  <div class="statusbar"><span id="clockText">6:50</span><span>&#9679;&#9679;&#9679;&#9679;</span></div>
   <main class="screen-root" id="screenRoot"></main>
 </div>
 
@@ -688,7 +696,7 @@ var GREETERS = {
 };
 
 var QUESTIONS = [
-  { key: "musicStyle", text: "What's the music usually like?", sub: "No wrong answer here, we just want you comfortable walking in.",
+  { key: "musicStyle", multi: true, text: "What's the music usually like?", sub: "Pick any that sound good. More than one is fine, most people are happy with a couple.",
     options: VOCAB.musicStyle.concat([NO_PREF]) },
   { key: "dressNorm", text: "What do people usually wear?", sub: "Come as you are either way, we just want you to know what to expect.",
     options: VOCAB.dressNorm.indexOf(NO_PREF) > -1 ? VOCAB.dressNorm : VOCAB.dressNorm.concat([NO_PREF]) },
@@ -709,7 +717,8 @@ QUESTIONS[4].options = ["Still deciding, no preference"].concat(uniqueDenoms);
 
 var ORLANDO_ZIP_PREFIXES = ["327", "328", "347", "346"];
 
-var STORAGE_KEY = "firstSunday.state.v1";
+/* v2: musicStyle became a multi-select array, so v1 answers can no longer be read. */
+var STORAGE_KEY = "firstSunday.state.v2";
 
 function loadState(){
   try {
@@ -759,6 +768,22 @@ function shortLoc(church){
   return "Orlando area";
 }
 
+/* Several addresses carry a parenthetical venue note ("(meets at ... School)").
+   Cards show the street only; the expanded view and plan show it in full. */
+function shortAddress(church){
+  if (!church.address) return null;
+  return church.address.split(" (")[0];
+}
+
+function directionsHtml(church){
+  if (!church.address) return "";
+  var q = encodeURIComponent(church.address);
+  return '<div class="dir-row">' +
+    '<a class="dir-btn" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener noreferrer">Apple Maps</a>' +
+    '<a class="dir-btn" href="https://www.google.com/maps/search/?api=1&amp;query=' + q + '" target="_blank" rel="noopener noreferrer">Google Maps</a>' +
+  '</div>';
+}
+
 /* ---------------- Fit scoring ---------------- */
 var WEIGHTS = { musicStyle: 25, dressNorm: 20, meetingSpace: 20, kidsDuringService: 25 };
 var DENOM_BONUS = 10;
@@ -766,6 +791,13 @@ var DENOM_BONUS = 10;
 var NEUTRAL_ANSWERS = [NO_PREF, "Not bringing kids", "Still deciding, no preference"];
 
 function axisScore(userAnswer, churchValue, weight){
+  /* Multi-select axes score as a match if the church lands on ANY chosen answer. */
+  if (Array.isArray(userAnswer)) {
+    if (!userAnswer.length || userAnswer.indexOf(NO_PREF) > -1) return weight;
+    if (churchValue === null || churchValue === undefined) return Math.round(weight * 0.6);
+    if (userAnswer.indexOf(churchValue) > -1) return weight;
+    return Math.round(weight * 0.2);
+  }
   if (!userAnswer || NEUTRAL_ANSWERS.indexOf(userAnswer) > -1) return weight;
   if (churchValue === null || churchValue === undefined) return Math.round(weight * 0.6);
   if (churchValue === userAnswer) return weight;
@@ -813,15 +845,12 @@ function allLanguages(){
 /* ---------------- Rendering ---------------- */
 var root = document.getElementById("screenRoot");
 var skyStrip = document.getElementById("skyStrip");
-var clockText = document.getElementById("clockText");
 
-var SCREEN_TIMES = { intro: "6:50", outofarea: "6:52", quiz: "6:58", results: "7:12", expanded: "9:15", plan: "9:20", safety: "7:05", report: "7:06" };
 var SCREEN_SKY = { intro: "sky-intro", outofarea: "sky-outofarea", quiz: "sky-quiz", results: "sky-results", expanded: "sky-expanded", plan: "sky-expanded", safety: "sky-results", report: "sky-outofarea" };
 
 function render(){
   saveState();
   skyStrip.className = "sky-strip " + SCREEN_SKY[state.screen];
-  clockText.textContent = SCREEN_TIMES[state.screen] || "";
   if (state.screen === "intro") renderIntro();
   else if (state.screen === "outofarea") renderOutOfArea();
   else if (state.screen === "quiz") renderQuiz();
@@ -996,7 +1025,10 @@ function renderOutOfArea(){
 
 function renderQuiz(){
   var q = QUESTIONS[state.quizIndex];
+  var isMulti = !!q.multi;
   var selected = state.answers[q.key];
+  var selectedList = Array.isArray(selected) ? selected : [];
+  var hasAnswer = isMulti ? selectedList.length > 0 : !!selected;
   var dots = QUESTIONS.map(function(_, i){
     var cls = "progress-dot";
     if (i < state.quizIndex) cls += " done";
@@ -1005,9 +1037,11 @@ function renderQuiz(){
   }).join("");
 
   var answersHtml = q.options.map(function(opt){
-    var isSelected = selected === opt;
-    return '<button class="answer-row' + (isSelected ? ' selected' : '') + '" type="button" data-value="' + escapeHtml(opt) + '">' +
-      '<span class="knob" aria-hidden="true"></span><span class="a-text">' + escapeHtml(opt) + '</span></button>';
+    var isSelected = isMulti ? selectedList.indexOf(opt) > -1 : selected === opt;
+    return '<button class="answer-row' + (isSelected ? ' selected' : '') + '" type="button"' +
+      ' role="' + (isMulti ? 'checkbox' : 'radio') + '" aria-checked="' + (isSelected ? 'true' : 'false') + '"' +
+      ' data-value="' + escapeHtml(opt) + '">' +
+      '<span class="knob' + (isMulti ? ' knob-multi' : '') + '" aria-hidden="true"></span><span class="a-text">' + escapeHtml(opt) + '</span></button>';
   }).join("");
 
   root.innerHTML =
@@ -1021,13 +1055,29 @@ function renderQuiz(){
       '<div class="answers">' + answersHtml + '</div>' +
       '<div class="quiz-nav">' +
         '<button class="nav-back" id="quizBackBtn" type="button"' + (state.quizIndex === 0 ? ' disabled' : '') + '>Back</button>' +
-        '<button class="nav-next" id="quizNextBtn" type="button"' + (selected ? '' : ' disabled') + '>' + (state.quizIndex === QUESTIONS.length - 1 ? 'See my matches' : 'Next') + '</button>' +
+        '<button class="nav-next" id="quizNextBtn" type="button"' + (hasAnswer ? '' : ' disabled') + '>' + (state.quizIndex === QUESTIONS.length - 1 ? 'See my matches' : 'Next') + '</button>' +
       '</div>' +
     '</div>';
 
   Array.prototype.forEach.call(document.querySelectorAll(".answer-row"), function(btn){
     btn.addEventListener("click", function(){
-      state.answers[q.key] = btn.getAttribute("data-value");
+      var val = btn.getAttribute("data-value");
+      if (!isMulti) {
+        state.answers[q.key] = val;
+        render();
+        return;
+      }
+      var cur = Array.isArray(state.answers[q.key]) ? state.answers[q.key].slice() : [];
+      if (val === NO_PREF) {
+        /* No preference is exclusive: choosing it clears everything else. */
+        cur = cur.indexOf(NO_PREF) > -1 ? [] : [NO_PREF];
+      } else {
+        var np = cur.indexOf(NO_PREF);
+        if (np > -1) cur.splice(np, 1);
+        var at = cur.indexOf(val);
+        if (at > -1) cur.splice(at, 1); else cur.push(val);
+      }
+      state.answers[q.key] = cur;
       render();
     });
   });
@@ -1036,7 +1086,8 @@ function renderQuiz(){
     else { state.screen = "intro"; render(); }
   });
   document.getElementById("quizNextBtn").addEventListener("click", function(){
-    if (!state.answers[q.key]) return;
+    var cur = state.answers[q.key];
+    if (isMulti ? !(Array.isArray(cur) && cur.length) : !cur) return;
     if (state.quizIndex < QUESTIONS.length - 1) {
       state.quizIndex += 1;
     } else {
@@ -1099,6 +1150,9 @@ function renderResults(){
           '<div class="fit-badge' + (isTop ? ' gold' : '') + '"><b>' + row.fit + '%</b><span>Est. fit</span></div>' +
         '</div>' +
         (tags ? '<div class="pc-tags">' + tags + '</div>' : '') +
+        (church.address
+          ? '<div class="pc-addr">' + escapeHtml(shortAddress(church)) + '</div>'
+          : '<div class="pc-addr unset">Address not listed on their site yet</div>') +
         (meta ? '<p class="pc-meta">' + escapeHtml(meta) + '</p>' : '') +
         (gCount ? '<div class="greeter-count"><span class="bulb" aria-hidden="true"></span>' + gCount + (gCount === 1 ? ' greeter ready' : ' greeters ready') + ' to meet you at the door</div>' : '') +
         (isTop ? '<div class="expand-hint">See more</div>' : '') +
@@ -1189,6 +1243,8 @@ function renderExpanded(){
         infoCell("Services", serviceTimesVal) +
         infoCell("Language", languageVal) +
       '</div>' +
+      '<div class="info-grid" style="grid-template-columns:1fr;">' + infoCell("Address", church.address) + '</div>' +
+      directionsHtml(church) +
       (church.parkingNote ? '<div class="info-grid" style="grid-template-columns:1fr;">' + infoCell("Parking", church.parkingNote) + '</div>' : '') +
       (church.whatToExpectNote ?
         '<div class="section-title"><span class="bulb-sm" aria-hidden="true"></span>What to expect</div>' +
@@ -1268,6 +1324,7 @@ function renderPlan(){
         '<div class="plan-row"><div class="plan-lbl">Meet</div><div class="plan-val">' + escapeHtml(greeter.name) + '<small>' + escapeHtml(greeter.spot) + ' (public spot), about 15 minutes before the service</small></div></div>' +
         '<div class="plan-row"><div class="plan-lbl">Services</div><div class="plan-val">' + escapeHtml(timesVal) + '</div></div>' +
         (church.address ? '<div class="plan-row"><div class="plan-lbl">Address</div><div class="plan-val">' + escapeHtml(church.address) + '</div></div>' : '') +
+        (church.address ? '<div class="plan-dir">' + directionsHtml(church) + '</div>' : '') +
         (church.parkingNote ? '<div class="plan-row"><div class="plan-lbl">Parking</div><div class="plan-val">' + escapeHtml(church.parkingNote) + '</div></div>' : '') +
         (church.dressNorm ? '<div class="plan-row"><div class="plan-lbl">Wear</div><div class="plan-val">' + escapeHtml(church.dressNorm) + '</div></div>' : '') +
       '</div>' +
