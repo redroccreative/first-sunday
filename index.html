@@ -27,7 +27,21 @@
   --oxblood:#8a2f1f;
   --line:#dcc9a6;
   --shadow:rgba(58,32,14,0.28);
+  /* A drawn rule instead of a 1px border. Tiles horizontally at natural size so
+     the wobble never stretches. Used for every divider in the app. */
+  --ink-rule:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='4'%3E%3Cpath d='M0 2.3C26 1.3 52 3 80 2.2s54-1.6 82-.5 54 2.3 82 1.4 48-1.5 76-.7' fill='none' stroke='%23cdb894' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
+
+/* Shared drawn divider. Sits on a pseudo-element so it never collides with an
+   element's own background shorthand. */
+.ink-top, .ink-bottom{ position:relative; }
+.ink-top::before, .ink-bottom::after{
+  content:""; position:absolute; left:0; right:0; height:4px;
+  background-image:var(--ink-rule); background-repeat:repeat-x; background-position:left center;
+  pointer-events:none;
+}
+.ink-top::before{ top:-1px; }
+.ink-bottom::after{ bottom:-2px; }
 *{box-sizing:border-box;}
 html,body{height:100%;}
 body{
@@ -60,13 +74,22 @@ a{ color:inherit; }
   max-width:480px;
   margin:0 auto;
   pointer-events:none;
-  background-image:radial-gradient(rgba(58,32,14,0.035) 1px, transparent 1px);
-  background-size:3px 3px;
-  opacity:0.5;
+  /* Paper fibre, not a dot grid. Matches the watercolour stock the intro
+     illustration is drawn on, so the art sits ON the page instead of over it. */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size:220px 220px;
+  opacity:0.05;
+  mix-blend-mode:multiply;
   z-index:0;
 }
 
-.sky-strip{ height:12px; width:100%; flex:none; transition:background 0.6s ease; }
+/* The sky. Shifts night-to-morning as you move through the app. Masked so it
+   dissolves into the paper instead of reading as a coloured UI bar. */
+.sky-strip{
+  height:16px; width:100%; flex:none; transition:background 0.6s ease;
+  -webkit-mask-image:linear-gradient(180deg,#000 45%,transparent);
+  mask-image:linear-gradient(180deg,#000 45%,transparent);
+}
 @media (prefers-reduced-motion: reduce){ .sky-strip{ transition:none; } }
 .sky-intro{ background:linear-gradient(90deg,#20160e,#3a2416,#20160e); }
 .sky-outofarea{ background:linear-gradient(90deg,#3a2416,#5a2f18,#3a2416); }
@@ -200,7 +223,7 @@ main.screen-root{
 .answer-row .a-text{ font-size:15.5px; color:var(--ink); font-weight:500; }
 .quiz-nav{
   display:flex; justify-content:space-between; align-items:center;
-  margin-top:18px; padding-top:14px; border-top:1px solid var(--line); flex:none;
+  margin-top:18px; padding-top:14px; flex:none; position:relative;
 }
 .nav-back{
   font-size:14px; color:var(--ink-soft); font-weight:600; min-height:44px; min-width:44px;
@@ -216,7 +239,7 @@ main.screen-root{
 
 /* ============ RESULTS ============ */
 .results-head{
-  padding:16px 22px 14px; background:var(--paper-deep); border-bottom:1px solid var(--line); flex:none;
+  padding:16px 22px 14px; background:var(--paper-deep); flex:none; position:relative;
 }
 .results-eyebrow{ font-size:11.5px; color:var(--ink-soft); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
 .results-head h2{ font-size:21px; margin:4px 0 2px; color:var(--ink); font-weight:500; }
@@ -299,7 +322,7 @@ main.screen-root{
 
 /* ============ EXPANDED ============ */
 .expand-head{
-  padding:14px 20px 12px; background:var(--paper-deep); border-bottom:1px solid var(--line);
+  padding:14px 20px 12px; background:var(--paper-deep); position:relative;
   display:flex; align-items:center; gap:10px; flex:none;
 }
 .back-chip{
@@ -439,7 +462,7 @@ main.screen-root{
 .plan-loc{ font-size:12.5px; color:var(--ink-soft); }
 .plan-row{
   display:flex; gap:10px; align-items:flex-start;
-  padding:11px 0; border-top:1px dashed var(--line); margin-top:11px;
+  padding:11px 0; margin-top:11px; position:relative;
 }
 .plan-row:first-of-type{ border-top:none; }
 .plan-dir{ padding-top:2px; }
@@ -520,6 +543,19 @@ main.screen-root{
 .start-over{
   display:block; text-align:center; margin:18px auto 0; font-size:12.5px; color:var(--ink-soft);
   font-weight:600; background:none; border:none; padding:8px; min-height:44px;
+}
+
+
+/* Drawn rules replacing the four straight borders. */
+.quiz-nav::before, .plan-row::before{
+  content:""; position:absolute; left:0; right:0; top:-1px; height:4px;
+  background-image:var(--ink-rule); background-repeat:repeat-x; background-position:left center;
+  pointer-events:none;
+}
+.results-head::after, .expand-head::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:4px;
+  background-image:var(--ink-rule); background-repeat:repeat-x; background-position:left center;
+  pointer-events:none;
 }
 
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
