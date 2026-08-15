@@ -1,0 +1,627 @@
+{
+  "vocabulary": {
+    "note": "Fixed answer sets used so the quiz can match on these values directly. dressNorm vocabulary is locked by DESIGN.md; musicStyle, meetingSpace, and kidsDuringService are provisional, defined this session to keep the ranking matchable. sizeBand was removed 2026-08-15 after a research pass found only 1 of 20 churches states a real Sunday attendance number; replaced by meetingSpace (quiz question 5) and languageOptions (a lighter filter/badge, not a full quiz question).",
+    "musicStyle": [
+      "Full band, modern worship",
+      "Blended, some hymns some contemporary",
+      "Traditional hymns, organ or piano",
+      "Choir led, traditional",
+      "Chant and liturgical music",
+      "Varies by service"
+    ],
+    "dressNorm": [
+      "Jeans and t-shirts",
+      "Business casual",
+      "Sunday best",
+      "Really varies",
+      "No preference"
+    ],
+    "kidsDuringService": [
+      "Own class during service",
+      "Kids classes sorted by age",
+      "Stay in the main service",
+      "Cry room or nursery available, no separate class"
+    ],
+    "meetingSpace": [
+      "Dedicated church building",
+      "Shared or rented space"
+    ],
+    "languageOptions": "Free-text array of languages a service is offered in or interpreted into (not a fixed vocabulary), e.g. [\"English\"], [\"English\", \"Spanish\"]."
+  },
+  "churches": [
+    {
+      "id": "nona-church-narcoossee",
+      "name": "Nona Church",
+      "denomination": "Nondenominational",
+      "neighborhood": "Lake Nona",
+      "address": "255 S. Narcoossee Rd, St Cloud, FL 34771",
+      "website": "https://nonachurch.com/",
+      "serviceTimes": [
+        "Saturday 4:30 PM",
+        "Saturday 6:00 PM",
+        "Saturday 7:30 PM (Spanish language)",
+        "Sunday 8:30 AM",
+        "Sunday 9:45 AM",
+        "Sunday 11:15 AM",
+        "Sunday 12:45 PM"
+      ],
+      "musicStyle": "Full band, modern worship",
+      "dressNorm": "No preference",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": null,
+      "languageOptions": [
+        "English",
+        "Spanish"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "Services run about 70 minutes with live, contemporary worship music, and there is no dress code, so guests are told to come as they are. First time visitors are encouraged to arrive 15 minutes early, and kids from crawlers through 5th grade can be pre-registered for secure, background checked NonaKids classes sorted by age.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://nonachurch.com/locations",
+        "musicStyle": "https://nonachurch.com/im-new",
+        "dressNorm": "https://nonachurch.com/im-new",
+        "kidsDuringService": "https://nonachurch.com/get-connected/nonakids",
+        "whatToExpectNote": "https://nonachurch.com/im-new",
+        "languageOptions": "https://nonachurch.com/locations"
+      }
+    },
+    {
+      "id": "trinity-church-lake-nona",
+      "name": "Trinity Church of Lake Nona",
+      "denomination": "Nondenominational (Reformed)",
+      "neighborhood": "Lake Nona",
+      "address": "7800 Laureate Blvd, Orlando, FL 32827 (meets at Laureate Park Elementary School, in the cafeteria)",
+      "website": "https://www.trinitylakenona.com/",
+      "serviceTimes": [
+        "Sunday 9:30 AM"
+      ],
+      "musicStyle": "Blended, some hymns some contemporary",
+      "dressNorm": "Business casual",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": null,
+      "parkingNote": "Use the school's main parking lot, with signage directing attendees to the cafeteria where the church meets.",
+      "whatToExpectNote": "You will gather in the cafeteria of Laureate Park Elementary School, where complimentary coffee and refreshments are offered before the service. Seating is either in chairs or on benches in the back for families with young children, and the service follows a structured order including a welcome, several songs, a time of confession, a roughly 30 minute sermon, pastoral prayer, and a closing benediction. Nursery care is available for ages 0 to 4, and kids in kindergarten through second grade can go to story time in the library during the sermon, with coloring pages and children's bulletins available for those who stay in the service.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://www.trinitylakenona.com/faqs",
+        "musicStyle": "https://www.trinitylakenona.com/",
+        "dressNorm": "https://www.trinitylakenona.com/faqs",
+        "kidsDuringService": "https://www.trinitylakenona.com/faqs",
+        "parkingNote": "https://www.trinitylakenona.com/faqs",
+        "whatToExpectNote": "https://www.trinitylakenona.com/faqs",
+        "meetingSpace": "https://www.trinitylakenona.com/faqs"
+      }
+    },
+    {
+      "id": "east-coast-believers-lake-nona",
+      "name": "East Coast Believers Church",
+      "denomination": "Nondenominational",
+      "neighborhood": "Lake Nona",
+      "address": "12253 Lake Nona Gateway Rd, Orlando, FL 32827",
+      "website": "https://www.eastcoastbelievers.org/lake-nona",
+      "serviceTimes": [
+        "Sunday 10:00 AM"
+      ],
+      "musicStyle": "Full band, modern worship",
+      "dressNorm": "No preference",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": [
+        "English",
+        "Spanish (translation available)"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "Services begin promptly on time with a countdown video five minutes before start, followed by a time of worship. Nobody will single you out, ask you to stand up, or ask for money as a first time guest. If it is your first visit, you can stop by the Guest Connect area in the lobby before or after the service.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://www.eastcoastbelievers.org/lake-nona",
+        "musicStyle": "https://www.eastcoastbelievers.org/lake-nona",
+        "dressNorm": "https://www.eastcoastbelievers.org/lake-nona",
+        "kidsDuringService": "https://www.eastcoastbelievers.org/lake-nona",
+        "whatToExpectNote": "https://www.eastcoastbelievers.org/lake-nona",
+        "meetingSpace": "https://www.eastcoastbelievers.org/lake-nona",
+        "languageOptions": "https://www.eastcoastbelievers.org/espanol"
+      }
+    },
+    {
+      "id": "azalea-park-church",
+      "name": "Azalea Park Church",
+      "denomination": "Nondenominational",
+      "neighborhood": "Azalea Park, Orlando",
+      "address": "5721 Dahlia Dr, Orlando, FL 32807",
+      "website": "https://azaleaparkchurch.org",
+      "serviceTimes": [
+        "Sunday 11:00 AM",
+        "Thursday 8:00 PM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": null,
+      "languageOptions": [
+        "Spanish"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "Azalea Park Church holds services on Sunday mornings at 11:00 AM and Thursday evenings at 8:00 PM. The church describes its focus as reaching people who want a new beginning, spiritual healing, and growth in love and compassion, and is led by Pastors Wildre and Alexa Ortega.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://azaleaparkchurch.org/about.html",
+        "serviceTimes": "https://azaleaparkchurch.org/about.html",
+        "whatToExpectNote": "https://azaleaparkchurch.org/about.html",
+        "languageOptions": "https://azaleaparkchurch.org/about.html"
+      }
+    },
+    {
+      "id": "narcoossee-baptist-church",
+      "name": "Narcoossee Baptist Church",
+      "denomination": "Southern Baptist",
+      "neighborhood": "St. Cloud / Lake Nona area",
+      "address": null,
+      "website": "http://www.nbaptistchurch.org/",
+      "serviceTimes": [
+        "Sunday 9:30 AM Bible Study",
+        "Sunday 10:30 AM Worship Service",
+        "Sunday 6:00 PM Bible Application"
+      ],
+      "musicStyle": "Blended, some hymns some contemporary",
+      "dressNorm": null,
+      "kidsDuringService": "Own class during service",
+      "meetingSpace": null,
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "Sunday starts with a 9:30 AM Bible Study for all ages, followed by the main Worship Service at 10:30 AM, which includes hymnal praise, contemporary praise and worship music, a choir, and a message from the pastor. Children's Church runs from 11:15 AM to 12:00 PM during that morning service, where kids learn Bible stories through videos, games, and crafts instead of sitting in the adult service. The church also broadcasts the service live on FM radio on the church property.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "http://www.nbaptistchurch.org/worship.html",
+        "musicStyle": "http://www.nbaptistchurch.org/about.html",
+        "kidsDuringService": "http://www.nbaptistchurch.org/ministries.html",
+        "whatToExpectNote": "http://www.nbaptistchurch.org/worship.html"
+      }
+    },
+    {
+      "id": "south-orlando-baptist-church",
+      "name": "South Orlando Baptist Church",
+      "denomination": "Southern Baptist",
+      "neighborhood": "South Orlando",
+      "address": "11513 S Orange Blossom Tr., Orlando, FL 32837",
+      "website": "https://www.southorlandobaptist.org/",
+      "serviceTimes": [
+        "Sunday 9:45 AM (Small Groups)",
+        "Sunday 11:00 AM (Worship Service)"
+      ],
+      "musicStyle": "Blended, some hymns some contemporary",
+      "dressNorm": null,
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": null,
+      "languageOptions": [
+        "English"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "A typical Sunday service lasts about 75 minutes with a mix of contemporary and traditional worship music led by the worship team. Childcare and nursery care are available during the service, and children in kindergarten through 5th grade have their own Children's Church after the music portion of worship. Visitors are welcome to stay after the service for fellowship and meeting people.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://www.southorlandobaptist.org/i-m-new",
+        "musicStyle": "https://www.southorlandobaptist.org/i-m-new",
+        "kidsDuringService": "https://www.southorlandobaptist.org/children",
+        "whatToExpectNote": "https://www.southorlandobaptist.org/i-m-new",
+        "languageOptions": "https://www.southorlandobaptist.org/our-story"
+      }
+    },
+    {
+      "id": "first-baptist-orlando",
+      "name": "First Baptist Church of Orlando",
+      "denomination": "Southern Baptist",
+      "neighborhood": "Orlando",
+      "address": "3000 South John Young Parkway, Orlando, FL 32805",
+      "website": "https://www.firstorlando.com/",
+      "serviceTimes": [
+        "Sunday 8:30 AM",
+        "Sunday 10:00 AM",
+        "Sunday 11:30 AM",
+        "Sunday 3:30 PM (Spanish language)"
+      ],
+      "musicStyle": "Varies by service",
+      "dressNorm": "No preference",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": null,
+      "languageOptions": [
+        "English",
+        "Spanish",
+        "Portuguese",
+        "ASL"
+      ],
+      "parkingNote": "Several parking lots are available on campus, with signage directing first time visitors to First Time Guest Parking.",
+      "whatToExpectNote": "Services run about an hour, with the 8:30 AM service featuring traditional style music and the 10:00 AM and 11:30 AM services featuring a worship team with live music. The church says formal attire is not required, so come as you are. Kids are placed in age based classes, Preschool, Elementary, and Preteen, while parents attend the main service, and first time guests are directed to dedicated guest parking.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://www.firstorlando.com/locations/john-young/",
+        "serviceTimes": "https://www.firstorlando.com/locations/john-young/",
+        "musicStyle": "https://www.firstorlando.com/locations/john-young/",
+        "dressNorm": "https://www.firstorlando.com/locations/john-young/",
+        "kidsDuringService": "https://www.firstorlando.com/kids/",
+        "parkingNote": "https://www.firstorlando.com/locations/john-young/",
+        "whatToExpectNote": "https://www.firstorlando.com/locations/john-young/",
+        "languageOptions": "https://www.firstorlando.com/locations/john-young/"
+      }
+    },
+    {
+      "id": "spring-of-life-umc",
+      "name": "Spring of Life United Methodist Church",
+      "denomination": "United Methodist",
+      "neighborhood": "Lake Nona",
+      "address": "11101 Moss Park Rd, Orlando, FL 32765",
+      "website": "https://www.springchurch.org",
+      "serviceTimes": [
+        "Sunday 10:30 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": "Really varies",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": null,
+      "parkingNote": "Parking is free and always available right on campus, park in any open spot and greeters near the entrance will point you in the right direction.",
+      "whatToExpectNote": "You will arrive to a Welcome Table with greeters and name tags, then can grab coffee or a snack at the Cafe before the 10:30 AM service. Kids ages 6 months through VPK can go to the nursery and grades K through 5 start in Sunday School, then rejoin the family in the sanctuary for the sermon and communion. There is no formal check in and dress ranges from jeans and t-shirts to business casual, so you come as you are.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://www.springchurch.org/first-visit",
+        "serviceTimes": "https://www.springchurch.org/first-visit",
+        "dressNorm": "https://www.springchurch.org/first-visit",
+        "kidsDuringService": "https://www.springchurch.org/first-visit",
+        "parkingNote": "https://www.springchurch.org/first-visit",
+        "whatToExpectNote": "https://www.springchurch.org/first-visit",
+        "meetingSpace": "https://www.springchurch.org/our-story"
+      }
+    },
+    {
+      "id": "first-umc-orlando",
+      "name": "First United Methodist Church of Orlando",
+      "denomination": "United Methodist",
+      "neighborhood": "Downtown Orlando",
+      "address": "142 E Jackson Street, Orlando, FL 32801",
+      "website": "https://firstchurchorlando.org",
+      "serviceTimes": [
+        "Sunday 9:30 AM",
+        "Sunday 11:00 AM"
+      ],
+      "musicStyle": "Varies by service",
+      "dressNorm": null,
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": null,
+      "parkingNote": "For Sunday worship: the Seaside parking garage at Jackson and Magnolia (closes at 1 pm), an underground garage beneath the building with 70 spaces, and a surface lot at the Wesley Center on Jackson Street for those with limited mobility or families with young children.",
+      "whatToExpectNote": "A first time visitor can choose between a 9:30 AM Modern Worship service with a praise band in the Contemporary Worship Center on the second floor, or an 11:00 AM Traditional Worship service in the Sanctuary with choirs, instrumental ensembles, and organ. Children from birth through preschool can go to nursery care, and Pre-K through 5th graders start in Kid's Chapel before moving to age based groups in the Children's Ministry wing. Communion is offered at both services on the first Sunday of each month.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://firstchurchorlando.org/contact-us",
+        "serviceTimes": "https://firstchurchorlando.org/services",
+        "musicStyle": "https://firstchurchorlando.org/services",
+        "kidsDuringService": "https://firstchurchorlando.org/children",
+        "parkingNote": "https://firstchurchorlando.org/contact-us",
+        "whatToExpectNote": "https://firstchurchorlando.org/services",
+        "meetingSpace": "https://firstchurchorlando.org/our-history"
+      }
+    },
+    {
+      "id": "hope-presbyterian-lake-nona",
+      "name": "Hope Presbyterian Church at Lake Nona",
+      "denomination": "Presbyterian (PCUSA)",
+      "neighborhood": "Lake Nona",
+      "address": "Lake Nona Middle School, 13700 Narcoossee Road, Orlando, FL 32832",
+      "website": "https://hopenona.com/",
+      "serviceTimes": [
+        "Sunday 10:00 AM"
+      ],
+      "musicStyle": "Blended, some hymns some contemporary",
+      "dressNorm": "Really varies",
+      "kidsDuringService": "Cry room or nursery available, no separate class",
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "Worship lasts about an hour and blends a couple of classic hymns with contemporary worship songs using simple instrumentation, along with some ancient forms of liturgy. Greeters are stationed near the main entrance of Lake Nona Middle School and will walk you to the right room. Communion is offered monthly, and background checked staff care for preschool age children in an adjacent windowed room during the service.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://hopenona.com/directions-and-services",
+        "serviceTimes": "https://hopenona.com/directions-and-services",
+        "musicStyle": "https://hopenona.com/directions-and-services",
+        "dressNorm": "https://hopenona.com/directions-and-services",
+        "kidsDuringService": "https://hopenona.com/directions-and-services",
+        "whatToExpectNote": "https://hopenona.com/directions-and-services",
+        "meetingSpace": "https://hopenona.com/directions-and-services"
+      }
+    },
+    {
+      "id": "lake-nona-presbyterian-pca",
+      "name": "Lake Nona Presbyterian Church",
+      "denomination": "Presbyterian (PCA)",
+      "neighborhood": "Lake Nona",
+      "address": "10123 William Carey Drive, Orlando, FL 32832 (meets at the Pioneers Campus, just off Narcoossee Road near 417)",
+      "website": "https://www.lnpca.church/",
+      "serviceTimes": [
+        "Sunday 10:30 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": "Business casual",
+      "kidsDuringService": null,
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "You will worship on Sunday morning at 10:30 AM at the Pioneers Campus just off Narcoossee Road near 417. The church describes itself as a casual congregation, and dress is casual, think jeans paired with a button down shirt or blouse.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://www.lnpca.church/i-am-new-here",
+        "serviceTimes": "https://www.lnpca.church/i-am-new-here",
+        "dressNorm": "https://www.lnpca.church/i-am-new-here",
+        "whatToExpectNote": "https://www.lnpca.church/i-am-new-here",
+        "meetingSpace": "https://www.lnpca.church/about"
+      }
+    },
+    {
+      "id": "all-saints-lutheran-orlando",
+      "name": "All Saints Lutheran Church",
+      "denomination": "Lutheran (ELCA)",
+      "neighborhood": "South Orlando",
+      "address": "12601 Balcombe Rd, Orlando, FL 32837",
+      "website": "https://www.allsaintsorlando.org/",
+      "serviceTimes": [
+        "Sunday 9:00 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "Sunday worship is once a week at this address, and the church describes its congregation as diverse and family like, welcoming to all who enter. The site itself lists two different start times for the Sunday service, 9:00 AM on the homepage and worship page, 9:30 AM on the visit and about pages, so a first time visitor should call ahead to confirm the exact time.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://www.allsaintsorlando.org/contact-us",
+        "serviceTimes": "https://www.allsaintsorlando.org/",
+        "whatToExpectNote": "https://www.allsaintsorlando.org/about",
+        "meetingSpace": "https://www.allsaintsorlando.org/about"
+      }
+    },
+    {
+      "id": "cathedral-church-st-luke",
+      "name": "Cathedral Church of Saint Luke",
+      "denomination": "Episcopal",
+      "neighborhood": "Downtown Orlando",
+      "address": "130 North Magnolia Avenue, Orlando, FL 32801",
+      "website": "https://www.ccslorlando.org/",
+      "serviceTimes": [
+        "Sunday 8:00 AM",
+        "Sunday 10:15 AM",
+        "Sunday 6:00 PM"
+      ],
+      "musicStyle": "Varies by service",
+      "dressNorm": null,
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": [
+        "English"
+      ],
+      "parkingNote": "Three free options on Sundays: complimentary metered street parking around the building, the Lanier Parking Lot at Washington and Magnolia adjacent to the cathedral, and the Regions Bank Parking Garage (covered, get a voucher from an usher after the service).",
+      "whatToExpectNote": "The service is a Holy Eucharist using the Book of Common Prayer, with hymns, scripture readings, and preaching, and worshippers can arrive early for silent prayer. The 8 AM service is traditional language with pipe organ and no incense, the 10:15 AM service is contemporary language with pipe organ, other instruments, choir, incense, and children's programming, and the 6 PM service is contemporary language with guitar and piano and no incense. Children ages 0 through 4th grade can stay in the main service with family or go to nursery or Kid's Church, and all children's volunteers are background checked.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://www.ccslorlando.org/worship-times",
+        "musicStyle": "https://www.ccslorlando.org/worship-times",
+        "kidsDuringService": "https://www.ccslorlando.org/cathedral-kids",
+        "parkingNote": "https://www.ccslorlando.org/visit-us-1",
+        "whatToExpectNote": "https://www.ccslorlando.org/worship-times",
+        "meetingSpace": "https://www.ccslorlando.org/history",
+        "languageOptions": "https://www.ccslorlando.org/worship-times"
+      }
+    },
+    {
+      "id": "adoration-church-orlando",
+      "name": "Adoration Church",
+      "denomination": "Anglican (ACNA)",
+      "neighborhood": "Winter Park",
+      "address": "Kress Memorial Seventh-Day Adventist Church Building, 746 Formosa Ave, Winter Park, FL 32789",
+      "website": "https://adorationchurchfl.com/",
+      "serviceTimes": [
+        "Sunday 10:00 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": "Own class during service",
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "Adoration Church is an Anglican parish that gathers for worship on Sunday mornings at 10am at the Kress Memorial Seventh Day Adventist Church Building in Winter Park. Kids ages 1 to 11 stay with their families for part of the service, then background checked volunteers lead them in age appropriate teaching during the sermon before they rejoin their families. A pre-service prayer gathering is also offered on Sundays at 9am for those who want to attend.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "denomination": "https://adorationchurchfl.com/beliefs",
+        "address": "https://adorationchurchfl.com/",
+        "serviceTimes": "https://adorationchurchfl.com/",
+        "kidsDuringService": "https://adorationchurchfl.com/adoration-kids",
+        "whatToExpectNote": "https://adorationchurchfl.com/adoration-kids",
+        "meetingSpace": "https://adorationchurchfl.com/"
+      }
+    },
+    {
+      "id": "saint-frances-xavier-cabrini",
+      "name": "Saint Frances Xavier Cabrini Catholic Church",
+      "denomination": "Catholic",
+      "neighborhood": "Lake Nona",
+      "address": "Narcoossee Middle School Cafeteria, 2700 N. Narcoossee Road, Saint Cloud, FL 34771",
+      "website": "https://stcabriniorlando.org/",
+      "serviceTimes": [
+        "Saturday Vigil Mass 5:00 PM",
+        "Sunday Mass 8:30 AM",
+        "Sunday Mass 10:30 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": "Shared or rented space",
+      "languageOptions": [
+        "English",
+        "Spanish",
+        "Portuguese"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "This parish holds Mass at Narcoossee Middle School, so first time visitors will be worshiping in a school cafeteria rather than a traditional church building. There is a Saturday vigil Mass at 5 PM and two Sunday Mass options at 8:30 AM and 10:30 AM to choose from. The site has a Welcome Home section that invites newcomers to register as a parish household after visiting.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://stcabriniorlando.org/mass-times/",
+        "serviceTimes": "https://stcabriniorlando.org/mass-times/",
+        "whatToExpectNote": "https://stcabriniorlando.org/",
+        "meetingSpace": "https://stcabriniorlando.org/mass-times/",
+        "languageOptions": "https://stcabriniorlando.org/news-events/new-sunday-mass-schedule-and-languages-beginning-september-6/"
+      }
+    },
+    {
+      "id": "blessed-trinity-catholic-conway",
+      "name": "Blessed Trinity Catholic Church",
+      "denomination": "Catholic",
+      "neighborhood": "Conway, Orlando",
+      "address": "4545 Anderson Road, Orlando, FL 32812",
+      "website": "https://btccorl.org/",
+      "serviceTimes": [
+        "Saturday Vigil Mass 5:00 PM (English)",
+        "Sunday Mass 8:00 AM (English)",
+        "Sunday Mass 10:00 AM (English)",
+        "Sunday Mass 12:00 PM (Spanish)",
+        "Sunday Mass 5:00 PM (English)"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": [
+        "English",
+        "Spanish"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": "Visitors are welcomed with the message Come as you are, whether it is their first time or they have been part of the parish for years. Sunday Mass is offered in English at 8:00 AM, 10:00 AM, and 5:00 PM, plus a Spanish language Mass at 12:00 PM, with confessions in Spanish available from 11:15 to 11:45 AM. The parish offers a low gluten host at Communion for anyone with a gluten intolerance, distributed at the line where the presider of Mass is giving communion.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://btccorl.org/parish-office-and-directions",
+        "serviceTimes": "https://btccorl.org/mass-times",
+        "whatToExpectNote": "https://btccorl.org/welcome",
+        "meetingSpace": "https://btccorl.org/news/60-years-of-faith-honoring-our-past-building-our-future",
+        "languageOptions": "https://btccorl.org/reconciliation"
+      }
+    },
+    {
+      "id": "st-george-antiochian-orthodox",
+      "name": "St. George Antiochian Orthodox Church",
+      "denomination": "Antiochian Orthodox",
+      "neighborhood": "Downtown Orlando",
+      "address": "24 North Rosalind Avenue, Orlando, FL 32801",
+      "website": "https://www.stgeorgeorlando.org/home",
+      "serviceTimes": [
+        "Sunday Orthros 9:00 AM",
+        "Sunday Divine Liturgy 10:00 AM",
+        "Saturday Confessions 4:00 PM",
+        "Saturday Great Vespers 5:00 PM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": "Own class during service",
+      "meetingSpace": null,
+      "languageOptions": [
+        "English",
+        "Arabic"
+      ],
+      "parkingNote": null,
+      "whatToExpectNote": null,
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "serviceTimes": "https://www.stgeorgeorlando.org/home",
+        "kidsDuringService": "https://www.stgeorgeorlando.org/home",
+        "languageOptions": "https://stgeorgeorlando.org/main/index.php/our-clergy/"
+      }
+    },
+    {
+      "id": "faith-church-orlando",
+      "name": "Faith Church Orlando",
+      "denomination": "Assemblies of God (Pentecostal)",
+      "neighborhood": "Southeast Orlando",
+      "address": "9307 Curry Ford Road, Orlando, FL 32825",
+      "website": "https://faithchurchorlando.com/",
+      "serviceTimes": [
+        "Wednesday 7:00 PM",
+        "Sunday 8:00 AM",
+        "Sunday 10:00 AM",
+        "Sunday 12:00 PM",
+        "Sunday 2:00 PM (Spanish language)"
+      ],
+      "musicStyle": "Full band, modern worship",
+      "dressNorm": "Really varies",
+      "kidsDuringService": "Kids classes sorted by age",
+      "meetingSpace": "Dedicated church building",
+      "languageOptions": [
+        "English",
+        "Spanish"
+      ],
+      "parkingNote": "The campus has multiple parking lots. The Information Center is located in the church vestibule by parking lot number 2.",
+      "whatToExpectNote": "Services run on a contemporary style with a full band and a practical message from the Bible. There is no set dress code, the church says to wear whatever makes you feel comfortable and confident, so you will see everything from business wear to casual clothes. A Guest Experience Team wearing bright yellow shirts is available near the entrance to answer questions and give directions, and children from newborn through grade 5 have their own age based classes with a secure check in and pickup system while parents are in the main service.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://faithchurchorlando.com/locations/curryford/",
+        "serviceTimes": "https://faithchurchorlando.com/locations/curryford/",
+        "musicStyle": "https://faithchurchorlando.com/events/easter/",
+        "dressNorm": "https://faithchurchorlando.com/events/easter/",
+        "kidsDuringService": "https://faithchurchorlando.com/kids/",
+        "parkingNote": "https://faithchurchorlando.com/locations/curryford/",
+        "whatToExpectNote": "https://faithchurchorlando.com/events/easter/",
+        "meetingSpace": "https://faithchurchorlando.com/church",
+        "languageOptions": "https://faithchurchorlando.com"
+      }
+    },
+    {
+      "id": "orlando-gospel-assembly",
+      "name": "Orlando Gospel Assembly",
+      "denomination": "Assemblies of God (Pentecostal)",
+      "neighborhood": "East Orlando",
+      "address": "2124 N Dean Road, Orlando, FL 32817",
+      "website": "https://www.orlandogospelassembly.org/",
+      "serviceTimes": [
+        "Sunday 12:00 PM",
+        "Sunday 6:00 PM",
+        "Wednesday 7:30 PM",
+        "Friday 8:00 PM (Zoom)"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": null,
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": null,
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://www.orlandogospelassembly.org/contact",
+        "serviceTimes": "https://www.orlandogospelassembly.org/contact"
+      }
+    },
+    {
+      "id": "restoration-seventh-day-adventist",
+      "name": "Restoration Seventh-day Adventist Church",
+      "denomination": "Seventh-day Adventist",
+      "neighborhood": "Orlando",
+      "address": "30 E Evans St, Orlando, FL 32804",
+      "website": "https://restorationfl.adventistchurch.org/",
+      "serviceTimes": [
+        "Saturday Sabbath School 10:00 AM",
+        "Saturday Divine Service 11:15 AM"
+      ],
+      "musicStyle": null,
+      "dressNorm": null,
+      "kidsDuringService": null,
+      "meetingSpace": null,
+      "languageOptions": null,
+      "parkingNote": null,
+      "whatToExpectNote": "The church describes itself as welcoming to visitors regardless of where they are in their spiritual journey, including people new to religion entirely. Worship happens on Saturday, the Sabbath, with Sabbath School at 10:00 AM followed by Divine Service at 11:15 AM.",
+      "lastVerified": "2026-08-15",
+      "sources": {
+        "address": "https://restorationfl.adventistchurch.org/about-ii/",
+        "serviceTimes": "https://restorationfl.adventistchurch.org/about-ii/",
+        "whatToExpectNote": "https://restorationfl.adventistchurch.org/"
+      }
+    }
+  ]
+}

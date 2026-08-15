@@ -1,0 +1,875 @@
+<title>The Handwritten Invitation</title>
+<style>
+  :root{
+    --paper:#f4ede1;
+    --paper-2:#ece2d1;
+    --ink:#1f2a3c;
+    --ink-soft:#3c4a5e;
+    --oxblood:#7a2e2e;
+    --accent:#b5893a;
+    --line:#c9bda3;
+    --card-shadow: 0 18px 40px rgba(20,15,5,0.35);
+    --bg-stage:#15130f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg-stage);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(122,46,46,0.12), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(181,137,58,0.10), transparent 45%);
+    color:#eee4d2;
+    font-family: ui-sans-serif, -apple-system, system-ui, "Segoe UI", sans-serif;
+    padding: 48px 24px 96px;
+  }
+  .stage-header{
+    max-width:1100px;
+    margin:0 auto 48px;
+  }
+  .kicker{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  h1.stage-title{
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    font-size:clamp(32px,5vw,52px);
+    margin:0 0 14px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    color:#f6efe1;
+  }
+  .thesis{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:18px;
+    line-height:1.5;
+    color:#cfc3a8;
+    max-width:640px;
+    margin:0 0 28px;
+  }
+  .swatches{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .swatch{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:#cfc3a8;
+    text-transform:uppercase;
+  }
+  .swatch .chip{
+    width:28px;height:28px;border-radius:6px;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+  }
+  .sample-chip{
+    display:inline-block;
+    margin-top:22px;
+    font-size:11px;
+    letter-spacing:0.05em;
+    color:#a89a78;
+    border:1px solid #4a4130;
+    border-radius:100px;
+    padding:6px 14px;
+    background:rgba(255,255,255,0.02);
+  }
+
+  .frames{
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:40px;
+    justify-content:center;
+    align-items:flex-start;
+  }
+  .frame-block{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+  .frame-label{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:#a89a78;
+  }
+
+  /* phone frame */
+  .phone{
+    width:390px;
+    height:844px;
+    max-width:90vw;
+    border-radius:52px;
+    background:linear-gradient(160deg,#2a271f,#100e0a);
+    padding:14px;
+    box-shadow: var(--card-shadow), 0 0 0 1px rgba(255,255,255,0.04);
+    position:relative;
+  }
+  .phone::before{
+    content:"";
+    position:absolute;
+    top:30px; left:50%;
+    transform:translateX(-50%);
+    width:120px; height:22px;
+    background:#0a0906;
+    border-radius:14px;
+    z-index:5;
+  }
+  .screen{
+    width:100%;
+    height:100%;
+    border-radius:40px;
+    overflow:hidden;
+    background:var(--paper);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    -webkit-overflow-scrolling:touch;
+  }
+  .screen-scroll{
+    flex:1;
+    overflow-y:auto;
+    padding: 56px 22px 28px;
+  }
+  .screen-scroll::-webkit-scrollbar{width:0;}
+
+  /* ==== shared typographic system inside screens ==== */
+  .label-sans{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .headline-serif{
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    color:var(--ink);
+    font-weight:600;
+    letter-spacing:0.005em;
+  }
+  hr.hairline{
+    border:none;
+    border-top:1px solid var(--line);
+    margin:16px 0;
+  }
+  .letterhead{
+    text-align:center;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .letterhead .mark{
+    width:34px;height:34px;
+    margin:0 auto 8px;
+  }
+  .letterhead .name{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--ink);
+    font-weight:700;
+  }
+  .letterhead .sub{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  /* progress dots for quiz */
+  .progress-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .progress-row .step{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--line);
+  }
+  .progress-row .step.done{background:var(--oxblood);}
+  .progress-row .step.current{background:var(--accent); transform:scale(1.3);}
+  .progress-text{
+    text-align:center;
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+
+  .q-number{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    color:var(--accent);
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  .q-title{
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    font-size:24px;
+    line-height:1.28;
+    color:var(--ink);
+    margin:0 0 22px;
+    font-weight:600;
+  }
+  .q-title .amp{ color:var(--oxblood); font-style:italic; }
+
+  .chip-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 14px;
+    border:1px solid var(--ink);
+    border-radius:2px;
+    background:transparent;
+    min-height:44px;
+    font-family: ui-serif, Georgia, serif;
+    font-size:15px;
+    color:var(--ink);
+    cursor:pointer;
+    position:relative;
+  }
+  .chip .box{
+    width:16px;height:16px;
+    border:1.4px solid var(--ink);
+    flex-shrink:0;
+    position:relative;
+  }
+  .chip.checked .box::after{
+    content:"";
+    position:absolute;
+    left:2px; top:-1px;
+    width:5px; height:9px;
+    border-right:2px solid var(--oxblood);
+    border-bottom:2px solid var(--oxblood);
+    transform:rotate(42deg);
+  }
+  .chip.checked{
+    border-color:var(--oxblood);
+    background:rgba(122,46,46,0.05);
+  }
+  .chip.checked::after{
+    content:"chosen";
+    position:absolute;
+    right:14px;
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:9px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+  }
+
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:26px;
+  }
+  .btn-primary{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-weight:700;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:13px 22px;
+    min-height:44px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .btn-ghost{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    background:none;
+    border:none;
+    min-height:44px;
+    padding:13px 10px;
+    cursor:pointer;
+  }
+
+  /* intro screen */
+  .intro-verse{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    border-left:2px solid var(--accent);
+    padding-left:14px;
+    margin: 22px 0 26px;
+  }
+  .field{
+    border:1px solid var(--ink);
+    border-radius:2px;
+    padding:12px 14px;
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    margin-bottom:12px;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .field .hint{ color:var(--ink-soft); font-size:12px; }
+  .or-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:16px 0;
+    color:var(--ink-soft);
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .or-row .rule{ flex:1; height:1px; background:var(--line); }
+
+  /* results list */
+  .addressed-to{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:2px;
+  }
+  .area-title{
+    font-family: ui-serif, Georgia, serif;
+    font-size:21px;
+    color:var(--ink);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+
+  .invite-card{
+    border:1px solid var(--ink);
+    border-radius:2px;
+    padding:16px;
+    margin-bottom:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    position:relative;
+  }
+  .invite-card.top{
+    border-color:var(--oxblood);
+    box-shadow: 0 0 0 1px var(--oxblood);
+  }
+  .invite-card .rank{
+    position:absolute;
+    top:-10px; left:14px;
+    background:var(--paper);
+    padding:0 6px;
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10px;
+    letter-spacing:0.14em;
+    color:var(--oxblood);
+    text-transform:uppercase;
+  }
+  .invite-card .row-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:6px;
+  }
+  .invite-card .church-name{
+    font-family: ui-serif, Georgia, serif;
+    font-size:18px;
+    color:var(--ink);
+    font-weight:600;
+    line-height:1.2;
+  }
+  .invite-card .fit-score{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--oxblood);
+    white-space:nowrap;
+    margin-left:10px;
+  }
+  .invite-card .meta{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    margin-top:8px;
+  }
+  .invite-card .greeter-note{
+    margin-top:10px;
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    color:var(--accent);
+    text-transform:uppercase;
+    font-weight:700;
+  }
+
+  /* expanded top result */
+  .expand-header{
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .expand-header .to-line{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .expand-header .church-big{
+    font-family: ui-serif, Georgia, serif;
+    font-size:26px;
+    color:var(--ink);
+    font-weight:600;
+    margin:4px 0 2px;
+  }
+  .expand-header .fit-big{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    color:var(--oxblood);
+    font-size:14px;
+  }
+  .detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 16px;
+    margin:18px 0;
+  }
+  .detail-grid .d{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+  }
+  .detail-grid .d .k{
+    font-size:9.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:3px;
+  }
+  .detail-grid .d .v{
+    font-size:12.5px;
+    color:var(--ink);
+    font-family: ui-serif, Georgia, serif;
+  }
+
+  .section-heading{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink);
+    font-weight:700;
+    margin: 22px 0 4px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-heading::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .section-sub{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+
+  .greeter-note-card{
+    border:1px solid var(--line);
+    border-left:3px solid var(--oxblood);
+    padding:14px 14px 12px;
+    margin-bottom:14px;
+    background:rgba(255,255,255,0.3);
+    position:relative;
+  }
+  .greeter-note-card .top-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .avatar{
+    width:34px;height:34px;
+    border-radius:50%;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: ui-serif, Georgia, serif;
+    font-size:12px;
+    font-weight:600;
+    color:var(--paper);
+  }
+  .greeter-note-card .who{
+    flex:1;
+  }
+  .greeter-note-card .gname{
+    font-family: ui-serif, Georgia, serif;
+    font-size:14.5px;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .greeter-note-card .gmeta{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10px;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  .demo-tag{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:8.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    border:1px solid var(--oxblood);
+    border-radius:100px;
+    padding:2px 7px;
+    white-space:nowrap;
+  }
+  .greeter-note-card .note{
+    font-family: ui-serif, Georgia, serif;
+    font-style:italic;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink);
+    margin:8px 0 10px;
+  }
+  .greeter-note-card .signature{
+    font-family: ui-serif, Georgia, serif;
+    font-size:13px;
+    color:var(--ink);
+    text-align:right;
+    margin-bottom:10px;
+  }
+  .greeter-note-card .meet-spot{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    border-radius:2px;
+    padding:8px 10px;
+    line-height:1.5;
+  }
+  .greeter-note-card .meet-spot b{
+    color:var(--ink);
+    font-weight:700;
+  }
+  .greeter-note-card .bottom-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:8px;
+  }
+  .report-link{
+    font-family: ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    text-decoration:underline;
+    background:none;
+    border:none;
+    cursor:pointer;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    padding:0 4px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .chip{ transition: border-color 0.15s ease, background 0.15s ease; }
+    .btn-primary{ transition: transform 0.1s ease; }
+    .btn-primary:active{ transform: scale(0.97); }
+  }
+
+  @media (max-width:900px){
+    .frames{gap:28px;}
+  }
+</style>
+
+<div class="stage-header">
+  <p class="kicker">Design Direction 03</p>
+  <h1 class="stage-title">The Handwritten Invitation</h1>
+  <p class="thesis">
+    Every screen reads like a card someone set by hand and sent to you by name.
+    Letterpress warmth, real hierarchy, and a voice that sounds like a person,
+    not a product.
+  </p>
+  <div class="swatches">
+    <div class="swatch"><span class="chip" style="background:#f4ede1;"></span>Paper F4EDE1</div>
+    <div class="swatch"><span class="chip" style="background:#1f2a3c;"></span>Ink Navy 1F2A3C</div>
+    <div class="swatch"><span class="chip" style="background:#7a2e2e;"></span>Oxblood 7A2E2E</div>
+    <div class="swatch"><span class="chip" style="background:#b5893a;"></span>Warm Gold B5893A</div>
+    <div class="swatch"><span class="chip" style="background:#c9bda3;"></span>Hairline C9BDA3</div>
+  </div>
+  <span class="sample-chip">Sample data for design review</span>
+</div>
+
+<div class="frames">
+
+  <!-- FRAME 1: INTRO -->
+  <div class="frame-block">
+    <p class="frame-label">Screen 01 &middot; The Invitation</p>
+    <div class="phone">
+      <div class="screen">
+        <div class="screen-scroll">
+          <div class="letterhead">
+            <svg class="mark" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="32" height="32" fill="none" stroke="#1f2a3c" stroke-width="1"/>
+              <path d="M17 8 L17 26 M9 14 L25 14" stroke="#7a2e2e" stroke-width="1.6" stroke-linecap="square"/>
+            </svg>
+            <div class="name">First Sunday</div>
+            <div class="sub">an invitation, of sorts</div>
+          </div>
+
+          <p class="label-sans" style="color:var(--accent);">You are invited to find</p>
+          <h2 class="headline-serif" style="font-size:26px; margin:6px 0 0; line-height:1.25;">
+            A church home worth<br>walking into.
+          </h2>
+
+          <p class="intro-verse">
+            Answer five short questions and we will set a table of churches
+            just for you. It takes about a minute, and nobody sees your answers
+            but us.
+          </p>
+
+          <p class="label-sans" style="margin-bottom:8px;">Where should we look</p>
+          <div class="field">
+            <span>Enter your zip code</span>
+            <span class="hint">e.g. 32827</span>
+          </div>
+          <div class="or-row"><span class="rule"></span>or<span class="rule"></span></div>
+          <div class="field">
+            <span>Use my location</span>
+            <span class="hint">&#8594;</span>
+          </div>
+
+          <div class="nav-row" style="margin-top:30px;">
+            <span class="label-sans" style="color:var(--ink-soft); font-weight:400;">Begin the questions</span>
+            <button class="btn-primary">Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 2: QUIZ Q2 -->
+  <div class="frame-block">
+    <p class="frame-label">Screen 02 &middot; Question 2 of 5</p>
+    <div class="phone">
+      <div class="screen">
+        <div class="screen-scroll">
+          <p class="progress-text">Second of five, almost there</p>
+          <div class="progress-row">
+            <span class="step done"></span>
+            <span class="step current"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
+
+          <p class="q-number">Question Two</p>
+          <h2 class="q-title">What do people <span class="amp">wear</span> on a Sunday morning?</h2>
+
+          <div class="chip-list">
+            <div class="chip"><span class="box"></span>Jeans and t-shirts</div>
+            <div class="chip checked"><span class="box"></span>Business casual</div>
+            <div class="chip"><span class="box"></span>Sunday best</div>
+            <div class="chip"><span class="box"></span>Really varies</div>
+            <div class="chip"><span class="box"></span>No preference</div>
+          </div>
+
+          <div class="nav-row">
+            <button class="btn-ghost">&#8592; Back</button>
+            <button class="btn-primary">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 3: RESULTS LIST -->
+  <div class="frame-block">
+    <p class="frame-label">Screen 03 &middot; Your Matches</p>
+    <div class="phone">
+      <div class="screen">
+        <div class="screen-scroll">
+          <div class="letterhead" style="padding-bottom:10px; margin-bottom:16px;">
+            <div class="name">First Sunday</div>
+          </div>
+          <p class="addressed-to">Addressed to you, near</p>
+          <h2 class="area-title">Orlando &amp; Lake Nona</h2>
+
+          <div class="invite-card top">
+            <span class="rank">Best fit</span>
+            <div class="row-top">
+              <span class="church-name">Summit Church, Orlando</span>
+              <span class="fit-score">94%</span>
+            </div>
+            <p class="meta">
+              Contemporary. Full band. Jeans and t-shirts welcome.
+              Several hundred on a Sunday. Kids have their own class
+              during service. Services at 9:15 and 11:00.
+            </p>
+            <p class="greeter-note">3 greeters ready to meet you &#8594;</p>
+          </div>
+
+          <div class="invite-card">
+            <span class="rank">No. 2</span>
+            <div class="row-top">
+              <span class="church-name">St. James Cathedral</span>
+              <span class="fit-score">88%</span>
+            </div>
+            <p class="meta">
+              Catholic, downtown Orlando. Liturgical, cantor and organ.
+              Attire varies, many dress up. Masses at 7:30, 9:30, and 11:30.
+            </p>
+            <p class="greeter-note">2 greeters ready to meet you</p>
+          </div>
+
+          <div class="invite-card">
+            <span class="rank">No. 3</span>
+            <div class="row-top">
+              <span class="church-name">First Baptist Orlando</span>
+              <span class="fit-score">85%</span>
+            </div>
+            <p class="meta">
+              Choir and orchestra, some modern songs mixed in.
+              Business casual to Sunday best. Over a thousand on
+              a Sunday. Kids classes by age, services 9:30 and 11:00.
+            </p>
+            <p class="greeter-note">3 greeters ready to meet you</p>
+          </div>
+
+          <div class="invite-card">
+            <span class="rank">No. 4</span>
+            <div class="row-top">
+              <span class="church-name">Holy Trinity Greek Orthodox</span>
+              <span class="fit-score">79%</span>
+            </div>
+            <p class="meta">
+              Maitland. Chanted liturgy, no instruments. Sunday best.
+              A couple hundred, children stay in liturgy. Divine
+              Liturgy at 10:00.
+            </p>
+            <p class="greeter-note">2 greeters ready to meet you</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 4: EXPANDED TOP RESULT + GREETERS -->
+  <div class="frame-block">
+    <p class="frame-label">Screen 04 &middot; Summit Church, Expanded</p>
+    <div class="phone">
+      <div class="screen">
+        <div class="screen-scroll">
+          <div class="expand-header">
+            <p class="to-line">Written for you at</p>
+            <h2 class="church-big">Summit Church, Orlando</h2>
+            <p class="fit-big">a 94% fit, by your answers</p>
+          </div>
+
+          <div class="detail-grid">
+            <div class="d"><div class="k">Tradition</div><div class="v">Non denominational</div></div>
+            <div class="d"><div class="k">Music</div><div class="v">Contemporary, full band</div></div>
+            <div class="d"><div class="k">Dress</div><div class="v">Jeans and t-shirts</div></div>
+            <div class="d"><div class="k">Size</div><div class="v">Several hundred</div></div>
+            <div class="d"><div class="k">Kids</div><div class="v">Class during service</div></div>
+            <div class="d"><div class="k">Services</div><div class="v">9:15 and 11:00</div></div>
+          </div>
+          <p style="font-family:ui-serif,Georgia,serif; font-style:italic; font-size:12px; color:var(--ink-soft); margin:-4px 0 4px;">
+            Parking team is out front both services.
+          </p>
+
+          <div class="section-heading">Visit With Someone</div>
+          <p class="section-sub">
+            Three people at Summit offered to meet you first, so you are not
+            walking in alone. Meetings are always in public.
+          </p>
+
+          <div class="greeter-note-card">
+            <div class="top-row">
+              <div class="avatar" style="background:#7a2e2e;">MR</div>
+              <div class="who">
+                <div class="gname">Maya R.</div>
+                <div class="gmeta">Lake Nona neighborhood &middot; 4 years at Summit</div>
+              </div>
+              <span class="demo-tag">Demo persona</span>
+            </div>
+            <p class="note">"I will meet you in the parking lot so you are not walking in alone."</p>
+            <p class="signature">&ndash; Maya</p>
+            <p class="meet-spot"><b>Happy to meet first at</b><br>Foxtail Coffee, Lake Nona Town Center (public spot)</p>
+            <div class="bottom-row"><button class="report-link">Report this greeter</button></div>
+          </div>
+
+          <div class="greeter-note-card">
+            <div class="top-row">
+              <div class="avatar" style="background:#1f2a3c;">DK</div>
+              <div class="who">
+                <div class="gname">Daniel K.</div>
+                <div class="gmeta">Baldwin Park neighborhood &middot; 2 years at Summit</div>
+              </div>
+              <span class="demo-tag">Demo persona</span>
+            </div>
+            <p class="note">"I came alone my first Sunday and nobody told me where anything was. I can fix that for you."</p>
+            <p class="signature">&ndash; Daniel</p>
+            <p class="meet-spot"><b>Happy to meet first at</b><br>Summit Church lobby, welcome desk (public spot)</p>
+            <div class="bottom-row"><button class="report-link">Report this greeter</button></div>
+          </div>
+
+          <div class="greeter-note-card">
+            <div class="top-row">
+              <div class="avatar" style="background:#b5893a;">GT</div>
+              <div class="who">
+                <div class="gname">Grace and Tom P.</div>
+                <div class="gmeta">Conway neighborhood &middot; 9 years at Summit</div>
+              </div>
+              <span class="demo-tag">Demo persona, not a real member</span>
+            </div>
+            <p class="note">"We bring our two kids, so we can show you exactly how kids check in works."</p>
+            <p class="signature">&ndash; Grace and Tom</p>
+            <p class="meet-spot"><b>Happy to meet first at</b><br>Summit Church main entrance (public spot)</p>
+            <div class="bottom-row"><button class="report-link">Report this greeter</button></div>
+          </div>
+
+          <hr class="hairline">
+          <p style="font-family:ui-serif,Georgia,serif; font-style:italic; font-size:12px; color:var(--ink-soft); text-align:center; padding-bottom:10px;">
+            "Let us not give up meeting together." Hebrews 10:25
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

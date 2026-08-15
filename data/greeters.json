@@ -1,0 +1,405 @@
+{
+  "note": "Every greeter in this file is FICTIONAL, a demo persona invented for the challenge build. None of them is a real member of any listed church, and the app labels every card Demo persona, not a real member. Quotes reference only details each church publishes on its own website. Meeting spots are public locations only. This file mirrors the GREETERS block embedded in index.html; edit both together.",
+  "greeters": {
+    "nona-church-narcoossee": [
+      {
+        "name": "Maya R.",
+        "initials": "MR",
+        "av": 1,
+        "meta": "Lake Nona neighborhood, at Nona Church four years",
+        "quote": "I came alone my first Sunday and nobody told me where anything was. I can fix that for you. I will meet you in the parking lot so you are not walking in alone.",
+        "sign": "Maya",
+        "spot": "Nona Church main lobby"
+      },
+      {
+        "name": "Marcos T.",
+        "initials": "MT",
+        "av": 2,
+        "meta": "St. Cloud neighborhood, at Nona Church two years",
+        "quote": "If Spanish feels more like home, the Saturday 7:30 service is ours. Either way, come 15 minutes early and I will save you a seat.",
+        "sign": "Marcos",
+        "spot": "Foxtail Coffee, Lake Nona Town Center"
+      }
+    ],
+    "trinity-church-lake-nona": [
+      {
+        "name": "Danielle W.",
+        "initials": "DW",
+        "av": 3,
+        "meta": "Laureate Park neighborhood, at Trinity three years",
+        "quote": "Church in a school cafeteria felt strange to me the first time too. Ten minutes in, it just feels like church. I will wait for you by the school’s front sign.",
+        "sign": "Danielle",
+        "spot": "Laureate Park Elementary front entrance"
+      },
+      {
+        "name": "Sam O.",
+        "initials": "SO",
+        "av": 2,
+        "meta": "Lake Nona neighborhood, at Trinity since it started",
+        "quote": "We keep benches in the back for families with wiggly kids, that is where mine and I sit. Come find us, the coffee is free and it is actually good.",
+        "sign": "Sam",
+        "spot": "The coffee table inside the cafeteria"
+      }
+    ],
+    "east-coast-believers-lake-nona": [
+      {
+        "name": "Priya S.",
+        "initials": "PS",
+        "av": 1,
+        "meta": "Lake Nona neighborhood, at East Coast Believers three years",
+        "quote": "Nobody here will single you out or ask you to stand, I promise, that is a real rule. I will be at the Guest Connect table before the countdown starts.",
+        "sign": "Priya",
+        "spot": "Guest Connect area, main lobby"
+      },
+      {
+        "name": "Andre B.",
+        "initials": "AB",
+        "av": 2,
+        "meta": "Moss Park neighborhood, at East Coast Believers two years",
+        "quote": "The service starts right on time, there is a countdown and everything. Come at 9:45 and we can grab seats together before it hits zero.",
+        "sign": "Andre",
+        "spot": "Main entrance doors"
+      }
+    ],
+    "azalea-park-church": [
+      {
+        "name": "Alexa V.",
+        "initials": "AV",
+        "av": 3,
+        "meta": "Azalea Park neighborhood, at Azalea Park Church five years",
+        "quote": "El servicio es en español. If English is easier for you, sit with me and I will quietly keep you in the loop on the parts that matter.",
+        "sign": "Alexa",
+        "spot": "Front steps on Dahlia Drive"
+      },
+      {
+        "name": "Luis R.",
+        "initials": "LR",
+        "av": 1,
+        "meta": "East Orlando neighborhood, at Azalea Park Church three years",
+        "quote": "This is a church for new beginnings, most of us walked in carrying something heavy. Come as you are on Sunday at 11, I will be at the door.",
+        "sign": "Luis",
+        "spot": "Church front entrance"
+      }
+    ],
+    "narcoossee-baptist-church": [
+      {
+        "name": "Ruth A.",
+        "initials": "RA",
+        "av": 2,
+        "meta": "Narcoossee neighborhood, at Narcoossee Baptist eleven years",
+        "quote": "We still sing from hymnals and the choir carries the room. If you have not been in years, it will feel familiar fast. I will save you a spot near the middle.",
+        "sign": "Ruth",
+        "spot": "Sanctuary front doors"
+      },
+      {
+        "name": "Josh P.",
+        "initials": "JP",
+        "av": 1,
+        "meta": "St. Cloud neighborhood, at Narcoossee Baptist four years",
+        "quote": "If you want to warm up first, the service plays on FM radio right in the parking lot. Listen for a minute, then come in and find me at the door.",
+        "sign": "Josh",
+        "spot": "Main parking lot, by the front doors"
+      }
+    ],
+    "south-orlando-baptist-church": [
+      {
+        "name": "Angela C.",
+        "initials": "AC",
+        "av": 3,
+        "meta": "Hunter’s Creek neighborhood, at South Orlando Baptist six years",
+        "quote": "The service is about 75 minutes and nobody rushes out after. Stay for the fellowship time, that is where it stops being a building and starts being people.",
+        "sign": "Angela",
+        "spot": "Welcome desk, main lobby"
+      },
+      {
+        "name": "Peter D.",
+        "initials": "PD",
+        "av": 2,
+        "meta": "South Orlando neighborhood, at South Orlando Baptist three years",
+        "quote": "The music is a mix, some hymns, some newer songs, so nobody feels like a stranger to all of it. I will meet you out front at 10:45.",
+        "sign": "Peter",
+        "spot": "Front entrance canopy"
+      }
+    ],
+    "first-baptist-orlando": [
+      {
+        "name": "Tanya B.",
+        "initials": "TB",
+        "av": 1,
+        "meta": "Millenia neighborhood, at First Orlando five years",
+        "quote": "The campus is big, but you only need one turn: follow the First Time Guest Parking signs and I will be waiting right where you park.",
+        "sign": "Tanya",
+        "spot": "First Time Guest Parking area"
+      },
+      {
+        "name": "Harold M.",
+        "initials": "HM",
+        "av": 3,
+        "meta": "Conway neighborhood, at First Orlando nineteen years",
+        "quote": "The 8:30 service is the traditional one, that is mine. Organ, older hymns, a quieter crowd. If that is what you miss, come sit with Marge and me.",
+        "sign": "Harold",
+        "spot": "Main worship center lobby"
+      }
+    ],
+    "spring-of-life-umc": [
+      {
+        "name": "Grace H.",
+        "initials": "GH",
+        "av": 2,
+        "meta": "Moss Park neighborhood, at Spring of Life seven years",
+        "quote": "There is a Welcome Table right inside with name tags and people who are glad you came. I will have yours ready, first names only if you like.",
+        "sign": "Grace",
+        "spot": "The Welcome Table, just inside the entrance"
+      },
+      {
+        "name": "Tom H.",
+        "initials": "TH",
+        "av": 1,
+        "meta": "Moss Park neighborhood, at Spring of Life seven years",
+        "quote": "Grab a coffee at the Cafe first, that is the unofficial front porch of this place. Kids start in Sunday School and rejoin you for communion, ours always have.",
+        "sign": "Tom",
+        "spot": "The Cafe, inside the main building"
+      }
+    ],
+    "first-umc-orlando": [
+      {
+        "name": "Elena V.",
+        "initials": "EV",
+        "av": 1,
+        "meta": "Downtown Orlando neighborhood, at First Church eight years",
+        "quote": "Downtown parking is the only hard part, so let me take it off your plate. Park in the Seaside garage at Jackson and Magnolia and I will meet you at the door.",
+        "sign": "Elena",
+        "spot": "E Jackson Street main entrance"
+      },
+      {
+        "name": "James K.",
+        "initials": "JK",
+        "av": 3,
+        "meta": "Colonialtown neighborhood, at First Church twelve years",
+        "quote": "We really are two churches in one building, a praise band upstairs at 9:30 and choir and organ in the sanctuary at 11. Tell me which one sounds like you and I will walk you there.",
+        "sign": "James",
+        "spot": "Welcome desk, main lobby"
+      }
+    ],
+    "hope-presbyterian-lake-nona": [
+      {
+        "name": "Miriam J.",
+        "initials": "MJ",
+        "av": 2,
+        "meta": "Lake Nona neighborhood, at Hope four years",
+        "quote": "We meet in a middle school, so look for the greeters at the main entrance, I am one of them. You will never wander a hallway wondering where to go.",
+        "sign": "Miriam",
+        "spot": "Lake Nona Middle School main entrance"
+      },
+      {
+        "name": "Caleb N.",
+        "initials": "CN",
+        "av": 1,
+        "meta": "Narcoossee neighborhood, at Hope two years",
+        "quote": "The service blends old hymns with newer songs and a little ancient liturgy. If the liturgy part is new to you, sit by me, everything is printed and easy to follow.",
+        "sign": "Caleb",
+        "spot": "The welcome table, inside the school entrance"
+      }
+    ],
+    "lake-nona-presbyterian-pca": [
+      {
+        "name": "Sofia L.",
+        "initials": "SL",
+        "av": 3,
+        "meta": "Lake Nona neighborhood, at Lake Nona Presbyterian three years",
+        "quote": "Jeans and a button down is the uniform here, truly, even the pastor. Come at 10:15 and I will introduce you around before the first song.",
+        "sign": "Sofia",
+        "spot": "Pioneers Campus front entrance"
+      },
+      {
+        "name": "Mark E.",
+        "initials": "ME",
+        "av": 2,
+        "meta": "Eagle Creek neighborhood, at Lake Nona Presbyterian since it started",
+        "quote": "We are a small, casual congregation, which means you will be noticed in the good way, greeted, not spotlighted. I will be at the door either way.",
+        "sign": "Mark",
+        "spot": "Main lobby, Pioneers Campus"
+      }
+    ],
+    "all-saints-lutheran-orlando": [
+      {
+        "name": "Margaret F.",
+        "initials": "MF",
+        "av": 2,
+        "meta": "Hunter’s Creek neighborhood, at All Saints fourteen years",
+        "quote": "We are a small congregation that feels like family, which means you will not slip in unnoticed, but you will be glad you were noticed. I will be by the front door from 8:45.",
+        "sign": "Margaret",
+        "spot": "Church front doors on Balcombe Road"
+      },
+      {
+        "name": "David R.",
+        "initials": "DR",
+        "av": 1,
+        "meta": "South Orlando neighborhood, at All Saints six years",
+        "quote": "Our website lists two different start times, so do not stress about which is right. Come by 9:00 and you cannot be late, and I will be there whichever it is.",
+        "sign": "David",
+        "spot": "Main entrance"
+      }
+    ],
+    "cathedral-church-st-luke": [
+      {
+        "name": "Nadia F.",
+        "initials": "NF",
+        "av": 1,
+        "meta": "Thornton Park neighborhood, at the Cathedral five years",
+        "quote": "The prayer book can feel like a maze your first time. Sit with me and I will keep us on the right page, when to stand, when to sit, all of it.",
+        "sign": "Nadia",
+        "spot": "Cathedral steps on Magnolia Avenue"
+      },
+      {
+        "name": "Charles W.",
+        "initials": "CW",
+        "av": 3,
+        "meta": "Downtown Orlando neighborhood, at the Cathedral ten years",
+        "quote": "The 8 AM service is quiet, spoken, no incense. The 10:15 has the choir and all the beauty. Neither one minds a newcomer in the least, and ushers hand out parking vouchers after.",
+        "sign": "Charles",
+        "spot": "The Lanier lot, at Washington and Magnolia"
+      }
+    ],
+    "adoration-church-orlando": [
+      {
+        "name": "Beth A.",
+        "initials": "BA",
+        "av": 2,
+        "meta": "Winter Park neighborhood, at Adoration two years",
+        "quote": "The sign out front says Kress Memorial, and that confuses everyone once. You are in the right place. I will be at the door so you do not have to wonder.",
+        "sign": "Beth",
+        "spot": "Kress Memorial building front entrance"
+      },
+      {
+        "name": "Isaiah T.",
+        "initials": "IT",
+        "av": 1,
+        "meta": "Audubon Park neighborhood, at Adoration since it started",
+        "quote": "Kids stay with you for the singing, then go to their own teaching during the sermon and come back after. Mine love it. There is also quiet prayer at 9 if you want to land early.",
+        "sign": "Isaiah",
+        "spot": "The welcome table, inside the entrance"
+      }
+    ],
+    "saint-frances-xavier-cabrini": [
+      {
+        "name": "Lucia M.",
+        "initials": "LM",
+        "av": 3,
+        "meta": "Lake Nona neighborhood, at St. Frances Cabrini three years",
+        "quote": "Mass in a school cafeteria surprised me too. Then the altar is set and it is simply home. I can walk you through when to sit, stand, and kneel, nobody will mind if you just watch.",
+        "sign": "Lucia",
+        "spot": "Narcoossee Middle School cafeteria entrance"
+      },
+      {
+        "name": "Rafael G.",
+        "initials": "RG",
+        "av": 1,
+        "meta": "St. Cloud neighborhood, at St. Frances Cabrini four years",
+        "quote": "If the 8:30 is too early, the 10:30 is the fuller one, more families, more noise, in the best way. Come find me by the doors and we will sit wherever you are comfortable.",
+        "sign": "Rafael",
+        "spot": "School main parking lot, by the cafeteria doors"
+      }
+    ],
+    "blessed-trinity-catholic-conway": [
+      {
+        "name": "Carmen O.",
+        "initials": "CO",
+        "av": 1,
+        "meta": "Conway neighborhood, at Blessed Trinity nine years",
+        "quote": "Come as you are is the actual motto here. The noon Mass is in Spanish, the rest are English, and I am happy to sit with you at any of them and whisper the when-to-stand parts.",
+        "sign": "Carmen",
+        "spot": "Narthex, just inside the main doors"
+      },
+      {
+        "name": "Frank D.",
+        "initials": "FD",
+        "av": 2,
+        "meta": "Belle Isle neighborhood, at Blessed Trinity sixteen years",
+        "quote": "If you are not sure what to do at Communion, you can simply stay seated or come up for a blessing, arms crossed. Nobody is watching for mistakes. I will be by the doors at 9:45.",
+        "sign": "Frank",
+        "spot": "Front entrance, Anderson Road"
+      }
+    ],
+    "st-george-antiochian-orthodox": [
+      {
+        "name": "Yara H.",
+        "initials": "YH",
+        "av": 3,
+        "meta": "Downtown Orlando neighborhood, at St. George six years",
+        "quote": "Liturgy is long and beautiful, and people genuinely come and go, nobody minds when you arrive. Stand when you can, sit when you need to. I will save you a spot near the back.",
+        "sign": "Yara",
+        "spot": "Church front steps on Rosalind Avenue"
+      },
+      {
+        "name": "Nick S.",
+        "initials": "NS",
+        "av": 1,
+        "meta": "Colonialtown neighborhood, at St. George three years",
+        "quote": "I grew up outside the Orthodox church and walked in here knowing nothing. Come to Orthros at 9 if you want the quiet build, or 10 for the Liturgy itself. I will meet you outside first.",
+        "sign": "Nick",
+        "spot": "Front steps, before the service"
+      }
+    ],
+    "faith-church-orlando": [
+      {
+        "name": "Keisha B.",
+        "initials": "KB",
+        "av": 1,
+        "meta": "Southeast Orlando neighborhood, at Faith Church five years",
+        "quote": "Look for the bright yellow shirts, that is our guest team, and I will be with them. Park in lot 2 and the Information Center is right by the vestibule.",
+        "sign": "Keisha",
+        "spot": "Information Center, by parking lot 2"
+      },
+      {
+        "name": "Devon C.",
+        "initials": "DC",
+        "av": 2,
+        "meta": "Union Park neighborhood, at Faith Church three years",
+        "quote": "Wear whatever makes you feel like you. You will see suits and you will see sneakers in the same row. The noon service is my favorite, come find me before it.",
+        "sign": "Devon",
+        "spot": "Main vestibule entrance"
+      }
+    ],
+    "orlando-gospel-assembly": [
+      {
+        "name": "Naomi K.",
+        "initials": "NK",
+        "av": 2,
+        "meta": "East Orlando neighborhood, at Orlando Gospel Assembly four years",
+        "quote": "Service is at noon, so no early alarm on your first Sunday. Come at 11:45 and I will meet you at the front door and sit with you.",
+        "sign": "Naomi",
+        "spot": "Front entrance on Dean Road"
+      },
+      {
+        "name": "Samuel A.",
+        "initials": "SA",
+        "av": 1,
+        "meta": "Union Park neighborhood, at Orlando Gospel Assembly six years",
+        "quote": "If Sunday feels like too big a first step, the Friday evening gathering is on Zoom, you can meet us from your couch first. Then come see us in person.",
+        "sign": "Samuel",
+        "spot": "Church front doors"
+      }
+    ],
+    "restoration-seventh-day-adventist": [
+      {
+        "name": "Denise L.",
+        "initials": "DL",
+        "av": 3,
+        "meta": "College Park neighborhood, at Restoration eight years",
+        "quote": "We worship on Saturday, the Sabbath, and that catches people off guard. Come at 11 for the Divine Service, or 10 if you want the smaller Sabbath School first. I will be at the door.",
+        "sign": "Denise",
+        "spot": "Front entrance on Evans Street"
+      },
+      {
+        "name": "Emmanuel J.",
+        "initials": "EJ",
+        "av": 1,
+        "meta": "Orlando neighborhood, at Restoration five years",
+        "quote": "People here come from every kind of story, including no church story at all. Wherever you are starting from, you will not be the odd one out. Find me up front after, I mean it.",
+        "sign": "Emmanuel",
+        "spot": "Main doors, after the service"
+      }
+    ]
+  }
+}

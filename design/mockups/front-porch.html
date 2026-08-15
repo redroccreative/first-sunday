@@ -1,0 +1,645 @@
+<title>First Sunday, The Front Porch</title>
+<style>
+  :root{
+    --paper:#f4ead9;
+    --paper-deep:#ece0c9;
+    --card:#fbf4e6;
+    --ink:#3a2c1f;
+    --ink-soft:#6b5943;
+    --clay:#c1602f;
+    --clay-deep:#9c4620;
+    --clay-glow:#e8a86b;
+    --sage:#6f7d54;
+    --gold:#d9a441;
+    --line:#dcc9a6;
+    --shadow:rgba(58,32,14,0.28);
+    --page-bg:#1c140d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    background-image:
+      radial-gradient(ellipse 900px 500px at 20% -10%, rgba(193,96,47,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(217,164,65,0.10), transparent 55%);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color:#f2e6d3;
+    padding:40px 20px 90px;
+  }
+  .heading-font{ font-family: ui-serif, Georgia, "Times New Roman", serif; }
+
+  /* ---------- Top matter ---------- */
+  .masthead{ max-width:980px; margin:0 auto 44px; }
+  .kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--clay-glow); font-weight:600; margin-bottom:14px;
+  }
+  .kicker::before{
+    content:""; width:22px; height:1px; background:var(--clay-glow); display:inline-block;
+  }
+  h1.dir-title{
+    font-size:clamp(32px,5vw,52px);
+    margin:0 0 12px;
+    color:#fbf1e0;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  .thesis{
+    max-width:640px;
+    font-size:17px;
+    line-height:1.6;
+    color:#d8c7ac;
+    margin:0 0 28px;
+  }
+  .swatches{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .swatch{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:#cbb896;
+  }
+  .swatch i{
+    width:26px; height:26px; border-radius:8px; display:block;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+  }
+  .sample-chip{
+    display:inline-block; margin-top:22px;
+    font-size:11px; letter-spacing:0.04em;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
+    color:#cbb896;
+    padding:6px 12px; border-radius:99px;
+  }
+
+  /* ---------- Frame gallery ---------- */
+  .gallery{
+    max-width:1500px; margin:0 auto;
+    display:flex; flex-wrap:wrap; gap:36px;
+    align-items:flex-start;
+  }
+  .frame-block{ width:390px; max-width:100%; }
+  .frame-label{
+    font-size:13px; color:#e7d3b0; margin:0 0 12px 4px;
+    font-weight:600; letter-spacing:0.01em;
+  }
+  .frame-label span{ display:block; font-weight:400; color:#a48f6d; font-size:12px; margin-top:2px; }
+
+  .phone{
+    width:390px; height:844px; max-width:100%;
+    border-radius:52px;
+    background:linear-gradient(160deg,#2a2018,#160f0a);
+    padding:14px;
+    box-shadow: 0 30px 60px -18px var(--shadow), 0 2px 0 rgba(255,255,255,0.04) inset;
+    position:relative;
+  }
+  .phone::after{
+    content:""; position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:120px; height:24px; background:#0e0a06; border-radius:0 0 16px 16px;
+  }
+  .screen{
+    width:100%; height:100%;
+    background:var(--paper);
+    border-radius:38px;
+    overflow:hidden;
+    position:relative;
+    display:flex; flex-direction:column;
+  }
+  .screen-scroll{
+    flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  }
+  .screen-scroll::-webkit-scrollbar{ width:0; }
+
+  /* subtle paper texture */
+  .screen::before{
+    content:"";
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      radial-gradient(rgba(58,32,14,0.035) 1px, transparent 1px);
+    background-size:3px 3px;
+    opacity:0.5;
+    z-index:0;
+  }
+
+  /* status bar */
+  .statusbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 26px 6px; font-size:13px; font-weight:600; color:var(--ink);
+    position:relative; z-index:1;
+  }
+
+  /* ============ INTRO SCREEN ============ */
+  .intro{ padding:10px 28px 28px; position:relative; z-index:1; }
+  .porch-glow{
+    width:64px; height:64px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, var(--clay-glow), var(--clay) 65%, var(--clay-deep));
+    box-shadow: 0 0 26px 6px rgba(232,168,107,0.45);
+    margin:18px 0 22px;
+  }
+  .intro h2{
+    font-size:30px; line-height:1.18; margin:0 0 14px; color:var(--ink); font-weight:500;
+  }
+  .intro p.sub{
+    font-size:15px; line-height:1.55; color:var(--ink-soft); margin:0 0 26px; max-width:300px;
+  }
+  .field-group{ margin-bottom:14px; }
+  .field-label{ font-size:12px; color:var(--ink-soft); margin-bottom:6px; font-weight:600; letter-spacing:0.02em; }
+  .zip-input{
+    width:100%; padding:16px 18px; border-radius:16px;
+    border:1.5px solid var(--line); background:var(--card);
+    font-size:16px; color:var(--ink); font-family:inherit;
+    min-height:44px;
+  }
+  .use-location{
+    display:flex; align-items:center; gap:10px;
+    padding:14px 16px; border-radius:16px;
+    background:rgba(111,125,84,0.10); border:1px dashed var(--sage);
+    color:var(--sage); font-size:14px; font-weight:600;
+    margin-top:10px; min-height:44px;
+  }
+  .use-location .pin{
+    width:18px; height:18px; border-radius:50%; border:2px solid var(--sage);
+    position:relative; flex:none;
+  }
+  .use-location .pin::after{
+    content:""; position:absolute; inset:4px; border-radius:50%; background:var(--sage);
+  }
+  .cta-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:100%; margin-top:22px; padding:17px; border-radius:18px;
+    background:linear-gradient(180deg,var(--clay),var(--clay-deep));
+    color:#fbf1e0; font-size:16px; font-weight:600; font-family:inherit;
+    box-shadow:0 10px 22px -8px rgba(156,70,32,0.55);
+    min-height:44px; border:none;
+  }
+  .porch-note{
+    margin-top:18px; font-size:12.5px; color:var(--ink-soft); line-height:1.5;
+    display:flex; gap:8px; align-items:flex-start;
+  }
+  .porch-note .bulb{
+    width:14px; height:14px; margin-top:2px; flex:none; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+    box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
+  }
+
+  /* ============ QUIZ SCREEN ============ */
+  .quiz{ padding:0 26px 24px; position:relative; z-index:1; display:flex; flex-direction:column; height:100%; }
+  .quiz-top{ padding-top:6px; }
+  .progress-row{ display:flex; gap:6px; margin:14px 0 22px; }
+  .progress-dot{ flex:1; height:5px; border-radius:99px; background:var(--line); }
+  .progress-dot.done{ background:var(--clay); }
+  .progress-dot.current{ background:linear-gradient(90deg,var(--clay),var(--clay-glow)); }
+  .q-count{ font-size:12px; color:var(--ink-soft); font-weight:600; letter-spacing:0.03em; margin-bottom:8px; }
+  .q-text{
+    font-size:25px; line-height:1.28; color:var(--ink); font-weight:500; margin:0 0 6px;
+  }
+  .q-sub{ font-size:13.5px; color:var(--ink-soft); margin:0 0 20px; }
+  .answers{ display:flex; flex-direction:column; gap:11px; flex:1; overflow-y:auto; padding-bottom:6px; }
+  .answer-row{
+    display:flex; align-items:center; gap:14px;
+    padding:17px 18px; border-radius:20px;
+    background:var(--card); border:1.5px solid var(--line);
+    min-height:44px; position:relative;
+    box-shadow:0 3px 0 rgba(58,32,14,0.05);
+  }
+  .answer-row.selected{
+    border-color:var(--clay); background:linear-gradient(180deg,#fdf0de,#f8e2c6);
+    box-shadow:0 6px 16px -6px rgba(193,96,47,0.35);
+  }
+  .answer-row .knob{
+    width:22px; height:22px; border-radius:50%; border:2px solid var(--line);
+    flex:none; position:relative;
+  }
+  .answer-row.selected .knob{ border-color:var(--clay); }
+  .answer-row.selected .knob::after{
+    content:""; position:absolute; inset:4px; border-radius:50%; background:var(--clay);
+  }
+  .answer-row .a-text{ font-size:15.5px; color:var(--ink); font-weight:500; }
+  .quiz-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+  }
+  .nav-back{ font-size:14px; color:var(--ink-soft); font-weight:600; min-height:44px; display:flex; align-items:center; }
+  .nav-next{
+    padding:12px 26px; border-radius:14px; background:var(--ink); color:var(--paper);
+    font-size:14px; font-weight:600; min-height:44px; display:flex; align-items:center;
+  }
+
+  /* ============ RESULTS SCREEN ============ */
+  .results-head{
+    padding:18px 24px 14px; position:relative; z-index:1;
+    background:var(--paper-deep); border-bottom:1px solid var(--line);
+  }
+  .results-eyebrow{ font-size:11.5px; color:var(--ink-soft); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+  .results-head h2{ font-size:22px; margin:4px 0 2px; color:var(--ink); font-weight:500; }
+  .results-head p{ font-size:13px; color:var(--ink-soft); margin:0; }
+  .results-list{ padding:16px 18px 26px; display:flex; flex-direction:column; gap:14px; position:relative; z-index:1; }
+
+  .porch-card{
+    background:var(--card); border-radius:22px; border:1.5px solid var(--line);
+    padding:17px 18px; box-shadow:0 6px 16px -10px rgba(58,32,14,0.3);
+  }
+  .porch-card.top{
+    border-color:var(--clay); background:linear-gradient(175deg,#fdf1e0,#f9e4c8);
+    box-shadow:0 14px 30px -14px rgba(193,96,47,0.45);
+  }
+  .pc-top-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .pc-name{ font-size:16.5px; font-weight:600; color:var(--ink); line-height:1.25; }
+  .pc-loc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .fit-badge{
+    flex:none; display:flex; flex-direction:column; align-items:center;
+    background:var(--ink); color:var(--paper); border-radius:14px;
+    padding:6px 10px; min-width:52px;
+  }
+  .fit-badge b{ font-size:15px; line-height:1; }
+  .fit-badge span{ font-size:8.5px; letter-spacing:0.04em; text-transform:uppercase; opacity:0.75; margin-top:2px; }
+  .pc-tags{ display:flex; flex-wrap:wrap; gap:6px; margin:11px 0; }
+  .tag{
+    font-size:11px; background:rgba(58,32,14,0.06); color:var(--ink-soft);
+    padding:5px 10px; border-radius:99px; font-weight:600;
+  }
+  .pc-meta{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:4px; }
+  .porch-light-row{
+    display:flex; align-items:center; gap:8px; margin-top:13px;
+    padding-top:12px; border-top:1px dashed var(--line);
+  }
+  .porch-light-row .bulb{
+    width:15px; height:15px; border-radius:50%; flex:none;
+    background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+    box-shadow:0 0 9px 3px rgba(217,164,65,0.65);
+  }
+  .porch-light-row span{ font-size:12.5px; color:var(--clay-deep); font-weight:700; }
+  .expand-hint{
+    margin-top:12px; text-align:center; font-size:12px; font-weight:700;
+    color:var(--clay-deep); display:flex; align-items:center; justify-content:center; gap:6px;
+    min-height:20px;
+  }
+  .expand-hint::after{ content:"▾"; font-size:11px; }
+
+  /* ============ EXPANDED TOP RESULT ============ */
+  .expand-head{
+    padding:16px 22px 12px; position:relative; z-index:1;
+    background:var(--paper-deep); border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:10px;
+  }
+  .back-chip{
+    width:34px; height:34px; border-radius:50%; background:var(--card);
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:15px; color:var(--ink); flex:none;
+  }
+  .expand-head h2{ font-size:17px; margin:0; color:var(--ink); font-weight:600; }
+  .expand-body{ padding:18px 20px 30px; position:relative; z-index:1; }
+
+  .hero-porch{
+    border-radius:22px; padding:20px; margin-bottom:18px;
+    background:
+      radial-gradient(ellipse 220px 90px at 85% -10%, rgba(232,168,107,0.55), transparent 60%),
+      linear-gradient(160deg,#3a2c1f,#241a11);
+    color:#f4e8d4;
+    position:relative; overflow:hidden;
+  }
+  .hero-porch::before{
+    content:""; position:absolute; right:-30px; bottom:-40px; width:150px; height:150px;
+    border-radius:50%; background:radial-gradient(circle, rgba(193,96,47,0.5), transparent 70%);
+  }
+  .hero-porch .fit-big{ font-size:34px; font-weight:600; }
+  .hero-porch .fit-big span{ font-size:14px; font-weight:500; opacity:0.75; margin-left:4px; }
+  .hero-porch h3{ font-size:20px; font-weight:500; margin:6px 0 4px; position:relative; }
+  .hero-porch .hp-loc{ font-size:12.5px; opacity:0.8; position:relative; }
+
+  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  .info-cell{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:12px 13px;
+  }
+  .info-cell .lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; margin-bottom:4px; }
+  .info-cell .val{ font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.35; }
+
+  .section-title{
+    font-size:14px; font-weight:700; color:var(--ink); margin:22px 0 4px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .section-title .bulb-sm{
+    width:13px; height:13px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+    box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
+  }
+  .section-sub{ font-size:12.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.5; }
+
+  .greeter-card{
+    background:var(--card); border:1.5px solid var(--line); border-radius:20px;
+    padding:16px; margin-bottom:12px; position:relative;
+  }
+  .g-top{ display:flex; gap:12px; align-items:flex-start; }
+  .g-avatar{
+    width:48px; height:48px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:700; color:#fff;
+  }
+  .g-avatar.a1{ background:linear-gradient(160deg,var(--clay-glow),var(--clay-deep)); }
+  .g-avatar.a2{ background:linear-gradient(160deg,#8fa06a,var(--sage)); }
+  .g-avatar.a3{ background:linear-gradient(160deg,#d9a441,#9c6a1f); }
+  .g-name{ font-size:14.5px; font-weight:700; color:var(--ink); }
+  .g-meta{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .demo-pill{
+    display:inline-block; margin-top:5px; font-size:10px; font-weight:700;
+    letter-spacing:0.03em; text-transform:uppercase;
+    background:rgba(193,96,47,0.14); color:var(--clay-deep);
+    padding:3px 8px; border-radius:99px;
+  }
+  .g-quote{
+    font-size:13px; color:var(--ink); line-height:1.5; margin:11px 0 10px;
+    font-style:italic; padding-left:11px; border-left:2px solid var(--clay-glow);
+  }
+  .g-meet{
+    display:flex; gap:8px; align-items:flex-start; font-size:12px; color:var(--ink-soft);
+    background:rgba(111,125,84,0.09); border-radius:12px; padding:9px 11px; line-height:1.4;
+  }
+  .g-meet b{ color:var(--sage); }
+  .g-actions{ display:flex; gap:10px; margin-top:12px; }
+  .g-btn{
+    flex:1; text-align:center; font-size:12.5px; font-weight:700; padding:11px 8px;
+    border-radius:12px; min-height:44px; display:flex; align-items:center; justify-content:center;
+  }
+  .g-btn.primary{ background:var(--clay); color:#fbf1e0; }
+  .g-btn.report{ background:transparent; border:1px solid var(--line); color:var(--ink-soft); }
+
+  .cta-btn.wide{ margin-top:6px; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+
+  @media (max-width:860px){
+    .gallery{ justify-content:center; }
+  }
+</style>
+
+<div class="masthead">
+  <div class="kicker">First Sunday · Design Direction</div>
+  <h1 class="dir-title heading-font">The Front Porch</h1>
+  <p class="thesis">This is not an app about churches. It is an app about being invited over. Warm paper, terracotta,
+    and a light left on, so the whole product feels less like a directory and more like walking up to a friend's
+    door and knowing you're expected.</p>
+  <div class="swatches">
+    <div class="swatch"><i style="background:#f4ead9"></i>Paper</div>
+    <div class="swatch"><i style="background:#c1602f"></i>Clay</div>
+    <div class="swatch"><i style="background:#9c4620"></i>Deep clay</div>
+    <div class="swatch"><i style="background:#d9a441"></i>Porch light gold</div>
+    <div class="swatch"><i style="background:#6f7d54"></i>Sage</div>
+    <div class="swatch"><i style="background:#3a2c1f"></i>Ink</div>
+  </div>
+  <div class="sample-chip">Sample data for design review</div>
+</div>
+
+<div class="gallery">
+
+  <!-- FRAME 1: INTRO -->
+  <div class="frame-block">
+    <p class="frame-label">Intro <span>Zip entry, one line about time, a light already on</span></p>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●●</span></div>
+      <div class="intro">
+        <div class="porch-glow"></div>
+        <h2 class="heading-font">Let's find your church home.</h2>
+        <p class="sub">Answer five easy questions, about a minute, and we will show you who is expecting you this
+          Sunday.</p>
+        <div class="field-group">
+          <div class="field-label">Where should we look</div>
+          <input class="zip-input" placeholder="Enter your zip code" />
+        </div>
+        <div class="use-location">
+          <span class="pin"></span>
+          Use my location instead
+        </div>
+        <div class="cta-btn">Start the questions</div>
+        <div class="porch-note">
+          <span class="bulb"></span>
+          Nobody sees your answers but you. This just helps us find where you'll feel at home.
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- FRAME 2: QUIZ Q2 -->
+  <div class="frame-block">
+    <p class="frame-label">Quiz, question 2 of 5 <span>One big question, oversized answer rows, asked like a friend across a table</span></p>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●●</span></div>
+      <div class="quiz">
+        <div class="quiz-top">
+          <div class="progress-row">
+            <div class="progress-dot done"></div>
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="q-count">QUESTION 2 OF 5</div>
+          <h2 class="q-text heading-font">What do people usually wear?</h2>
+          <p class="q-sub">No wrong answer here, we just want you comfortable walking in.</p>
+        </div>
+        <div class="answers">
+          <div class="answer-row"><span class="knob"></span><span class="a-text">Jeans and t-shirts</span></div>
+          <div class="answer-row selected"><span class="knob"></span><span class="a-text">Business casual</span></div>
+          <div class="answer-row"><span class="knob"></span><span class="a-text">Sunday best</span></div>
+          <div class="answer-row"><span class="knob"></span><span class="a-text">Really varies</span></div>
+          <div class="answer-row"><span class="knob"></span><span class="a-text">No preference</span></div>
+        </div>
+        <div class="quiz-nav">
+          <div class="nav-back">Back</div>
+          <div class="nav-next">Next</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- FRAME 3: RESULTS LIST -->
+  <div class="frame-block">
+    <p class="frame-label">Your matches <span>Porch cards, the greeter light is part of the card, not a tab</span></p>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●●</span></div>
+      <div class="results-head">
+        <div class="results-eyebrow">Orlando &amp; Lake Nona</div>
+        <h2 class="heading-font">A few places for you</h2>
+        <p>Ranked by fit, based on your answers.</p>
+      </div>
+      <div class="screen-scroll">
+        <div class="results-list">
+
+          <div class="porch-card top">
+            <div class="pc-top-row">
+              <div>
+                <div class="pc-name">Summit Church</div>
+                <div class="pc-loc">Orlando</div>
+              </div>
+              <div class="fit-badge"><b>94%</b><span>Fit</span></div>
+            </div>
+            <div class="pc-tags">
+              <span class="tag">Contemporary</span>
+              <span class="tag">Full band</span>
+              <span class="tag">Jeans &amp; tees</span>
+            </div>
+            <p class="pc-meta">Several hundred on a Sunday. Kids have their own class during service.
+              Services at 9:15 and 11:00. Parking team out front.</p>
+            <div class="porch-light-row">
+              <span class="bulb"></span>
+              <span>3 greeters ready to meet you at the door</span>
+            </div>
+            <div class="expand-hint">See who's waiting for you</div>
+          </div>
+
+          <div class="porch-card">
+            <div class="pc-top-row">
+              <div>
+                <div class="pc-name">St. James Cathedral</div>
+                <div class="pc-loc">Downtown Orlando</div>
+              </div>
+              <div class="fit-badge"><b>88%</b><span>Fit</span></div>
+            </div>
+            <div class="pc-tags">
+              <span class="tag">Catholic</span>
+              <span class="tag">Liturgical</span>
+              <span class="tag">Cantor &amp; organ</span>
+            </div>
+            <p class="pc-meta">Varies, many dress up. Several hundred. Children stay in Mass.
+              Masses at 7:30, 9:30, and 11:30.</p>
+            <div class="porch-light-row">
+              <span class="bulb"></span>
+              <span>2 greeters ready to meet you at the door</span>
+            </div>
+          </div>
+
+          <div class="porch-card">
+            <div class="pc-top-row">
+              <div>
+                <div class="pc-name">First Baptist Orlando</div>
+                <div class="pc-loc">Orlando</div>
+              </div>
+              <div class="fit-badge"><b>85%</b><span>Fit</span></div>
+            </div>
+            <div class="pc-tags">
+              <span class="tag">Baptist</span>
+              <span class="tag">Choir &amp; orchestra</span>
+              <span class="tag">Business casual+</span>
+            </div>
+            <p class="pc-meta">Over a thousand on a Sunday. Kids classes sorted by age.
+              Services at 9:30 and 11:00.</p>
+            <div class="porch-light-row">
+              <span class="bulb"></span>
+              <span>3 greeters ready to meet you at the door</span>
+            </div>
+          </div>
+
+          <div class="porch-card">
+            <div class="pc-top-row">
+              <div>
+                <div class="pc-name">Holy Trinity Greek Orthodox</div>
+                <div class="pc-loc">Maitland</div>
+              </div>
+              <div class="fit-badge"><b>79%</b><span>Fit</span></div>
+            </div>
+            <div class="pc-tags">
+              <span class="tag">Orthodox</span>
+              <span class="tag">Chanted liturgy</span>
+              <span class="tag">Sunday best</span>
+            </div>
+            <p class="pc-meta">A couple hundred. No instruments. Children stay in liturgy.
+              Divine Liturgy at 10:00.</p>
+            <div class="porch-light-row">
+              <span class="bulb"></span>
+              <span>2 greeters ready to meet you at the door</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- FRAME 4: EXPANDED TOP RESULT -->
+  <div class="frame-block">
+    <p class="frame-label">Summit Church, expanded <span>The greeters, right where you're already looking</span></p>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●●</span></div>
+      <div class="expand-head">
+        <div class="back-chip">‹</div>
+        <h2>Summit Church</h2>
+      </div>
+      <div class="screen-scroll">
+        <div class="expand-body">
+
+          <div class="hero-porch">
+            <div class="fit-big">94<span>% fit for you</span></div>
+            <h3 class="heading-font">Summit Church</h3>
+            <div class="hp-loc">Orlando · Contemporary</div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-cell"><div class="lbl">Music</div><div class="val">Full band, modern worship</div></div>
+            <div class="info-cell"><div class="lbl">Dress</div><div class="val">Jeans and t-shirts</div></div>
+            <div class="info-cell"><div class="lbl">Size</div><div class="val">Several hundred</div></div>
+            <div class="info-cell"><div class="lbl">Kids</div><div class="val">Own class during service</div></div>
+            <div class="info-cell"><div class="lbl">Services</div><div class="val">9:15 &amp; 11:00 AM</div></div>
+            <div class="info-cell"><div class="lbl">Parking</div><div class="val">Team out front to help</div></div>
+          </div>
+
+          <div class="section-title"><span class="bulb-sm"></span>Visit with someone</div>
+          <p class="section-sub">These are real people at Summit who leave a light on for first timers. Meet up at a
+            public spot first, whatever feels easiest.</p>
+
+          <div class="greeter-card">
+            <div class="g-top">
+              <div class="g-avatar a1">MR</div>
+              <div>
+                <div class="g-name">Maya R.</div>
+                <div class="g-meta">Lake Nona neighborhood · at Summit 4 years</div>
+                <span class="demo-pill">Demo persona</span>
+              </div>
+            </div>
+            <p class="g-quote">"I will meet you in the parking lot so you are not walking in alone."</p>
+            <div class="g-meet"><b>Meet first at:</b>&nbsp;Foxtail Coffee, Lake Nona Town Center (public spot)</div>
+            <div class="g-actions">
+              <div class="g-btn primary">Ask Maya to meet me</div>
+              <div class="g-btn report">Report</div>
+            </div>
+          </div>
+
+          <div class="greeter-card">
+            <div class="g-top">
+              <div class="g-avatar a2">DK</div>
+              <div>
+                <div class="g-name">Daniel K.</div>
+                <div class="g-meta">Baldwin Park neighborhood · at Summit 2 years</div>
+                <span class="demo-pill">Demo persona</span>
+              </div>
+            </div>
+            <p class="g-quote">"I came alone my first Sunday and nobody told me where anything was. I can fix that for you."</p>
+            <div class="g-meet"><b>Meet first at:</b>&nbsp;Summit Church lobby, welcome desk (public spot)</div>
+            <div class="g-actions">
+              <div class="g-btn primary">Ask Daniel to meet me</div>
+              <div class="g-btn report">Report</div>
+            </div>
+          </div>
+
+          <div class="greeter-card">
+            <div class="g-top">
+              <div class="g-avatar a3">GT</div>
+              <div>
+                <div class="g-name">Grace and Tom P.</div>
+                <div class="g-meta">Conway neighborhood · at Summit 9 years</div>
+                <span class="demo-pill">Demo persona, not a real member</span>
+              </div>
+            </div>
+            <p class="g-quote">"We bring our two kids, so we can show you exactly how kids check in works."</p>
+            <div class="g-meet"><b>Meet first at:</b>&nbsp;Summit Church main entrance (public spot)</div>
+            <div class="g-actions">
+              <div class="g-btn primary">Ask Grace &amp; Tom to meet me</div>
+              <div class="g-btn report">Report</div>
+            </div>
+          </div>
+
+          <div class="cta-btn wide">Plan my first Sunday here</div>
+
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+</div>

@@ -1,0 +1,1410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>First Sunday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Find a church for your first Sunday in Orlando, and know what to expect before you walk in." />
+<meta name="theme-color" content="#c1602f" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="First Sunday" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23c1602f'/%3E%3Ccircle cx='32' cy='30' r='14' fill='%23d9a441'/%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23c1602f'/%3E%3Ccircle cx='32' cy='30' r='14' fill='%23d9a441'/%3E%3C/svg%3E" />
+<link id="manifestLink" rel="manifest" />
+<style>
+:root{
+  --paper:#f4ead9;
+  --paper-deep:#ece0c9;
+  --card:#fbf4e6;
+  --ink:#3a2c1f;
+  --ink-soft:#6b5943;
+  --clay:#c1602f;
+  --clay-deep:#9c4620;
+  --clay-glow:#e8a86b;
+  --sage:#6f7d54;
+  --gold:#d9a441;
+  --oxblood:#8a2f1f;
+  --line:#dcc9a6;
+  --shadow:rgba(58,32,14,0.28);
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+.heading-font{ font-family: ui-serif, Georgia, "Times New Roman", serif; }
+button{ font-family:inherit; cursor:pointer; -webkit-appearance:none; appearance:none; }
+input{ font-family:inherit; }
+a{ color:inherit; }
+
+.app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--paper);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  box-shadow:0 0 60px -20px rgba(0,0,0,0.25);
+}
+.app::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  max-width:480px;
+  margin:0 auto;
+  pointer-events:none;
+  background-image:radial-gradient(rgba(58,32,14,0.035) 1px, transparent 1px);
+  background-size:3px 3px;
+  opacity:0.5;
+  z-index:0;
+}
+
+.sky-strip{ height:12px; width:100%; flex:none; transition:background 0.6s ease; }
+@media (prefers-reduced-motion: reduce){ .sky-strip{ transition:none; } }
+.sky-intro{ background:linear-gradient(90deg,#20160e,#3a2416,#20160e); }
+.sky-outofarea{ background:linear-gradient(90deg,#3a2416,#5a2f18,#3a2416); }
+.sky-quiz{ background:linear-gradient(90deg,#3a2416,#7a3c1e,#c1602f); }
+.sky-results{ background:linear-gradient(90deg,#c1602f,#d9a441,#eccf94); }
+.sky-expanded{ background:linear-gradient(90deg,#eccf94,#ffe9b8,#fff6e4); }
+
+.statusbar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 22px 4px; font-size:13px; font-weight:600; color:var(--ink);
+  position:relative; z-index:1; flex:none;
+}
+
+main.screen-root{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ============ INTRO ============ */
+.intro{ padding:6px 24px 28px; }
+.porch-glow{
+  width:64px; height:64px; border-radius:50%;
+  background: radial-gradient(circle at 35% 30%, var(--clay-glow), var(--clay) 65%, var(--clay-deep));
+  box-shadow: 0 0 26px 6px rgba(232,168,107,0.45);
+  margin:16px 0 20px;
+}
+.intro h2{ font-size:29px; line-height:1.2; margin:0 0 14px; color:var(--ink); font-weight:500; }
+.intro p.sub{ font-size:15px; line-height:1.55; color:var(--ink-soft); margin:0 0 24px; max-width:340px; }
+.field-group{ margin-bottom:14px; }
+.field-label{ font-size:12px; color:var(--ink-soft); margin-bottom:6px; font-weight:600; letter-spacing:0.02em; }
+.zip-input{
+  width:100%; padding:16px 18px; border-radius:16px;
+  border:1.5px solid var(--line); background:var(--card);
+  font-size:16px; color:var(--ink);
+  min-height:44px;
+}
+.zip-input:focus{ outline:2px solid var(--clay); outline-offset:1px; }
+.field-error{ font-size:12.5px; color:var(--oxblood); margin-top:6px; font-weight:600; }
+.use-location{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  padding:14px 16px; border-radius:16px;
+  background:rgba(111,125,84,0.10); border:1px dashed var(--sage);
+  color:var(--sage); font-size:14px; font-weight:600;
+  margin-top:10px; min-height:44px; border-style:dashed;
+}
+.use-location .pin{
+  width:18px; height:18px; border-radius:50%; border:2px solid var(--sage);
+  position:relative; flex:none;
+}
+.use-location .pin::after{
+  content:""; position:absolute; inset:4px; border-radius:50%; background:var(--sage);
+}
+.location-status{ font-size:12.5px; color:var(--sage); margin-top:8px; font-weight:600; }
+.cta-btn{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; margin-top:20px; padding:17px; border-radius:18px;
+  background:linear-gradient(180deg,var(--clay),var(--clay-deep));
+  color:#fbf1e0; font-size:16px; font-weight:600;
+  box-shadow:0 10px 22px -8px rgba(156,70,32,0.55);
+  min-height:44px; border:none;
+}
+.cta-btn:disabled{ opacity:0.6; }
+.cta-btn.ghost{
+  background:transparent; color:var(--clay-deep); box-shadow:none;
+  border:1.5px solid var(--clay);
+}
+.porch-note{
+  margin-top:18px; font-size:12.5px; color:var(--ink-soft); line-height:1.5;
+  display:flex; gap:8px; align-items:flex-start;
+}
+.porch-note .bulb{
+  width:14px; height:14px; margin-top:2px; flex:none; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
+}
+
+/* ============ OUT OF AREA ============ */
+.outofarea{ padding:6px 24px 28px; }
+.outofarea h2{ font-size:25px; line-height:1.28; margin:16px 0 12px; font-weight:500; }
+.outofarea p{ font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 20px; }
+.outofarea .zip-pill{
+  display:inline-block; font-size:12px; font-weight:700; color:var(--ink-soft);
+  background:rgba(58,32,14,0.07); padding:5px 11px; border-radius:99px; margin-bottom:14px;
+}
+
+/* ============ QUIZ ============ */
+.quiz{ padding:0 24px 24px; display:flex; flex-direction:column; flex:1; }
+.quiz-top{ padding-top:6px; }
+.progress-row{ display:flex; gap:6px; margin:14px 0 22px; }
+.progress-dot{ flex:1; height:5px; border-radius:99px; background:var(--line); }
+.progress-dot.done{ background:var(--clay); }
+.progress-dot.current{ background:linear-gradient(90deg,var(--clay),var(--clay-glow)); }
+.q-count{ font-size:12px; color:var(--ink-soft); font-weight:600; letter-spacing:0.03em; margin-bottom:8px; }
+.q-text{ font-size:25px; line-height:1.28; color:var(--ink); font-weight:500; margin:0 0 6px; }
+.q-sub{ font-size:13.5px; color:var(--ink-soft); margin:0 0 20px; }
+.answers{ display:flex; flex-direction:column; gap:11px; padding-bottom:6px; }
+.answer-row{
+  display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+  padding:16px 18px; border-radius:20px;
+  background:var(--card); border:1.5px solid var(--line);
+  min-height:44px; position:relative;
+  box-shadow:0 3px 0 rgba(58,32,14,0.05);
+}
+.answer-row.selected{
+  border-color:var(--clay); background:linear-gradient(180deg,#fdf0de,#f8e2c6);
+  box-shadow:0 6px 16px -6px rgba(193,96,47,0.35);
+}
+.answer-row .knob{
+  width:22px; height:22px; border-radius:50%; border:2px solid var(--line);
+  flex:none; position:relative;
+}
+.answer-row.selected .knob{ border-color:var(--clay); }
+.answer-row.selected .knob::after{
+  content:""; position:absolute; inset:4px; border-radius:50%; background:var(--clay);
+}
+.answer-row .a-text{ font-size:15.5px; color:var(--ink); font-weight:500; }
+.quiz-nav{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:18px; padding-top:14px; border-top:1px solid var(--line); flex:none;
+}
+.nav-back{
+  font-size:14px; color:var(--ink-soft); font-weight:600; min-height:44px; min-width:44px;
+  display:flex; align-items:center; background:none; border:none; padding:0;
+}
+.nav-back:disabled{ opacity:0.35; }
+.nav-next{
+  padding:12px 26px; border-radius:14px; background:var(--ink); color:var(--paper);
+  font-size:14px; font-weight:600; min-height:44px; display:flex; align-items:center;
+  border:none;
+}
+.nav-next:disabled{ opacity:0.4; }
+
+/* ============ RESULTS ============ */
+.results-head{
+  padding:16px 22px 14px; background:var(--paper-deep); border-bottom:1px solid var(--line); flex:none;
+}
+.results-eyebrow{ font-size:11.5px; color:var(--ink-soft); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+.results-head h2{ font-size:21px; margin:4px 0 2px; color:var(--ink); font-weight:500; }
+.results-head p{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; }
+.results-actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.chip-btn{
+  font-size:12px; font-weight:700; color:var(--ink-soft);
+  background:var(--card); border:1.5px solid var(--line); border-radius:99px;
+  padding:8px 14px; min-height:36px; display:inline-flex; align-items:center; gap:6px;
+}
+.chip-btn.active{ border-color:var(--sage); color:var(--sage); background:rgba(111,125,84,0.10); }
+.lang-panel{
+  margin-top:12px; padding:12px 14px; border-radius:14px;
+  background:var(--card); border:1.5px solid var(--line);
+  display:none; flex-wrap:wrap; gap:8px;
+}
+.lang-panel.open{ display:flex; }
+.lang-chip{
+  font-size:12px; font-weight:700; color:var(--ink);
+  background:var(--paper); border:1.5px solid var(--line); border-radius:99px;
+  padding:7px 12px; min-height:36px;
+}
+.lang-chip.selected{ border-color:var(--clay); color:var(--clay-deep); background:#fdf0de; }
+.results-list{ padding:16px 18px 6px; display:flex; flex-direction:column; gap:14px; }
+.no-results{ padding:30px 20px; text-align:center; color:var(--ink-soft); font-size:14px; line-height:1.6; }
+.fit-note{ font-size:11px; color:var(--ink-soft); text-align:center; padding:6px 20px 26px; line-height:1.4; }
+
+.porch-card{
+  background:var(--card); border-radius:22px; border:1.5px solid var(--line);
+  padding:17px 18px; box-shadow:0 6px 16px -10px rgba(58,32,14,0.3);
+  width:100%; text-align:left;
+}
+.porch-card.top{
+  border-width:2px; border-color:var(--gold);
+  background:linear-gradient(175deg,#fff3de,#f9dfae);
+  box-shadow:0 16px 34px -14px rgba(193,96,47,0.5);
+}
+.best-tag{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--clay-deep); background:rgba(255,255,255,0.55);
+  border:1px solid var(--gold); border-radius:99px;
+  padding:4px 10px; margin-bottom:11px;
+}
+.best-tag::before{ content:"\2605"; font-size:9px; }
+.pc-top-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.pc-name{ font-size:16.5px; font-weight:600; color:var(--ink); line-height:1.25; }
+.pc-loc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.fit-badge{
+  flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  width:54px; height:54px; border-radius:50%;
+  background:var(--card); border:2px solid var(--clay); color:var(--ink);
+}
+.fit-badge.gold{ border-color:var(--gold); background:linear-gradient(160deg,#fff4dd,#f8e2c0); }
+.fit-badge b{ font-size:15px; line-height:1; }
+.fit-badge span{ font-size:6.8px; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px; font-weight:700; }
+.pc-tags{ display:flex; flex-wrap:wrap; gap:6px; margin:11px 0; }
+.tag{
+  font-size:11px; background:rgba(58,32,14,0.07); color:var(--ink-soft);
+  padding:5px 10px; border-radius:99px; font-weight:700;
+}
+.pc-meta{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:4px; }
+.expand-hint{
+  margin-top:12px; text-align:center; font-size:12px; font-weight:700;
+  color:var(--clay-deep); display:flex; align-items:center; justify-content:center; gap:6px;
+  min-height:20px;
+}
+.expand-hint::after{ content:"\25be"; font-size:11px; }
+
+/* ============ EXPANDED ============ */
+.expand-head{
+  padding:14px 20px 12px; background:var(--paper-deep); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:10px; flex:none;
+}
+.back-chip{
+  width:40px; height:40px; border-radius:50%; background:var(--card);
+  border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:var(--ink); flex:none;
+}
+.expand-head h2{ font-size:17px; margin:0; color:var(--ink); font-weight:600; }
+.expand-body{ padding:18px 20px 34px; }
+
+.hero-porch{
+  border-radius:22px; padding:20px; margin-bottom:18px;
+  background:
+    radial-gradient(ellipse 220px 90px at 85% -10%, rgba(232,168,107,0.55), transparent 60%),
+    linear-gradient(160deg,#3a2c1f,#241a11);
+  color:#f4e8d4; position:relative; overflow:hidden;
+}
+.hero-porch::before{
+  content:""; position:absolute; right:-30px; bottom:-40px; width:150px; height:150px;
+  border-radius:50%; background:radial-gradient(circle, rgba(193,96,47,0.5), transparent 70%);
+}
+.hero-porch .fit-big{ font-size:32px; font-weight:600; position:relative; }
+.hero-porch .fit-big span{ font-size:13px; font-weight:500; opacity:0.78; margin-left:4px; }
+.hero-porch h3{ font-size:20px; font-weight:500; margin:6px 0 4px; position:relative; }
+.hero-porch .hp-loc{ font-size:12.5px; opacity:0.8; position:relative; }
+
+.info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:8px; }
+.info-cell{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:12px 13px;
+}
+.info-cell .lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; margin-bottom:4px; }
+.info-cell .val{ font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.35; }
+.info-cell .val.unset{ color:var(--ink-soft); font-weight:500; font-style:italic; }
+
+.section-title{
+  font-size:14px; font-weight:700; color:var(--ink); margin:22px 0 4px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-title .bulb-sm{
+  width:13px; height:13px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
+}
+.section-sub{ font-size:12.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.5; }
+.expect-note{ font-size:13.5px; color:var(--ink); line-height:1.6; margin:0; }
+
+.greeter-card{
+  background:var(--card); border:1.5px solid var(--line); border-radius:20px;
+  padding:16px; margin-bottom:12px; position:relative;
+}
+.g-head{ display:flex; gap:12px; align-items:flex-start; }
+.g-avatar{
+  width:52px; height:52px; border-radius:16px; flex:none; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:700; color:#fff;
+}
+.g-avatar::before{
+  content:""; position:absolute; inset:0; border-radius:16px; overflow:hidden;
+  background-image:repeating-linear-gradient(135deg, rgba(255,255,255,0.12) 0 2px, transparent 2px 8px);
+}
+.g-avatar .lamp{
+  position:absolute; right:-3px; bottom:-3px; width:15px; height:15px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 8px 3px rgba(217,164,65,0.7); border:2px solid var(--card);
+}
+.g-avatar span{ position:relative; z-index:1; }
+.g-avatar.a1{ background:linear-gradient(160deg,var(--clay-glow),var(--clay-deep)); }
+.g-avatar.a2{ background:linear-gradient(160deg,#8fa06a,var(--sage)); }
+.g-avatar.a3{ background:linear-gradient(160deg,#d9a441,#9c6a1f); }
+.g-id{ flex:1; min-width:0; }
+.g-name{ font-size:14.5px; font-weight:700; color:var(--ink); }
+.g-meta{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; line-height:1.4; }
+.report-flag{
+  flex:none; display:flex; align-items:center; justify-content:center; gap:4px;
+  font-size:11px; font-weight:700; color:var(--oxblood);
+  background:transparent; border:1.5px solid var(--oxblood); border-radius:10px;
+  padding:0 10px; min-height:44px; min-width:44px;
+}
+.demo-tag{
+  display:flex; align-items:center; gap:6px;
+  font-size:10.5px; font-weight:800; letter-spacing:0.03em; text-transform:uppercase;
+  color:var(--oxblood); background:rgba(138,47,31,0.07);
+  border:1.5px solid var(--oxblood); border-radius:10px;
+  padding:6px 10px; margin:11px 0 12px;
+}
+.demo-tag::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--oxblood); flex:none; }
+.g-quote{
+  font-size:13px; color:var(--ink); line-height:1.5; margin:0 0 4px;
+  font-style:italic; padding-left:11px; border-left:2px solid var(--clay-glow);
+}
+.g-sign{ font-size:12px; color:var(--ink-soft); font-weight:700; margin:0 0 12px; text-align:right; }
+.meet-box{
+  background:rgba(111,125,84,0.10); border:1.5px solid var(--sage); border-radius:14px;
+  padding:11px 13px;
+}
+.meet-label{
+  display:block; font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--sage); margin-bottom:3px;
+}
+.meet-place{ font-size:13px; color:var(--ink); line-height:1.4; }
+.meet-place em{ color:var(--ink-soft); font-style:normal; }
+.g-reply{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; margin-top:12px; padding:13px; border-radius:14px;
+  background:linear-gradient(180deg,var(--clay),var(--clay-deep));
+  color:#fbf1e0; font-size:13.5px; font-weight:700; min-height:44px; border:none;
+}
+.safety-link-row{
+  text-align:center; margin-top:4px;
+}
+.safety-link{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12.5px; font-weight:700; color:var(--sage);
+  background:none; border:none; padding:10px; min-height:44px;
+}
+.greeter-count{
+  display:flex; align-items:center; gap:7px; margin-top:11px;
+  font-size:12px; font-weight:700; color:var(--clay-deep);
+}
+.greeter-count .bulb{
+  width:12px; height:12px; flex:none; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
+}
+
+/* ============ PLAN / CONFIRMATION ============ */
+.plan{ padding:6px 24px 34px; }
+.plan h2{ font-size:27px; line-height:1.22; margin:14px 0 8px; font-weight:500; }
+.plan p.sub{ font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 20px; }
+.plan-card{
+  background:var(--card); border:2px solid var(--gold); border-radius:22px;
+  padding:18px; box-shadow:0 16px 34px -14px rgba(193,96,47,0.4);
+}
+.plan-when{ font-size:11px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:var(--clay-deep); margin-bottom:4px; }
+.plan-church{ font-size:19px; font-weight:500; color:var(--ink); margin:0 0 2px; }
+.plan-loc{ font-size:12.5px; color:var(--ink-soft); }
+.plan-row{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:11px 0; border-top:1px dashed var(--line); margin-top:11px;
+}
+.plan-row:first-of-type{ border-top:none; }
+.plan-row .plan-lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; width:74px; flex:none; padding-top:2px; }
+.plan-row .plan-val{ font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.45; }
+.plan-row .plan-val small{ display:block; font-size:12px; color:var(--ink-soft); font-weight:500; margin-top:2px; }
+
+/* ============ SAFETY ============ */
+.safety{ padding:6px 24px 34px; }
+.safety h2{ font-size:25px; line-height:1.25; margin:14px 0 8px; font-weight:500; }
+.safety p.lede{ font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 20px; }
+.safety-block{
+  background:var(--card); border:1.5px solid var(--line); border-radius:18px;
+  padding:15px 16px; margin-bottom:12px;
+}
+.safety-block.sage{ border-color:var(--sage); background:rgba(111,125,84,0.08); }
+.safety-block.oxblood{ border-color:var(--oxblood); background:rgba(138,47,31,0.05); }
+.safety-block h3{ font-size:14px; font-weight:700; color:var(--ink); margin:0 0 5px; }
+.safety-block.sage h3{ color:var(--sage); }
+.safety-block.oxblood h3{ color:var(--oxblood); }
+.safety-block p{ font-size:13px; color:var(--ink-soft); line-height:1.55; margin:0; }
+
+/* ============ RESUME CARD (intro) ============ */
+.resume-card{
+  background:linear-gradient(175deg,#fff3de,#f9dfae);
+  border:2px solid var(--gold); border-radius:20px;
+  padding:15px 16px; margin-bottom:18px;
+  box-shadow:0 10px 24px -12px rgba(193,96,47,0.45);
+}
+.resume-card .rc-eyebrow{
+  display:flex; align-items:center; gap:7px;
+  font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--clay-deep); margin-bottom:6px;
+}
+.resume-card .rc-eyebrow .bulb{
+  width:12px; height:12px; border-radius:50%; flex:none;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 8px 2px rgba(217,164,65,0.7);
+}
+.resume-card p{ font-size:13.5px; color:var(--ink); line-height:1.5; margin:0 0 10px; font-weight:500; }
+.resume-actions{ display:flex; gap:8px; }
+.resume-btn{
+  flex:1; padding:11px; border-radius:12px; min-height:44px;
+  font-size:13px; font-weight:700; border:none;
+  background:linear-gradient(180deg,var(--clay),var(--clay-deep)); color:#fbf1e0;
+}
+.resume-btn.ghost{ background:transparent; border:1.5px solid var(--line); color:var(--ink-soft); }
+
+.greeter-stub{
+  background:var(--card); border:1.5px dashed var(--line); border-radius:20px;
+  padding:18px; text-align:center;
+}
+.greeter-stub .bulb-lg{
+  width:32px; height:32px; margin:0 auto 12px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
+  box-shadow:0 0 12px 4px rgba(217,164,65,0.5);
+}
+.greeter-stub p{ font-size:13px; color:var(--ink-soft); line-height:1.6; margin:0; }
+.greeter-stub .stub-label{
+  display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--ink-soft); background:rgba(58,32,14,0.06); border-radius:10px;
+  padding:5px 10px; margin-bottom:10px;
+}
+
+.site-link{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; margin-top:8px; padding:16px; border-radius:16px;
+  background:linear-gradient(180deg,var(--clay),var(--clay-deep));
+  color:#fbf1e0; font-size:14.5px; font-weight:700; min-height:44px;
+  text-decoration:none;
+}
+.site-link.disabled{
+  background:var(--card); color:var(--ink-soft); border:1.5px solid var(--line);
+  pointer-events:none;
+}
+.sources-note{ font-size:11px; color:var(--ink-soft); margin-top:14px; line-height:1.5; text-align:center; }
+
+.start-over{
+  display:block; text-align:center; margin:18px auto 0; font-size:12.5px; color:var(--ink-soft);
+  font-weight:600; background:none; border:none; padding:8px; min-height:44px;
+}
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sky-strip sky-intro" id="skyStrip"></div>
+  <div class="statusbar"><span id="clockText">6:50</span><span>&#9679;&#9679;&#9679;&#9679;</span></div>
+  <main class="screen-root" id="screenRoot"></main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var CHURCH_DATA = {"vocabulary":{"note":"Fixed answer sets used so the quiz can match on these values directly. dressNorm vocabulary is locked by DESIGN.md; musicStyle, meetingSpace, and kidsDuringService are provisional, defined this session to keep the ranking matchable. sizeBand was removed 2026-08-15 after a research pass found only 1 of 20 churches states a real Sunday attendance number; replaced by meetingSpace (quiz question 5) and languageOptions (a lighter filter/badge, not a full quiz question).","musicStyle":["Full band, modern worship","Blended, some hymns some contemporary","Traditional hymns, organ or piano","Choir led, traditional","Chant and liturgical music","Varies by service"],"dressNorm":["Jeans and t-shirts","Business casual","Sunday best","Really varies","No preference"],"kidsDuringService":["Own class during service","Kids classes sorted by age","Stay in the main service","Cry room or nursery available, no separate class"],"meetingSpace":["Dedicated church building","Shared or rented space"],"languageOptions":"Free-text array of languages a service is offered in or interpreted into (not a fixed vocabulary), e.g. [\"English\"], [\"English\", \"Spanish\"]."},"churches":[{"id":"nona-church-narcoossee","name":"Nona Church","denomination":"Nondenominational","neighborhood":"Lake Nona","address":"255 S. Narcoossee Rd, St Cloud, FL 34771","website":"https://nonachurch.com/","serviceTimes":["Saturday 4:30 PM","Saturday 6:00 PM","Saturday 7:30 PM (Spanish language)","Sunday 8:30 AM","Sunday 9:45 AM","Sunday 11:15 AM","Sunday 12:45 PM"],"musicStyle":"Full band, modern worship","dressNorm":"No preference","kidsDuringService":"Kids classes sorted by age","meetingSpace":null,"languageOptions":["English","Spanish"],"parkingNote":null,"whatToExpectNote":"Services run about 70 minutes with live, contemporary worship music, and there is no dress code, so guests are told to come as they are. First time visitors are encouraged to arrive 15 minutes early, and kids from crawlers through 5th grade can be pre-registered for secure, background checked NonaKids classes sorted by age.","lastVerified":"2026-08-15","sources":{"serviceTimes":"https://nonachurch.com/locations","musicStyle":"https://nonachurch.com/im-new","dressNorm":"https://nonachurch.com/im-new","kidsDuringService":"https://nonachurch.com/get-connected/nonakids","whatToExpectNote":"https://nonachurch.com/im-new","languageOptions":"https://nonachurch.com/locations"}},{"id":"trinity-church-lake-nona","name":"Trinity Church of Lake Nona","denomination":"Nondenominational (Reformed)","neighborhood":"Lake Nona","address":"7800 Laureate Blvd, Orlando, FL 32827 (meets at Laureate Park Elementary School, in the cafeteria)","website":"https://www.trinitylakenona.com/","serviceTimes":["Sunday 9:30 AM"],"musicStyle":"Blended, some hymns some contemporary","dressNorm":"Business casual","kidsDuringService":"Kids classes sorted by age","meetingSpace":"Shared or rented space","languageOptions":null,"parkingNote":"Use the school's main parking lot, with signage directing attendees to the cafeteria where the church meets.","whatToExpectNote":"You will gather in the cafeteria of Laureate Park Elementary School, where complimentary coffee and refreshments are offered before the service. Seating is either in chairs or on benches in the back for families with young children, and the service follows a structured order including a welcome, several songs, a time of confession, a roughly 30 minute sermon, pastoral prayer, and a closing benediction. Nursery care is available for ages 0 to 4, and kids in kindergarten through second grade can go to story time in the library during the sermon, with coloring pages and children's bulletins available for those who stay in the service.","lastVerified":"2026-08-15","sources":{"serviceTimes":"https://www.trinitylakenona.com/faqs","musicStyle":"https://www.trinitylakenona.com/","dressNorm":"https://www.trinitylakenona.com/faqs","kidsDuringService":"https://www.trinitylakenona.com/faqs","parkingNote":"https://www.trinitylakenona.com/faqs","whatToExpectNote":"https://www.trinitylakenona.com/faqs","meetingSpace":"https://www.trinitylakenona.com/faqs"}},{"id":"east-coast-believers-lake-nona","name":"East Coast Believers Church","denomination":"Nondenominational","neighborhood":"Lake Nona","address":"12253 Lake Nona Gateway Rd, Orlando, FL 32827","website":"https://www.eastcoastbelievers.org/lake-nona","serviceTimes":["Sunday 10:00 AM"],"musicStyle":"Full band, modern worship","dressNorm":"No preference","kidsDuringService":"Kids classes sorted by age","meetingSpace":"Shared or rented space","languageOptions":["English","Spanish (translation available)"],"parkingNote":null,"whatToExpectNote":"Services begin promptly on time with a countdown video five minutes before start, followed by a time of worship. Nobody will single you out, ask you to stand up, or ask for money as a first time guest. If it is your first visit, you can stop by the Guest Connect area in the lobby before or after the service.","lastVerified":"2026-08-15","sources":{"serviceTimes":"https://www.eastcoastbelievers.org/lake-nona","musicStyle":"https://www.eastcoastbelievers.org/lake-nona","dressNorm":"https://www.eastcoastbelievers.org/lake-nona","kidsDuringService":"https://www.eastcoastbelievers.org/lake-nona","whatToExpectNote":"https://www.eastcoastbelievers.org/lake-nona","meetingSpace":"https://www.eastcoastbelievers.org/lake-nona","languageOptions":"https://www.eastcoastbelievers.org/espanol"}},{"id":"azalea-park-church","name":"Azalea Park Church","denomination":"Nondenominational","neighborhood":"Azalea Park, Orlando","address":"5721 Dahlia Dr, Orlando, FL 32807","website":"https://azaleaparkchurch.org","serviceTimes":["Sunday 11:00 AM","Thursday 8:00 PM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":null,"languageOptions":["Spanish"],"parkingNote":null,"whatToExpectNote":"Azalea Park Church holds services on Sunday mornings at 11:00 AM and Thursday evenings at 8:00 PM. The church describes its focus as reaching people who want a new beginning, spiritual healing, and growth in love and compassion, and is led by Pastors Wildre and Alexa Ortega.","lastVerified":"2026-08-15","sources":{"address":"https://azaleaparkchurch.org/about.html","serviceTimes":"https://azaleaparkchurch.org/about.html","whatToExpectNote":"https://azaleaparkchurch.org/about.html","languageOptions":"https://azaleaparkchurch.org/about.html"}},{"id":"narcoossee-baptist-church","name":"Narcoossee Baptist Church","denomination":"Southern Baptist","neighborhood":"St. Cloud / Lake Nona area","address":null,"website":"http://www.nbaptistchurch.org/","serviceTimes":["Sunday 9:30 AM Bible Study","Sunday 10:30 AM Worship Service","Sunday 6:00 PM Bible Application"],"musicStyle":"Blended, some hymns some contemporary","dressNorm":null,"kidsDuringService":"Own class during service","meetingSpace":null,"languageOptions":null,"parkingNote":null,"whatToExpectNote":"Sunday starts with a 9:30 AM Bible Study for all ages, followed by the main Worship Service at 10:30 AM, which includes hymnal praise, contemporary praise and worship music, a choir, and a message from the pastor. Children's Church runs from 11:15 AM to 12:00 PM during that morning service, where kids learn Bible stories through videos, games, and crafts instead of sitting in the adult service. The church also broadcasts the service live on FM radio on the church property.","lastVerified":"2026-08-15","sources":{"serviceTimes":"http://www.nbaptistchurch.org/worship.html","musicStyle":"http://www.nbaptistchurch.org/about.html","kidsDuringService":"http://www.nbaptistchurch.org/ministries.html","whatToExpectNote":"http://www.nbaptistchurch.org/worship.html"}},{"id":"south-orlando-baptist-church","name":"South Orlando Baptist Church","denomination":"Southern Baptist","neighborhood":"South Orlando","address":"11513 S Orange Blossom Tr., Orlando, FL 32837","website":"https://www.southorlandobaptist.org/","serviceTimes":["Sunday 9:45 AM (Small Groups)","Sunday 11:00 AM (Worship Service)"],"musicStyle":"Blended, some hymns some contemporary","dressNorm":null,"kidsDuringService":"Kids classes sorted by age","meetingSpace":null,"languageOptions":["English"],"parkingNote":null,"whatToExpectNote":"A typical Sunday service lasts about 75 minutes with a mix of contemporary and traditional worship music led by the worship team. Childcare and nursery care are available during the service, and children in kindergarten through 5th grade have their own Children's Church after the music portion of worship. Visitors are welcome to stay after the service for fellowship and meeting people.","lastVerified":"2026-08-15","sources":{"serviceTimes":"https://www.southorlandobaptist.org/i-m-new","musicStyle":"https://www.southorlandobaptist.org/i-m-new","kidsDuringService":"https://www.southorlandobaptist.org/children","whatToExpectNote":"https://www.southorlandobaptist.org/i-m-new","languageOptions":"https://www.southorlandobaptist.org/our-story"}},{"id":"first-baptist-orlando","name":"First Baptist Church of Orlando","denomination":"Southern Baptist","neighborhood":"Orlando","address":"3000 South John Young Parkway, Orlando, FL 32805","website":"https://www.firstorlando.com/","serviceTimes":["Sunday 8:30 AM","Sunday 10:00 AM","Sunday 11:30 AM","Sunday 3:30 PM (Spanish language)"],"musicStyle":"Varies by service","dressNorm":"No preference","kidsDuringService":"Kids classes sorted by age","meetingSpace":null,"languageOptions":["English","Spanish","Portuguese","ASL"],"parkingNote":"Several parking lots are available on campus, with signage directing first time visitors to First Time Guest Parking.","whatToExpectNote":"Services run about an hour, with the 8:30 AM service featuring traditional style music and the 10:00 AM and 11:30 AM services featuring a worship team with live music. The church says formal attire is not required, so come as you are. Kids are placed in age based classes, Preschool, Elementary, and Preteen, while parents attend the main service, and first time guests are directed to dedicated guest parking.","lastVerified":"2026-08-15","sources":{"address":"https://www.firstorlando.com/locations/john-young/","serviceTimes":"https://www.firstorlando.com/locations/john-young/","musicStyle":"https://www.firstorlando.com/locations/john-young/","dressNorm":"https://www.firstorlando.com/locations/john-young/","kidsDuringService":"https://www.firstorlando.com/kids/","parkingNote":"https://www.firstorlando.com/locations/john-young/","whatToExpectNote":"https://www.firstorlando.com/locations/john-young/","languageOptions":"https://www.firstorlando.com/locations/john-young/"}},{"id":"spring-of-life-umc","name":"Spring of Life United Methodist Church","denomination":"United Methodist","neighborhood":"Lake Nona","address":"11101 Moss Park Rd, Orlando, FL 32765","website":"https://www.springchurch.org","serviceTimes":["Sunday 10:30 AM"],"musicStyle":null,"dressNorm":"Really varies","kidsDuringService":"Kids classes sorted by age","meetingSpace":"Dedicated church building","languageOptions":null,"parkingNote":"Parking is free and always available right on campus, park in any open spot and greeters near the entrance will point you in the right direction.","whatToExpectNote":"You will arrive to a Welcome Table with greeters and name tags, then can grab coffee or a snack at the Cafe before the 10:30 AM service. Kids ages 6 months through VPK can go to the nursery and grades K through 5 start in Sunday School, then rejoin the family in the sanctuary for the sermon and communion. There is no formal check in and dress ranges from jeans and t-shirts to business casual, so you come as you are.","lastVerified":"2026-08-15","sources":{"address":"https://www.springchurch.org/first-visit","serviceTimes":"https://www.springchurch.org/first-visit","dressNorm":"https://www.springchurch.org/first-visit","kidsDuringService":"https://www.springchurch.org/first-visit","parkingNote":"https://www.springchurch.org/first-visit","whatToExpectNote":"https://www.springchurch.org/first-visit","meetingSpace":"https://www.springchurch.org/our-story"}},{"id":"first-umc-orlando","name":"First United Methodist Church of Orlando","denomination":"United Methodist","neighborhood":"Downtown Orlando","address":"142 E Jackson Street, Orlando, FL 32801","website":"https://firstchurchorlando.org","serviceTimes":["Sunday 9:30 AM","Sunday 11:00 AM"],"musicStyle":"Varies by service","dressNorm":null,"kidsDuringService":"Kids classes sorted by age","meetingSpace":"Dedicated church building","languageOptions":null,"parkingNote":"For Sunday worship: the Seaside parking garage at Jackson and Magnolia (closes at 1 pm), an underground garage beneath the building with 70 spaces, and a surface lot at the Wesley Center on Jackson Street for those with limited mobility or families with young children.","whatToExpectNote":"A first time visitor can choose between a 9:30 AM Modern Worship service with a praise band in the Contemporary Worship Center on the second floor, or an 11:00 AM Traditional Worship service in the Sanctuary with choirs, instrumental ensembles, and organ. Children from birth through preschool can go to nursery care, and Pre-K through 5th graders start in Kid's Chapel before moving to age based groups in the Children's Ministry wing. Communion is offered at both services on the first Sunday of each month.","lastVerified":"2026-08-15","sources":{"address":"https://firstchurchorlando.org/contact-us","serviceTimes":"https://firstchurchorlando.org/services","musicStyle":"https://firstchurchorlando.org/services","kidsDuringService":"https://firstchurchorlando.org/children","parkingNote":"https://firstchurchorlando.org/contact-us","whatToExpectNote":"https://firstchurchorlando.org/services","meetingSpace":"https://firstchurchorlando.org/our-history"}},{"id":"hope-presbyterian-lake-nona","name":"Hope Presbyterian Church at Lake Nona","denomination":"Presbyterian (PCUSA)","neighborhood":"Lake Nona","address":"Lake Nona Middle School, 13700 Narcoossee Road, Orlando, FL 32832","website":"https://hopenona.com/","serviceTimes":["Sunday 10:00 AM"],"musicStyle":"Blended, some hymns some contemporary","dressNorm":"Really varies","kidsDuringService":"Cry room or nursery available, no separate class","meetingSpace":"Shared or rented space","languageOptions":null,"parkingNote":null,"whatToExpectNote":"Worship lasts about an hour and blends a couple of classic hymns with contemporary worship songs using simple instrumentation, along with some ancient forms of liturgy. Greeters are stationed near the main entrance of Lake Nona Middle School and will walk you to the right room. Communion is offered monthly, and background checked staff care for preschool age children in an adjacent windowed room during the service.","lastVerified":"2026-08-15","sources":{"address":"https://hopenona.com/directions-and-services","serviceTimes":"https://hopenona.com/directions-and-services","musicStyle":"https://hopenona.com/directions-and-services","dressNorm":"https://hopenona.com/directions-and-services","kidsDuringService":"https://hopenona.com/directions-and-services","whatToExpectNote":"https://hopenona.com/directions-and-services","meetingSpace":"https://hopenona.com/directions-and-services"}},{"id":"lake-nona-presbyterian-pca","name":"Lake Nona Presbyterian Church","denomination":"Presbyterian (PCA)","neighborhood":"Lake Nona","address":"10123 William Carey Drive, Orlando, FL 32832 (meets at the Pioneers Campus, just off Narcoossee Road near 417)","website":"https://www.lnpca.church/","serviceTimes":["Sunday 10:30 AM"],"musicStyle":null,"dressNorm":"Business casual","kidsDuringService":null,"meetingSpace":"Shared or rented space","languageOptions":null,"parkingNote":null,"whatToExpectNote":"You will worship on Sunday morning at 10:30 AM at the Pioneers Campus just off Narcoossee Road near 417. The church describes itself as a casual congregation, and dress is casual, think jeans paired with a button down shirt or blouse.","lastVerified":"2026-08-15","sources":{"address":"https://www.lnpca.church/i-am-new-here","serviceTimes":"https://www.lnpca.church/i-am-new-here","dressNorm":"https://www.lnpca.church/i-am-new-here","whatToExpectNote":"https://www.lnpca.church/i-am-new-here","meetingSpace":"https://www.lnpca.church/about"}},{"id":"all-saints-lutheran-orlando","name":"All Saints Lutheran Church","denomination":"Lutheran (ELCA)","neighborhood":"South Orlando","address":"12601 Balcombe Rd, Orlando, FL 32837","website":"https://www.allsaintsorlando.org/","serviceTimes":["Sunday 9:00 AM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":"Dedicated church building","languageOptions":null,"parkingNote":null,"whatToExpectNote":"Sunday worship is once a week at this address, and the church describes its congregation as diverse and family like, welcoming to all who enter. The site itself lists two different start times for the Sunday service, 9:00 AM on the homepage and worship page, 9:30 AM on the visit and about pages, so a first time visitor should call ahead to confirm the exact time.","lastVerified":"2026-08-15","sources":{"address":"https://www.allsaintsorlando.org/contact-us","serviceTimes":"https://www.allsaintsorlando.org/","whatToExpectNote":"https://www.allsaintsorlando.org/about","meetingSpace":"https://www.allsaintsorlando.org/about"}},{"id":"cathedral-church-st-luke","name":"Cathedral Church of Saint Luke","denomination":"Episcopal","neighborhood":"Downtown Orlando","address":"130 North Magnolia Avenue, Orlando, FL 32801","website":"https://www.ccslorlando.org/","serviceTimes":["Sunday 8:00 AM","Sunday 10:15 AM","Sunday 6:00 PM"],"musicStyle":"Varies by service","dressNorm":null,"kidsDuringService":"Kids classes sorted by age","meetingSpace":"Dedicated church building","languageOptions":["English"],"parkingNote":"Three free options on Sundays: complimentary metered street parking around the building, the Lanier Parking Lot at Washington and Magnolia adjacent to the cathedral, and the Regions Bank Parking Garage (covered, get a voucher from an usher after the service).","whatToExpectNote":"The service is a Holy Eucharist using the Book of Common Prayer, with hymns, scripture readings, and preaching, and worshippers can arrive early for silent prayer. The 8 AM service is traditional language with pipe organ and no incense, the 10:15 AM service is contemporary language with pipe organ, other instruments, choir, incense, and children's programming, and the 6 PM service is contemporary language with guitar and piano and no incense. Children ages 0 through 4th grade can stay in the main service with family or go to nursery or Kid's Church, and all children's volunteers are background checked.","lastVerified":"2026-08-15","sources":{"serviceTimes":"https://www.ccslorlando.org/worship-times","musicStyle":"https://www.ccslorlando.org/worship-times","kidsDuringService":"https://www.ccslorlando.org/cathedral-kids","parkingNote":"https://www.ccslorlando.org/visit-us-1","whatToExpectNote":"https://www.ccslorlando.org/worship-times","meetingSpace":"https://www.ccslorlando.org/history","languageOptions":"https://www.ccslorlando.org/worship-times"}},{"id":"adoration-church-orlando","name":"Adoration Church","denomination":"Anglican (ACNA)","neighborhood":"Winter Park","address":"Kress Memorial Seventh-Day Adventist Church Building, 746 Formosa Ave, Winter Park, FL 32789","website":"https://adorationchurchfl.com/","serviceTimes":["Sunday 10:00 AM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":"Own class during service","meetingSpace":"Shared or rented space","languageOptions":null,"parkingNote":null,"whatToExpectNote":"Adoration Church is an Anglican parish that gathers for worship on Sunday mornings at 10am at the Kress Memorial Seventh Day Adventist Church Building in Winter Park. Kids ages 1 to 11 stay with their families for part of the service, then background checked volunteers lead them in age appropriate teaching during the sermon before they rejoin their families. A pre-service prayer gathering is also offered on Sundays at 9am for those who want to attend.","lastVerified":"2026-08-15","sources":{"denomination":"https://adorationchurchfl.com/beliefs","address":"https://adorationchurchfl.com/","serviceTimes":"https://adorationchurchfl.com/","kidsDuringService":"https://adorationchurchfl.com/adoration-kids","whatToExpectNote":"https://adorationchurchfl.com/adoration-kids","meetingSpace":"https://adorationchurchfl.com/"}},{"id":"saint-frances-xavier-cabrini","name":"Saint Frances Xavier Cabrini Catholic Church","denomination":"Catholic","neighborhood":"Lake Nona","address":"Narcoossee Middle School Cafeteria, 2700 N. Narcoossee Road, Saint Cloud, FL 34771","website":"https://stcabriniorlando.org/","serviceTimes":["Saturday Vigil Mass 5:00 PM","Sunday Mass 8:30 AM","Sunday Mass 10:30 AM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":"Shared or rented space","languageOptions":["English","Spanish","Portuguese"],"parkingNote":null,"whatToExpectNote":"This parish holds Mass at Narcoossee Middle School, so first time visitors will be worshiping in a school cafeteria rather than a traditional church building. There is a Saturday vigil Mass at 5 PM and two Sunday Mass options at 8:30 AM and 10:30 AM to choose from. The site has a Welcome Home section that invites newcomers to register as a parish household after visiting.","lastVerified":"2026-08-15","sources":{"address":"https://stcabriniorlando.org/mass-times/","serviceTimes":"https://stcabriniorlando.org/mass-times/","whatToExpectNote":"https://stcabriniorlando.org/","meetingSpace":"https://stcabriniorlando.org/mass-times/","languageOptions":"https://stcabriniorlando.org/news-events/new-sunday-mass-schedule-and-languages-beginning-september-6/"}},{"id":"blessed-trinity-catholic-conway","name":"Blessed Trinity Catholic Church","denomination":"Catholic","neighborhood":"Conway, Orlando","address":"4545 Anderson Road, Orlando, FL 32812","website":"https://btccorl.org/","serviceTimes":["Saturday Vigil Mass 5:00 PM (English)","Sunday Mass 8:00 AM (English)","Sunday Mass 10:00 AM (English)","Sunday Mass 12:00 PM (Spanish)","Sunday Mass 5:00 PM (English)"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":"Dedicated church building","languageOptions":["English","Spanish"],"parkingNote":null,"whatToExpectNote":"Visitors are welcomed with the message Come as you are, whether it is their first time or they have been part of the parish for years. Sunday Mass is offered in English at 8:00 AM, 10:00 AM, and 5:00 PM, plus a Spanish language Mass at 12:00 PM, with confessions in Spanish available from 11:15 to 11:45 AM. The parish offers a low gluten host at Communion for anyone with a gluten intolerance, distributed at the line where the presider of Mass is giving communion.","lastVerified":"2026-08-15","sources":{"address":"https://btccorl.org/parish-office-and-directions","serviceTimes":"https://btccorl.org/mass-times","whatToExpectNote":"https://btccorl.org/welcome","meetingSpace":"https://btccorl.org/news/60-years-of-faith-honoring-our-past-building-our-future","languageOptions":"https://btccorl.org/reconciliation"}},{"id":"st-george-antiochian-orthodox","name":"St. George Antiochian Orthodox Church","denomination":"Antiochian Orthodox","neighborhood":"Downtown Orlando","address":"24 North Rosalind Avenue, Orlando, FL 32801","website":"https://www.stgeorgeorlando.org/home","serviceTimes":["Sunday Orthros 9:00 AM","Sunday Divine Liturgy 10:00 AM","Saturday Confessions 4:00 PM","Saturday Great Vespers 5:00 PM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":"Own class during service","meetingSpace":null,"languageOptions":["English","Arabic"],"parkingNote":null,"whatToExpectNote":null,"lastVerified":"2026-08-15","sources":{"serviceTimes":"https://www.stgeorgeorlando.org/home","kidsDuringService":"https://www.stgeorgeorlando.org/home","languageOptions":"https://stgeorgeorlando.org/main/index.php/our-clergy/"}},{"id":"faith-church-orlando","name":"Faith Church Orlando","denomination":"Assemblies of God (Pentecostal)","neighborhood":"Southeast Orlando","address":"9307 Curry Ford Road, Orlando, FL 32825","website":"https://faithchurchorlando.com/","serviceTimes":["Wednesday 7:00 PM","Sunday 8:00 AM","Sunday 10:00 AM","Sunday 12:00 PM","Sunday 2:00 PM (Spanish language)"],"musicStyle":"Full band, modern worship","dressNorm":"Really varies","kidsDuringService":"Kids classes sorted by age","meetingSpace":"Dedicated church building","languageOptions":["English","Spanish"],"parkingNote":"The campus has multiple parking lots. The Information Center is located in the church vestibule by parking lot number 2.","whatToExpectNote":"Services run on a contemporary style with a full band and a practical message from the Bible. There is no set dress code, the church says to wear whatever makes you feel comfortable and confident, so you will see everything from business wear to casual clothes. A Guest Experience Team wearing bright yellow shirts is available near the entrance to answer questions and give directions, and children from newborn through grade 5 have their own age based classes with a secure check in and pickup system while parents are in the main service.","lastVerified":"2026-08-15","sources":{"address":"https://faithchurchorlando.com/locations/curryford/","serviceTimes":"https://faithchurchorlando.com/locations/curryford/","musicStyle":"https://faithchurchorlando.com/events/easter/","dressNorm":"https://faithchurchorlando.com/events/easter/","kidsDuringService":"https://faithchurchorlando.com/kids/","parkingNote":"https://faithchurchorlando.com/locations/curryford/","whatToExpectNote":"https://faithchurchorlando.com/events/easter/","meetingSpace":"https://faithchurchorlando.com/church","languageOptions":"https://faithchurchorlando.com"}},{"id":"orlando-gospel-assembly","name":"Orlando Gospel Assembly","denomination":"Assemblies of God (Pentecostal)","neighborhood":"East Orlando","address":"2124 N Dean Road, Orlando, FL 32817","website":"https://www.orlandogospelassembly.org/","serviceTimes":["Sunday 12:00 PM","Sunday 6:00 PM","Wednesday 7:30 PM","Friday 8:00 PM (Zoom)"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":null,"languageOptions":null,"parkingNote":null,"whatToExpectNote":null,"lastVerified":"2026-08-15","sources":{"address":"https://www.orlandogospelassembly.org/contact","serviceTimes":"https://www.orlandogospelassembly.org/contact"}},{"id":"restoration-seventh-day-adventist","name":"Restoration Seventh-day Adventist Church","denomination":"Seventh-day Adventist","neighborhood":"Orlando","address":"30 E Evans St, Orlando, FL 32804","website":"https://restorationfl.adventistchurch.org/","serviceTimes":["Saturday Sabbath School 10:00 AM","Saturday Divine Service 11:15 AM"],"musicStyle":null,"dressNorm":null,"kidsDuringService":null,"meetingSpace":null,"languageOptions":null,"parkingNote":null,"whatToExpectNote":"The church describes itself as welcoming to visitors regardless of where they are in their spiritual journey, including people new to religion entirely. Worship happens on Saturday, the Sabbath, with Sabbath School at 10:00 AM followed by Divine Service at 11:15 AM.","lastVerified":"2026-08-15","sources":{"address":"https://restorationfl.adventistchurch.org/about-ii/","serviceTimes":"https://restorationfl.adventistchurch.org/about-ii/","whatToExpectNote":"https://restorationfl.adventistchurch.org/"}}]};
+var VOCAB = CHURCH_DATA.vocabulary;
+var CHURCHES = CHURCH_DATA.churches;
+
+var NO_PREF = "No preference";
+
+/* Fictional demo greeters, 2 per church. Every one is invented and labeled
+   "Demo persona, not a real member" in the UI. Quotes reference only details
+   each church publishes on its own site. Meeting spots are public, on-campus
+   spots (lobby, entrance, guest parking), never a private location. */
+var GREETERS = {
+  "nona-church-narcoossee": [
+    { name:"Maya R.", initials:"MR", av:1, meta:"Lake Nona neighborhood, at Nona Church four years",
+      quote:"I came alone my first Sunday and nobody told me where anything was. I can fix that for you. I will meet you in the parking lot so you are not walking in alone.",
+      sign:"Maya", spot:"Nona Church main lobby" },
+    { name:"Marcos T.", initials:"MT", av:2, meta:"St. Cloud neighborhood, at Nona Church two years",
+      quote:"If Spanish feels more like home, the Saturday 7:30 service is ours. Either way, come 15 minutes early and I will save you a seat.",
+      sign:"Marcos", spot:"Foxtail Coffee, Lake Nona Town Center" }
+  ],
+  "trinity-church-lake-nona": [
+    { name:"Danielle W.", initials:"DW", av:3, meta:"Laureate Park neighborhood, at Trinity three years",
+      quote:"Church in a school cafeteria felt strange to me the first time too. Ten minutes in, it just feels like church. I will wait for you by the school’s front sign.",
+      sign:"Danielle", spot:"Laureate Park Elementary front entrance" },
+    { name:"Sam O.", initials:"SO", av:2, meta:"Lake Nona neighborhood, at Trinity since it started",
+      quote:"We keep benches in the back for families with wiggly kids, that is where mine and I sit. Come find us, the coffee is free and it is actually good.",
+      sign:"Sam", spot:"The coffee table inside the cafeteria" }
+  ],
+  "east-coast-believers-lake-nona": [
+    { name:"Priya S.", initials:"PS", av:1, meta:"Lake Nona neighborhood, at East Coast Believers three years",
+      quote:"Nobody here will single you out or ask you to stand, I promise, that is a real rule. I will be at the Guest Connect table before the countdown starts.",
+      sign:"Priya", spot:"Guest Connect area, main lobby" },
+    { name:"Andre B.", initials:"AB", av:2, meta:"Moss Park neighborhood, at East Coast Believers two years",
+      quote:"The service starts right on time, there is a countdown and everything. Come at 9:45 and we can grab seats together before it hits zero.",
+      sign:"Andre", spot:"Main entrance doors" }
+  ],
+  "azalea-park-church": [
+    { name:"Alexa V.", initials:"AV", av:3, meta:"Azalea Park neighborhood, at Azalea Park Church five years",
+      quote:"El servicio es en español. If English is easier for you, sit with me and I will quietly keep you in the loop on the parts that matter.",
+      sign:"Alexa", spot:"Front steps on Dahlia Drive" },
+    { name:"Luis R.", initials:"LR", av:1, meta:"East Orlando neighborhood, at Azalea Park Church three years",
+      quote:"This is a church for new beginnings, most of us walked in carrying something heavy. Come as you are on Sunday at 11, I will be at the door.",
+      sign:"Luis", spot:"Church front entrance" }
+  ],
+  "narcoossee-baptist-church": [
+    { name:"Ruth A.", initials:"RA", av:2, meta:"Narcoossee neighborhood, at Narcoossee Baptist eleven years",
+      quote:"We still sing from hymnals and the choir carries the room. If you have not been in years, it will feel familiar fast. I will save you a spot near the middle.",
+      sign:"Ruth", spot:"Sanctuary front doors" },
+    { name:"Josh P.", initials:"JP", av:1, meta:"St. Cloud neighborhood, at Narcoossee Baptist four years",
+      quote:"If you want to warm up first, the service plays on FM radio right in the parking lot. Listen for a minute, then come in and find me at the door.",
+      sign:"Josh", spot:"Main parking lot, by the front doors" }
+  ],
+  "south-orlando-baptist-church": [
+    { name:"Angela C.", initials:"AC", av:3, meta:"Hunter’s Creek neighborhood, at South Orlando Baptist six years",
+      quote:"The service is about 75 minutes and nobody rushes out after. Stay for the fellowship time, that is where it stops being a building and starts being people.",
+      sign:"Angela", spot:"Welcome desk, main lobby" },
+    { name:"Peter D.", initials:"PD", av:2, meta:"South Orlando neighborhood, at South Orlando Baptist three years",
+      quote:"The music is a mix, some hymns, some newer songs, so nobody feels like a stranger to all of it. I will meet you out front at 10:45.",
+      sign:"Peter", spot:"Front entrance canopy" }
+  ],
+  "first-baptist-orlando": [
+    { name:"Tanya B.", initials:"TB", av:1, meta:"Millenia neighborhood, at First Orlando five years",
+      quote:"The campus is big, but you only need one turn: follow the First Time Guest Parking signs and I will be waiting right where you park.",
+      sign:"Tanya", spot:"First Time Guest Parking area" },
+    { name:"Harold M.", initials:"HM", av:3, meta:"Conway neighborhood, at First Orlando nineteen years",
+      quote:"The 8:30 service is the traditional one, that is mine. Organ, older hymns, a quieter crowd. If that is what you miss, come sit with Marge and me.",
+      sign:"Harold", spot:"Main worship center lobby" }
+  ],
+  "spring-of-life-umc": [
+    { name:"Grace H.", initials:"GH", av:2, meta:"Moss Park neighborhood, at Spring of Life seven years",
+      quote:"There is a Welcome Table right inside with name tags and people who are glad you came. I will have yours ready, first names only if you like.",
+      sign:"Grace", spot:"The Welcome Table, just inside the entrance" },
+    { name:"Tom H.", initials:"TH", av:1, meta:"Moss Park neighborhood, at Spring of Life seven years",
+      quote:"Grab a coffee at the Cafe first, that is the unofficial front porch of this place. Kids start in Sunday School and rejoin you for communion, ours always have.",
+      sign:"Tom", spot:"The Cafe, inside the main building" }
+  ],
+  "first-umc-orlando": [
+    { name:"Elena V.", initials:"EV", av:1, meta:"Downtown Orlando neighborhood, at First Church eight years",
+      quote:"Downtown parking is the only hard part, so let me take it off your plate. Park in the Seaside garage at Jackson and Magnolia and I will meet you at the door.",
+      sign:"Elena", spot:"E Jackson Street main entrance" },
+    { name:"James K.", initials:"JK", av:3, meta:"Colonialtown neighborhood, at First Church twelve years",
+      quote:"We really are two churches in one building, a praise band upstairs at 9:30 and choir and organ in the sanctuary at 11. Tell me which one sounds like you and I will walk you there.",
+      sign:"James", spot:"Welcome desk, main lobby" }
+  ],
+  "hope-presbyterian-lake-nona": [
+    { name:"Miriam J.", initials:"MJ", av:2, meta:"Lake Nona neighborhood, at Hope four years",
+      quote:"We meet in a middle school, so look for the greeters at the main entrance, I am one of them. You will never wander a hallway wondering where to go.",
+      sign:"Miriam", spot:"Lake Nona Middle School main entrance" },
+    { name:"Caleb N.", initials:"CN", av:1, meta:"Narcoossee neighborhood, at Hope two years",
+      quote:"The service blends old hymns with newer songs and a little ancient liturgy. If the liturgy part is new to you, sit by me, everything is printed and easy to follow.",
+      sign:"Caleb", spot:"The welcome table, inside the school entrance" }
+  ],
+  "lake-nona-presbyterian-pca": [
+    { name:"Sofia L.", initials:"SL", av:3, meta:"Lake Nona neighborhood, at Lake Nona Presbyterian three years",
+      quote:"Jeans and a button down is the uniform here, truly, even the pastor. Come at 10:15 and I will introduce you around before the first song.",
+      sign:"Sofia", spot:"Pioneers Campus front entrance" },
+    { name:"Mark E.", initials:"ME", av:2, meta:"Eagle Creek neighborhood, at Lake Nona Presbyterian since it started",
+      quote:"We are a small, casual congregation, which means you will be noticed in the good way, greeted, not spotlighted. I will be at the door either way.",
+      sign:"Mark", spot:"Main lobby, Pioneers Campus" }
+  ],
+  "all-saints-lutheran-orlando": [
+    { name:"Margaret F.", initials:"MF", av:2, meta:"Hunter’s Creek neighborhood, at All Saints fourteen years",
+      quote:"We are a small congregation that feels like family, which means you will not slip in unnoticed, but you will be glad you were noticed. I will be by the front door from 8:45.",
+      sign:"Margaret", spot:"Church front doors on Balcombe Road" },
+    { name:"David R.", initials:"DR", av:1, meta:"South Orlando neighborhood, at All Saints six years",
+      quote:"Our website lists two different start times, so do not stress about which is right. Come by 9:00 and you cannot be late, and I will be there whichever it is.",
+      sign:"David", spot:"Main entrance" }
+  ],
+  "cathedral-church-st-luke": [
+    { name:"Nadia F.", initials:"NF", av:1, meta:"Thornton Park neighborhood, at the Cathedral five years",
+      quote:"The prayer book can feel like a maze your first time. Sit with me and I will keep us on the right page, when to stand, when to sit, all of it.",
+      sign:"Nadia", spot:"Cathedral steps on Magnolia Avenue" },
+    { name:"Charles W.", initials:"CW", av:3, meta:"Downtown Orlando neighborhood, at the Cathedral ten years",
+      quote:"The 8 AM service is quiet, spoken, no incense. The 10:15 has the choir and all the beauty. Neither one minds a newcomer in the least, and ushers hand out parking vouchers after.",
+      sign:"Charles", spot:"The Lanier lot, at Washington and Magnolia" }
+  ],
+  "adoration-church-orlando": [
+    { name:"Beth A.", initials:"BA", av:2, meta:"Winter Park neighborhood, at Adoration two years",
+      quote:"The sign out front says Kress Memorial, and that confuses everyone once. You are in the right place. I will be at the door so you do not have to wonder.",
+      sign:"Beth", spot:"Kress Memorial building front entrance" },
+    { name:"Isaiah T.", initials:"IT", av:1, meta:"Audubon Park neighborhood, at Adoration since it started",
+      quote:"Kids stay with you for the singing, then go to their own teaching during the sermon and come back after. Mine love it. There is also quiet prayer at 9 if you want to land early.",
+      sign:"Isaiah", spot:"The welcome table, inside the entrance" }
+  ],
+  "saint-frances-xavier-cabrini": [
+    { name:"Lucia M.", initials:"LM", av:3, meta:"Lake Nona neighborhood, at St. Frances Cabrini three years",
+      quote:"Mass in a school cafeteria surprised me too. Then the altar is set and it is simply home. I can walk you through when to sit, stand, and kneel, nobody will mind if you just watch.",
+      sign:"Lucia", spot:"Narcoossee Middle School cafeteria entrance" },
+    { name:"Rafael G.", initials:"RG", av:1, meta:"St. Cloud neighborhood, at St. Frances Cabrini four years",
+      quote:"If the 8:30 is too early, the 10:30 is the fuller one, more families, more noise, in the best way. Come find me by the doors and we will sit wherever you are comfortable.",
+      sign:"Rafael", spot:"School main parking lot, by the cafeteria doors" }
+  ],
+  "blessed-trinity-catholic-conway": [
+    { name:"Carmen O.", initials:"CO", av:1, meta:"Conway neighborhood, at Blessed Trinity nine years",
+      quote:"Come as you are is the actual motto here. The noon Mass is in Spanish, the rest are English, and I am happy to sit with you at any of them and whisper the when-to-stand parts.",
+      sign:"Carmen", spot:"Narthex, just inside the main doors" },
+    { name:"Frank D.", initials:"FD", av:2, meta:"Belle Isle neighborhood, at Blessed Trinity sixteen years",
+      quote:"If you are not sure what to do at Communion, you can simply stay seated or come up for a blessing, arms crossed. Nobody is watching for mistakes. I will be by the doors at 9:45.",
+      sign:"Frank", spot:"Front entrance, Anderson Road" }
+  ],
+  "st-george-antiochian-orthodox": [
+    { name:"Yara H.", initials:"YH", av:3, meta:"Downtown Orlando neighborhood, at St. George six years",
+      quote:"Liturgy is long and beautiful, and people genuinely come and go, nobody minds when you arrive. Stand when you can, sit when you need to. I will save you a spot near the back.",
+      sign:"Yara", spot:"Church front steps on Rosalind Avenue" },
+    { name:"Nick S.", initials:"NS", av:1, meta:"Colonialtown neighborhood, at St. George three years",
+      quote:"I grew up outside the Orthodox church and walked in here knowing nothing. Come to Orthros at 9 if you want the quiet build, or 10 for the Liturgy itself. I will meet you outside first.",
+      sign:"Nick", spot:"Front steps, before the service" }
+  ],
+  "faith-church-orlando": [
+    { name:"Keisha B.", initials:"KB", av:1, meta:"Southeast Orlando neighborhood, at Faith Church five years",
+      quote:"Look for the bright yellow shirts, that is our guest team, and I will be with them. Park in lot 2 and the Information Center is right by the vestibule.",
+      sign:"Keisha", spot:"Information Center, by parking lot 2" },
+    { name:"Devon C.", initials:"DC", av:2, meta:"Union Park neighborhood, at Faith Church three years",
+      quote:"Wear whatever makes you feel like you. You will see suits and you will see sneakers in the same row. The noon service is my favorite, come find me before it.",
+      sign:"Devon", spot:"Main vestibule entrance" }
+  ],
+  "orlando-gospel-assembly": [
+    { name:"Naomi K.", initials:"NK", av:2, meta:"East Orlando neighborhood, at Orlando Gospel Assembly four years",
+      quote:"Service is at noon, so no early alarm on your first Sunday. Come at 11:45 and I will meet you at the front door and sit with you.",
+      sign:"Naomi", spot:"Front entrance on Dean Road" },
+    { name:"Samuel A.", initials:"SA", av:1, meta:"Union Park neighborhood, at Orlando Gospel Assembly six years",
+      quote:"If Sunday feels like too big a first step, the Friday evening gathering is on Zoom, you can meet us from your couch first. Then come see us in person.",
+      sign:"Samuel", spot:"Church front doors" }
+  ],
+  "restoration-seventh-day-adventist": [
+    { name:"Denise L.", initials:"DL", av:3, meta:"College Park neighborhood, at Restoration eight years",
+      quote:"We worship on Saturday, the Sabbath, and that catches people off guard. Come at 11 for the Divine Service, or 10 if you want the smaller Sabbath School first. I will be at the door.",
+      sign:"Denise", spot:"Front entrance on Evans Street" },
+    { name:"Emmanuel J.", initials:"EJ", av:1, meta:"Orlando neighborhood, at Restoration five years",
+      quote:"People here come from every kind of story, including no church story at all. Wherever you are starting from, you will not be the odd one out. Find me up front after, I mean it.",
+      sign:"Emmanuel", spot:"Main doors, after the service" }
+  ]
+};
+
+var QUESTIONS = [
+  { key: "musicStyle", text: "What's the music usually like?", sub: "No wrong answer here, we just want you comfortable walking in.",
+    options: VOCAB.musicStyle.concat([NO_PREF]) },
+  { key: "dressNorm", text: "What do people usually wear?", sub: "Come as you are either way, we just want you to know what to expect.",
+    options: VOCAB.dressNorm.indexOf(NO_PREF) > -1 ? VOCAB.dressNorm : VOCAB.dressNorm.concat([NO_PREF]) },
+  { key: "meetingSpace", text: "Where do they meet?", sub: "Some churches meet in their own building, some in a shared or rented space like a school.",
+    options: VOCAB.meetingSpace.concat([NO_PREF]) },
+  { key: "kidsDuringService", text: "If you're bringing kids, what works best?", sub: "No kids this Sunday? Just pick the last one.",
+    options: VOCAB.kidsDuringService.concat(["Not bringing kids"]) },
+  { key: "denomination", text: "Any denomination in mind?", sub: "Totally fine if you're still figuring this out, most people are.",
+    options: [] } // filled in at runtime from real data
+];
+
+var uniqueDenoms = [];
+CHURCHES.forEach(function(c){
+  if (c.denomination && uniqueDenoms.indexOf(c.denomination) === -1) uniqueDenoms.push(c.denomination);
+});
+uniqueDenoms.sort();
+QUESTIONS[4].options = ["Still deciding, no preference"].concat(uniqueDenoms);
+
+var ORLANDO_ZIP_PREFIXES = ["327", "328", "347", "346"];
+
+var STORAGE_KEY = "firstSunday.state.v1";
+
+function loadState(){
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+function saveState(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+var saved = loadState();
+var state = saved || {
+  screen: "intro",
+  zip: "",
+  usedLocation: false,
+  inArea: true,
+  quizIndex: 0,
+  answers: {},
+  languageFilter: null,
+  languagePanelOpen: false,
+  expandedChurchId: null,
+  zipError: "",
+  visitPlan: null,
+  hiddenGreeters: [],
+  reportGreeterId: null,
+  safetyReturn: "results"
+};
+// Always start a fresh session on the intro screen even if a prior visit left state mid-quiz.
+if (saved) { state.screen = "intro"; state.zipError = ""; }
+if (!state.hiddenGreeters) state.hiddenGreeters = [];
+
+function isValidZip(z){ return /^\d{5}$/.test(z); }
+function zipInArea(z){
+  return ORLANDO_ZIP_PREFIXES.some(function(p){ return z.indexOf(p) === 0; });
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, function(c){
+    return { "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;" }[c];
+  });
+}
+
+function shortLoc(church){
+  if (church.neighborhood) return church.neighborhood;
+  return "Orlando area";
+}
+
+/* ---------------- Fit scoring ---------------- */
+var WEIGHTS = { musicStyle: 25, dressNorm: 20, meetingSpace: 20, kidsDuringService: 25 };
+var DENOM_BONUS = 10;
+
+var NEUTRAL_ANSWERS = [NO_PREF, "Not bringing kids", "Still deciding, no preference"];
+
+function axisScore(userAnswer, churchValue, weight){
+  if (!userAnswer || NEUTRAL_ANSWERS.indexOf(userAnswer) > -1) return weight;
+  if (churchValue === null || churchValue === undefined) return Math.round(weight * 0.6);
+  if (churchValue === userAnswer) return weight;
+  return Math.round(weight * 0.2);
+}
+
+function computeFit(answers, church){
+  var total = 0;
+  Object.keys(WEIGHTS).forEach(function(key){
+    total += axisScore(answers[key], church[key], WEIGHTS[key]);
+  });
+  var denomAnswer = answers.denomination;
+  if (!denomAnswer || denomAnswer === "Still deciding, no preference") {
+    total += DENOM_BONUS;
+  } else if (denomAnswer === church.denomination) {
+    total += DENOM_BONUS;
+  }
+  return Math.max(0, Math.min(100, total));
+}
+
+function rankedChurches(){
+  var list = CHURCHES.map(function(c){
+    return { church: c, fit: computeFit(state.answers, c) };
+  });
+  if (state.languageFilter) {
+    list = list.filter(function(row){
+      return row.church.languageOptions && row.church.languageOptions.indexOf(state.languageFilter) > -1;
+    });
+  }
+  list.sort(function(a, b){ return b.fit - a.fit; });
+  return list;
+}
+
+function allLanguages(){
+  var set = [];
+  CHURCHES.forEach(function(c){
+    if (c.languageOptions) {
+      c.languageOptions.forEach(function(l){ if (set.indexOf(l) === -1) set.push(l); });
+    }
+  });
+  set.sort();
+  return set;
+}
+
+/* ---------------- Rendering ---------------- */
+var root = document.getElementById("screenRoot");
+var skyStrip = document.getElementById("skyStrip");
+var clockText = document.getElementById("clockText");
+
+var SCREEN_TIMES = { intro: "6:50", outofarea: "6:52", quiz: "6:58", results: "7:12", expanded: "9:15", plan: "9:20", safety: "7:05", report: "7:06" };
+var SCREEN_SKY = { intro: "sky-intro", outofarea: "sky-outofarea", quiz: "sky-quiz", results: "sky-results", expanded: "sky-expanded", plan: "sky-expanded", safety: "sky-results", report: "sky-outofarea" };
+
+function render(){
+  saveState();
+  skyStrip.className = "sky-strip " + SCREEN_SKY[state.screen];
+  clockText.textContent = SCREEN_TIMES[state.screen] || "";
+  if (state.screen === "intro") renderIntro();
+  else if (state.screen === "outofarea") renderOutOfArea();
+  else if (state.screen === "quiz") renderQuiz();
+  else if (state.screen === "results") renderResults();
+  else if (state.screen === "expanded") renderExpanded();
+  else if (state.screen === "plan") renderPlan();
+  else if (state.screen === "safety") renderSafety();
+  else if (state.screen === "report") renderReport();
+  root.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+/* ---------------- Greeter + plan helpers ---------------- */
+function greetersFor(churchId){
+  var list = GREETERS[churchId] || [];
+  return list.filter(function(g, i){
+    return state.hiddenGreeters.indexOf(churchId + ":" + i) === -1;
+  });
+}
+function greeterIndex(churchId, greeter){
+  var list = GREETERS[churchId] || [];
+  return list.indexOf(greeter);
+}
+function findChurch(id){
+  return CHURCHES.filter(function(c){ return c.id === id; })[0] || null;
+}
+function serviceDay(church){
+  var first = church.serviceTimes && church.serviceTimes[0] ? church.serviceTimes[0] : "";
+  return first.indexOf("Saturday") === 0 ? 6 : 0;
+}
+function nextServiceDateLabel(church){
+  var target = serviceDay(church);
+  var d = new Date();
+  var add = (target - d.getDay() + 7) % 7;
+  if (add === 0) add = 7;
+  d.setDate(d.getDate() + add);
+  var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate();
+}
+function greeterCardHtml(church, g){
+  var idx = greeterIndex(church.id, g);
+  return '<div class="greeter-card">' +
+    '<div class="g-head">' +
+      '<div class="g-avatar a' + g.av + '" aria-hidden="true"><span>' + escapeHtml(g.initials) + '</span><span class="lamp"></span></div>' +
+      '<div class="g-id"><div class="g-name">' + escapeHtml(g.name) + '</div><div class="g-meta">' + escapeHtml(g.meta) + '</div></div>' +
+      '<button class="report-flag" type="button" data-report="' + escapeHtml(church.id + ":" + idx) + '" aria-label="Report ' + escapeHtml(g.name) + '’s profile">Report</button>' +
+    '</div>' +
+    '<div class="demo-tag">Demo persona, not a real member</div>' +
+    '<p class="g-quote">“' + escapeHtml(g.quote) + '”</p>' +
+    '<p class="g-sign">, ' + escapeHtml(g.sign) + '</p>' +
+    '<div class="meet-box"><span class="meet-label">Happy to meet first at</span>' +
+      '<span class="meet-place">' + escapeHtml(g.spot) + ' <em>(public spot)</em></span></div>' +
+    '<button class="g-reply" type="button" data-request="' + escapeHtml(church.id + ":" + idx) + '">Let ' + escapeHtml(g.sign) + ' know you’re coming</button>' +
+  '</div>';
+}
+
+function renderIntro(){
+  var resumeHtml = "";
+  if (state.visitPlan) {
+    var planChurch = findChurch(state.visitPlan.churchId);
+    var planGreeter = planChurch && GREETERS[planChurch.id] ? GREETERS[planChurch.id][state.visitPlan.greeterIndex] : null;
+    if (planChurch && planGreeter) {
+      resumeHtml =
+        '<div class="resume-card">' +
+          '<div class="rc-eyebrow"><span class="bulb" aria-hidden="true"></span>The light’s still on</div>' +
+          '<p>You’re expected at ' + escapeHtml(planChurch.name) + ' on ' + escapeHtml(nextServiceDateLabel(planChurch)) + '. ' + escapeHtml(planGreeter.sign) + ' will meet you at ' + escapeHtml(planGreeter.spot) + '.</p>' +
+          '<div class="resume-actions">' +
+            '<button class="resume-btn" id="resumeViewBtn" type="button">See my plan</button>' +
+            '<button class="resume-btn ghost" id="resumeClearBtn" type="button">Clear it</button>' +
+          '</div>' +
+        '</div>';
+    }
+  }
+  root.innerHTML =
+    '<div class="intro">' +
+      '<div class="porch-glow" aria-hidden="true"></div>' +
+      resumeHtml +
+      '<h2 class="heading-font">Let’s plan your first Sunday.</h2>' +
+      '<p class="sub">Five quick questions, about a minute, so when you walk in this Sunday morning, someone already knows to expect you.</p>' +
+      '<div class="field-group">' +
+        '<div class="field-label">Where should we look</div>' +
+        '<input class="zip-input" id="zipInput" inputmode="numeric" maxlength="5" placeholder="Enter your zip code" value="' + escapeHtml(state.zip) + '" />' +
+        (state.zipError ? '<div class="field-error">' + escapeHtml(state.zipError) + '</div>' : '') +
+      '</div>' +
+      '<button class="use-location" id="useLocationBtn" type="button"><span class="pin" aria-hidden="true"></span>Use my location instead</button>' +
+      (state.usedLocation ? '<div class="location-status">Got it, we’ll use where you are.</div>' : '') +
+      '<button class="cta-btn" id="startBtn" type="button">Start the questions</button>' +
+      '<div class="porch-note"><span class="bulb" aria-hidden="true"></span>Nobody sees your answers but you. This just helps us find where you’ll feel at home this Sunday.</div>' +
+    '</div>';
+
+  var resumeViewBtn = document.getElementById("resumeViewBtn");
+  if (resumeViewBtn) {
+    resumeViewBtn.addEventListener("click", function(){
+      state.screen = "plan";
+      render();
+    });
+    document.getElementById("resumeClearBtn").addEventListener("click", function(){
+      state.visitPlan = null;
+      render();
+    });
+  }
+
+  var zipInput = document.getElementById("zipInput");
+  zipInput.addEventListener("input", function(e){
+    state.zip = e.target.value.replace(/[^0-9]/g, "").slice(0, 5);
+    state.usedLocation = false;
+    e.target.value = state.zip;
+  });
+  document.getElementById("useLocationBtn").addEventListener("click", function(){
+    if (!navigator.geolocation) {
+      state.zipError = "Location isn’t available on this device, go ahead and type your zip code instead.";
+      render();
+      return;
+    }
+    var btn = document.getElementById("useLocationBtn");
+    btn.textContent = "Finding you…";
+    navigator.geolocation.getCurrentPosition(
+      function(){
+        state.usedLocation = true;
+        state.zip = "";
+        state.inArea = true;
+        state.zipError = "";
+        render();
+      },
+      function(){
+        state.zipError = "Couldn’t get your location, mind typing your zip code instead?";
+        render();
+      },
+      { timeout: 8000 }
+    );
+  });
+  document.getElementById("startBtn").addEventListener("click", function(){
+    if (state.usedLocation) {
+      state.screen = "quiz";
+      state.quizIndex = 0;
+      render();
+      return;
+    }
+    if (!isValidZip(state.zip)) {
+      state.zipError = "That doesn’t look like a full 5 digit zip code yet.";
+      render();
+      return;
+    }
+    state.zipError = "";
+    state.inArea = zipInArea(state.zip);
+    state.screen = state.inArea ? "quiz" : "outofarea";
+    state.quizIndex = 0;
+    render();
+  });
+}
+
+function renderOutOfArea(){
+  root.innerHTML =
+    '<div class="outofarea">' +
+      '<div class="zip-pill">' + escapeHtml(state.zip) + '</div>' +
+      '<h2 class="heading-font">First Sunday is starting in Orlando.</h2>' +
+      '<p>We’re not in your area yet, we’re starting right here in Orlando and Lake Nona. We’ll still show you what we’ve got there, in case a trip out this way is ever on the table, or just to see what the app does.</p>' +
+      '<button class="cta-btn" id="continueAnywayBtn" type="button">See the Orlando matches</button>' +
+      '<button class="cta-btn ghost" id="backToZipBtn" type="button">Try a different zip code</button>' +
+    '</div>';
+  document.getElementById("continueAnywayBtn").addEventListener("click", function(){
+    state.screen = "quiz";
+    state.quizIndex = 0;
+    render();
+  });
+  document.getElementById("backToZipBtn").addEventListener("click", function(){
+    state.screen = "intro";
+    render();
+  });
+}
+
+function renderQuiz(){
+  var q = QUESTIONS[state.quizIndex];
+  var selected = state.answers[q.key];
+  var dots = QUESTIONS.map(function(_, i){
+    var cls = "progress-dot";
+    if (i < state.quizIndex) cls += " done";
+    else if (i === state.quizIndex) cls += " current";
+    return '<div class="' + cls + '"></div>';
+  }).join("");
+
+  var answersHtml = q.options.map(function(opt){
+    var isSelected = selected === opt;
+    return '<button class="answer-row' + (isSelected ? ' selected' : '') + '" type="button" data-value="' + escapeHtml(opt) + '">' +
+      '<span class="knob" aria-hidden="true"></span><span class="a-text">' + escapeHtml(opt) + '</span></button>';
+  }).join("");
+
+  root.innerHTML =
+    '<div class="quiz">' +
+      '<div class="quiz-top">' +
+        '<div class="progress-row">' + dots + '</div>' +
+        '<div class="q-count">QUESTION ' + (state.quizIndex + 1) + ' OF ' + QUESTIONS.length + '</div>' +
+        '<h2 class="q-text heading-font">' + escapeHtml(q.text) + '</h2>' +
+        '<p class="q-sub">' + escapeHtml(q.sub) + '</p>' +
+      '</div>' +
+      '<div class="answers">' + answersHtml + '</div>' +
+      '<div class="quiz-nav">' +
+        '<button class="nav-back" id="quizBackBtn" type="button"' + (state.quizIndex === 0 ? ' disabled' : '') + '>Back</button>' +
+        '<button class="nav-next" id="quizNextBtn" type="button"' + (selected ? '' : ' disabled') + '>' + (state.quizIndex === QUESTIONS.length - 1 ? 'See my matches' : 'Next') + '</button>' +
+      '</div>' +
+    '</div>';
+
+  Array.prototype.forEach.call(document.querySelectorAll(".answer-row"), function(btn){
+    btn.addEventListener("click", function(){
+      state.answers[q.key] = btn.getAttribute("data-value");
+      render();
+    });
+  });
+  document.getElementById("quizBackBtn").addEventListener("click", function(){
+    if (state.quizIndex > 0) { state.quizIndex -= 1; render(); }
+    else { state.screen = "intro"; render(); }
+  });
+  document.getElementById("quizNextBtn").addEventListener("click", function(){
+    if (!state.answers[q.key]) return;
+    if (state.quizIndex < QUESTIONS.length - 1) {
+      state.quizIndex += 1;
+    } else {
+      state.screen = "results";
+    }
+    render();
+  });
+}
+
+function tagsFor(church){
+  var tags = [];
+  if (church.denomination) tags.push(church.denomination);
+  if (church.musicStyle) tags.push(church.musicStyle.split(",")[0]);
+  if (church.dressNorm) tags.push(church.dressNorm);
+  return tags;
+}
+
+function metaLineFor(church){
+  var parts = [];
+  if (church.meetingSpace) parts.push(church.meetingSpace);
+  if (church.kidsDuringService) parts.push(church.kidsDuringService);
+  if (church.serviceTimes && church.serviceTimes.length) {
+    parts.push("Services " + church.serviceTimes.slice(0, 2).join(", ") + (church.serviceTimes.length > 2 ? "…" : ""));
+  }
+  return parts.join(". ") + (parts.length ? "." : "");
+}
+
+function renderResults(){
+  var ranked = rankedChurches();
+  var langs = allLanguages();
+
+  var areaLabel = state.inArea || state.usedLocation ? "Orlando &amp; Lake Nona" : "Orlando &amp; Lake Nona";
+  var subLine = (!state.inArea && !state.usedLocation)
+    ? "First Sunday is starting here, ranked by your answers."
+    : "Ranked by fit, based on your answers.";
+
+  var langPanel = langs.length
+    ? '<div class="lang-panel' + (state.languagePanelOpen ? ' open' : '') + '" id="langPanel">' +
+        '<button class="lang-chip' + (!state.languageFilter ? ' selected' : '') + '" type="button" data-lang="">Any language</button>' +
+        langs.map(function(l){
+          return '<button class="lang-chip' + (state.languageFilter === l ? ' selected' : '') + '" type="button" data-lang="' + escapeHtml(l) + '">' + escapeHtml(l) + '</button>';
+        }).join("") +
+      '</div>'
+    : '';
+
+  var listHtml;
+  if (!ranked.length) {
+    listHtml = '<div class="no-results">No churches match that language filter yet. Try "Any language" to see everyone.</div>';
+  } else {
+    listHtml = ranked.map(function(row, i){
+      var church = row.church;
+      var isTop = i === 0;
+      var gCount = greetersFor(church.id).length;
+      var tags = tagsFor(church).map(function(t){ return '<span class="tag">' + escapeHtml(t) + '</span>'; }).join("");
+      var meta = metaLineFor(church);
+      return '<button class="porch-card' + (isTop ? ' top' : '') + '" type="button" data-id="' + escapeHtml(church.id) + '">' +
+        (isTop ? '<div class="best-tag">Best fit for you</div>' : '') +
+        '<div class="pc-top-row">' +
+          '<div><div class="pc-name">' + escapeHtml(church.name) + '</div><div class="pc-loc">' + escapeHtml(shortLoc(church)) + '</div></div>' +
+          '<div class="fit-badge' + (isTop ? ' gold' : '') + '"><b>' + row.fit + '%</b><span>Est. fit</span></div>' +
+        '</div>' +
+        (tags ? '<div class="pc-tags">' + tags + '</div>' : '') +
+        (meta ? '<p class="pc-meta">' + escapeHtml(meta) + '</p>' : '') +
+        (gCount ? '<div class="greeter-count"><span class="bulb" aria-hidden="true"></span>' + gCount + (gCount === 1 ? ' greeter ready' : ' greeters ready') + ' to meet you at the door</div>' : '') +
+        (isTop ? '<div class="expand-hint">See more</div>' : '') +
+      '</button>';
+    }).join("");
+  }
+
+  root.innerHTML =
+    '<div class="results-head">' +
+      '<div class="results-eyebrow">' + areaLabel + '</div>' +
+      '<h2 class="heading-font">A few places for your first Sunday</h2>' +
+      '<p>' + subLine + '</p>' +
+      '<div class="results-actions">' +
+        '<button class="chip-btn' + (state.languageFilter ? ' active' : '') + '" id="langToggleBtn" type="button">' + (state.languageFilter ? "Language: " + escapeHtml(state.languageFilter) : "Filter by language") + '</button>' +
+        '<button class="chip-btn" id="startOverBtn" type="button">Start over</button>' +
+      '</div>' +
+      langPanel +
+    '</div>' +
+    '<div class="results-list">' + listHtml + '</div>' +
+    '<p class="fit-note">Fit is a starting estimate from your answers, not a promise. The best way to know is to go.</p>';
+
+  Array.prototype.forEach.call(document.querySelectorAll(".porch-card"), function(btn){
+    btn.addEventListener("click", function(){
+      state.expandedChurchId = btn.getAttribute("data-id");
+      state.screen = "expanded";
+      render();
+    });
+  });
+  var langToggleBtn = document.getElementById("langToggleBtn");
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener("click", function(){
+      state.languagePanelOpen = !state.languagePanelOpen;
+      render();
+    });
+  }
+  var langPanelEl = document.getElementById("langPanel");
+  if (langPanelEl) {
+    Array.prototype.forEach.call(langPanelEl.querySelectorAll(".lang-chip"), function(chip){
+      chip.addEventListener("click", function(){
+        var val = chip.getAttribute("data-lang");
+        state.languageFilter = val || null;
+        render();
+      });
+    });
+  }
+  document.getElementById("startOverBtn").addEventListener("click", function(){
+    state.screen = "intro";
+    state.quizIndex = 0;
+    state.answers = {};
+    state.languageFilter = null;
+    state.languagePanelOpen = false;
+    render();
+  });
+}
+
+function infoCell(label, value){
+  if (value === null || value === undefined || value === "") {
+    return '<div class="info-cell"><div class="lbl">' + escapeHtml(label) + '</div><div class="val unset">Not listed yet</div></div>';
+  }
+  return '<div class="info-cell"><div class="lbl">' + escapeHtml(label) + '</div><div class="val">' + escapeHtml(value) + '</div></div>';
+}
+
+function renderExpanded(){
+  var church = findChurch(state.expandedChurchId);
+  if (!church) { state.screen = "results"; render(); return; }
+  var fit = computeFit(state.answers, church);
+  var greeters = greetersFor(church.id);
+
+  var serviceTimesVal = church.serviceTimes && church.serviceTimes.length ? church.serviceTimes.join(", ") : null;
+  var languageVal = church.languageOptions && church.languageOptions.length ? church.languageOptions.join(", ") : null;
+
+  root.innerHTML =
+    '<div class="expand-head">' +
+      '<button class="back-chip" id="backBtn" type="button" aria-label="Back to your matches">&lsaquo;</button>' +
+      '<h2>' + escapeHtml(church.name) + '</h2>' +
+    '</div>' +
+    '<div class="expand-body">' +
+      '<div class="hero-porch">' +
+        '<div class="fit-big">' + fit + '<span>% estimated fit</span></div>' +
+        '<h3 class="heading-font">' + escapeHtml(church.name) + '</h3>' +
+        '<div class="hp-loc">' + escapeHtml(shortLoc(church)) + (church.denomination ? ' · ' + escapeHtml(church.denomination) : '') + '</div>' +
+      '</div>' +
+      '<div class="info-grid">' +
+        infoCell("Music", church.musicStyle) +
+        infoCell("Dress", church.dressNorm) +
+        infoCell("Meeting space", church.meetingSpace) +
+        infoCell("Kids", church.kidsDuringService) +
+        infoCell("Services", serviceTimesVal) +
+        infoCell("Language", languageVal) +
+      '</div>' +
+      (church.parkingNote ? '<div class="info-grid" style="grid-template-columns:1fr;">' + infoCell("Parking", church.parkingNote) + '</div>' : '') +
+      (church.whatToExpectNote ?
+        '<div class="section-title"><span class="bulb-sm" aria-hidden="true"></span>What to expect</div>' +
+        '<p class="expect-note">' + escapeHtml(church.whatToExpectNote) + '</p>' : '') +
+      '<div class="section-title"><span class="bulb-sm" aria-hidden="true"></span>Visit with someone</div>' +
+      '<p class="section-sub">These are demo personas, invented to show how this will work, so you can see what walking in with someone would feel like. Meet ups always start at a public spot.</p>' +
+      (greeters.length
+        ? greeters.map(function(g){ return greeterCardHtml(church, g); }).join("")
+        : '<div class="greeter-stub">' +
+            '<div class="bulb-lg" aria-hidden="true"></div>' +
+            '<div class="stub-label">No greeters shown</div>' +
+            '<p>You’ve hidden the greeter profiles for ' + escapeHtml(church.name) + '. Thanks for looking out.</p>' +
+          '</div>') +
+      '<div class="safety-link-row"><button class="safety-link" id="safetyLinkBtn" type="button">How we keep meeting up safe</button></div>' +
+      (church.website
+        ? '<a class="site-link" href="' + escapeHtml(church.website) + '" target="_blank" rel="noopener noreferrer">Visit ' + escapeHtml(church.name) + '’s website</a>'
+        : '<div class="site-link disabled">No website listed yet</div>') +
+      (church.lastVerified ? '<p class="sources-note">Details last checked ' + escapeHtml(church.lastVerified) + '. Always good to double check before you go.</p>' : '') +
+      '<button class="start-over" id="expandStartOverBtn" type="button">Start a new search</button>' +
+    '</div>';
+
+  document.getElementById("backBtn").addEventListener("click", function(){
+    state.screen = "results";
+    render();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-request]"), function(btn){
+    btn.addEventListener("click", function(){
+      var parts = btn.getAttribute("data-request").split(":");
+      state.visitPlan = { churchId: parts[0], greeterIndex: parseInt(parts[1], 10) };
+      state.screen = "plan";
+      render();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-report]"), function(btn){
+    btn.addEventListener("click", function(){
+      state.reportGreeterId = btn.getAttribute("data-report");
+      state.screen = "report";
+      render();
+    });
+  });
+  var safetyLinkBtn = document.getElementById("safetyLinkBtn");
+  if (safetyLinkBtn) {
+    safetyLinkBtn.addEventListener("click", function(){
+      state.safetyReturn = "expanded";
+      state.screen = "safety";
+      render();
+    });
+  }
+  document.getElementById("expandStartOverBtn").addEventListener("click", function(){
+    state.screen = "intro";
+    state.quizIndex = 0;
+    state.answers = {};
+    state.languageFilter = null;
+    state.languagePanelOpen = false;
+    render();
+  });
+}
+
+function renderPlan(){
+  var plan = state.visitPlan;
+  var church = plan ? findChurch(plan.churchId) : null;
+  var greeter = church && GREETERS[church.id] ? GREETERS[church.id][plan.greeterIndex] : null;
+  if (!church || !greeter) { state.visitPlan = null; state.screen = "results"; render(); return; }
+
+  var dateLabel = nextServiceDateLabel(church);
+  var timesVal = church.serviceTimes && church.serviceTimes.length ? church.serviceTimes.join(", ") : "Check the church’s website";
+
+  root.innerHTML =
+    '<div class="plan">' +
+      '<div class="porch-glow" aria-hidden="true"></div>' +
+      '<h2 class="heading-font">The light’s on. You’re expected.</h2>' +
+      '<p class="sub">Here’s your plan for ' + escapeHtml(dateLabel) + '. It’s saved on this phone, so it’ll be right here when you open the app in the car.</p>' +
+      '<div class="plan-card">' +
+        '<div class="plan-when">' + escapeHtml(dateLabel) + '</div>' +
+        '<div class="plan-church heading-font">' + escapeHtml(church.name) + '</div>' +
+        '<div class="plan-loc">' + escapeHtml(shortLoc(church)) + (church.denomination ? ' · ' + escapeHtml(church.denomination) : '') + '</div>' +
+        '<div class="plan-row"><div class="plan-lbl">Meet</div><div class="plan-val">' + escapeHtml(greeter.name) + '<small>' + escapeHtml(greeter.spot) + ' (public spot), about 15 minutes before the service</small></div></div>' +
+        '<div class="plan-row"><div class="plan-lbl">Services</div><div class="plan-val">' + escapeHtml(timesVal) + '</div></div>' +
+        (church.address ? '<div class="plan-row"><div class="plan-lbl">Address</div><div class="plan-val">' + escapeHtml(church.address) + '</div></div>' : '') +
+        (church.parkingNote ? '<div class="plan-row"><div class="plan-lbl">Parking</div><div class="plan-val">' + escapeHtml(church.parkingNote) + '</div></div>' : '') +
+        (church.dressNorm ? '<div class="plan-row"><div class="plan-lbl">Wear</div><div class="plan-val">' + escapeHtml(church.dressNorm) + '</div></div>' : '') +
+      '</div>' +
+      '<div class="demo-tag" style="margin-top:16px;">Demo persona, so no message was actually sent</div>' +
+      '<p class="section-sub">' + escapeHtml(greeter.sign) + ' is a demo persona, invented to show how this will work. In the full version, a real greeter from ' + escapeHtml(church.name) + ' would get a heads up right now and confirm they’ll be there. Everything else on this plan is real, from the church’s own website.</p>' +
+      (church.website
+        ? '<a class="site-link" href="' + escapeHtml(church.website) + '" target="_blank" rel="noopener noreferrer">Visit ' + escapeHtml(church.name) + '’s website</a>'
+        : '') +
+      '<div class="safety-link-row"><button class="safety-link" id="planSafetyBtn" type="button">How we keep meeting up safe</button></div>' +
+      '<button class="cta-btn ghost" id="planBackBtn" type="button" style="margin-top:8px;">Back to ' + escapeHtml(church.name) + '</button>' +
+      '<button class="start-over" id="planClearBtn" type="button">Cancel this plan</button>' +
+    '</div>';
+
+  document.getElementById("planBackBtn").addEventListener("click", function(){
+    state.expandedChurchId = church.id;
+    state.screen = "expanded";
+    render();
+  });
+  document.getElementById("planSafetyBtn").addEventListener("click", function(){
+    state.safetyReturn = "plan";
+    state.screen = "safety";
+    render();
+  });
+  document.getElementById("planClearBtn").addEventListener("click", function(){
+    state.visitPlan = null;
+    state.expandedChurchId = church.id;
+    state.screen = "expanded";
+    render();
+  });
+}
+
+function renderSafety(){
+  root.innerHTML =
+    '<div class="safety">' +
+      '<h2 class="heading-font">Meeting someone should feel safe, not brave.</h2>' +
+      '<p class="lede">A few plain rules this whole feature is built on. They aren’t fine print, they’re the point.</p>' +
+      '<div class="safety-block sage">' +
+        '<h3>Public spots only, always</h3>' +
+        '<p>Every meet up starts at a public place: a church lobby, a welcome desk, a busy coffee shop. Never a private home, never a car, never “I’ll text you an address.” If someone suggests moving the first meeting somewhere private, don’t go, and report it.</p>' +
+      '</div>' +
+      '<div class="safety-block">' +
+        '<h3>Greeters share a neighborhood, never an address</h3>' +
+        '<p>You’ll see what part of town a greeter lives in and how long they’ve been at their church. That’s it. Nobody’s home address, yours or theirs, is ever part of this.</p>' +
+      '</div>' +
+      '<div class="safety-block oxblood">' +
+        '<h3>Every profile can be reported, right on the card</h3>' +
+        '<p>The Report button sits on every greeter card, not buried in a menu. Reporting hides the profile for you immediately. In the full version, a human reviews every report before that profile can appear again.</p>' +
+      '</div>' +
+      '<div class="safety-block oxblood">' +
+        '<h3>Right now, every greeter is a demo persona</h3>' +
+        '<p>The greeters you see today are invented, and every card says so. No real person at any of these churches has signed up yet. When real greeters join, they’ll be vetted through their own church first.</p>' +
+      '</div>' +
+      '<div class="safety-block">' +
+        '<h3>Your answers never leave your phone</h3>' +
+        '<p>There’s no account and no server. Your quiz answers and your Sunday plan are saved on this device only, nothing is uploaded anywhere, and you can clear your plan any time.</p>' +
+      '</div>' +
+      '<div class="safety-block">' +
+        '<h3>And the oldest rule of all</h3>' +
+        '<p>Trust your gut. Bring a friend if you’d feel better with one, any greeter worth meeting will be glad you did. A good church, and a good greeter, will never rush you, pressure you, or ask you for money. Ever.</p>' +
+      '</div>' +
+      '<button class="cta-btn" id="safetyBackBtn" type="button">Got it</button>' +
+    '</div>';
+  document.getElementById("safetyBackBtn").addEventListener("click", function(){
+    state.screen = state.safetyReturn || "results";
+    render();
+  });
+}
+
+function renderReport(){
+  var parts = (state.reportGreeterId || "").split(":");
+  var church = findChurch(parts[0]);
+  var greeter = church && GREETERS[church.id] ? GREETERS[church.id][parseInt(parts[1], 10)] : null;
+  if (!church || !greeter) { state.screen = "expanded"; render(); return; }
+
+  root.innerHTML =
+    '<div class="safety">' +
+      '<h2 class="heading-font">Thanks for looking out.</h2>' +
+      '<p class="lede">You’re reporting ' + escapeHtml(greeter.name) + '’s profile at ' + escapeHtml(church.name) + '. Reports are how this stays safe for the next person, so never hesitate to use one.</p>' +
+      '<div class="safety-block oxblood">' +
+        '<h3>What happens right now</h3>' +
+        '<p>Hiding the profile takes effect immediately on this phone. Because ' + escapeHtml(greeter.sign) + ' is a demo persona, there’s no real person behind this card and nothing is sent anywhere. In the full version, a report also goes straight to a human reviewer, and the profile stays hidden for everyone until they’ve looked at it.</p>' +
+      '</div>' +
+      '<button class="cta-btn" id="reportHideBtn" type="button">Hide this profile</button>' +
+      '<button class="cta-btn ghost" id="reportCancelBtn" type="button">Never mind, go back</button>' +
+    '</div>';
+
+  document.getElementById("reportHideBtn").addEventListener("click", function(){
+    if (state.hiddenGreeters.indexOf(state.reportGreeterId) === -1) {
+      state.hiddenGreeters.push(state.reportGreeterId);
+    }
+    if (state.visitPlan && state.visitPlan.churchId === parts[0] && state.visitPlan.greeterIndex === parseInt(parts[1], 10)) {
+      state.visitPlan = null;
+    }
+    state.reportGreeterId = null;
+    state.expandedChurchId = church.id;
+    state.screen = "expanded";
+    render();
+  });
+  document.getElementById("reportCancelBtn").addEventListener("click", function(){
+    state.reportGreeterId = null;
+    state.expandedChurchId = church.id;
+    state.screen = "expanded";
+    render();
+  });
+}
+
+/* ---------------- Installable PWA (single file) ---------------- */
+(function setupPwa(){
+  var manifest = {
+    name: "First Sunday",
+    short_name: "First Sunday",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#f4ead9",
+    theme_color: "#c1602f",
+    icons: [{
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23c1602f'/%3E%3Ccircle cx='96' cy='90' r='42' fill='%23d9a441'/%3E%3C/svg%3E",
+      sizes: "192x192",
+      type: "image/svg+xml"
+    }]
+  };
+  var manifestBlob = new Blob([JSON.stringify(manifest)], { type: "application/json" });
+  document.getElementById("manifestLink").href = URL.createObjectURL(manifestBlob);
+
+  if ("serviceWorker" in navigator) {
+    var swSource =
+      'self.addEventListener("install", function(e){ self.skipWaiting(); });' +
+      'self.addEventListener("activate", function(e){ self.clients.claim(); });' +
+      'self.addEventListener("fetch", function(e){});';
+    var swBlob = new Blob([swSource], { type: "application/javascript" });
+    var swUrl = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl).catch(function(){});
+  }
+})();
+
+render();
+})();
+</script>
+</body>
+</html>
