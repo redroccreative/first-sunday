@@ -109,7 +109,7 @@ main.screen-root{
 
 /* ============ INTRO ============ */
 .intro{ padding:6px 24px 28px; }
-/* The intro hero replaces the porch-glow dot. It bleeds past the intro's side
+/* The intro hero. It bleeds past the intro's side
    padding and fades into the paper, so no text ever sits on the artwork.
    Height is viewport-relative so a short phone still shows the CTA unscrolled. */
 .intro:has(.intro-hero){ padding-top:0; }
@@ -120,13 +120,6 @@ main.screen-root{
   object-fit:cover; object-position:center center;
   -webkit-mask-image:linear-gradient(180deg,#000 56%,transparent 99%);
   mask-image:linear-gradient(180deg,#000 56%,transparent 99%);
-}
-.intro .porch-glow{ display:none; }
-.porch-glow{
-  width:64px; height:64px; border-radius:50%;
-  background: radial-gradient(circle at 35% 30%, var(--clay-glow), var(--clay) 65%, var(--clay-deep));
-  box-shadow: 0 0 26px 6px rgba(232,168,107,0.45);
-  margin:16px 0 20px;
 }
 .intro h2{ font-size:29px; line-height:1.2; margin:0 0 14px; color:var(--ink); font-weight:500; }
 .intro p.sub{ font-size:15px; line-height:1.55; color:var(--ink-soft); margin:0 0 24px; max-width:340px; }
@@ -171,11 +164,6 @@ main.screen-root{
 .porch-note{
   margin-top:18px; font-size:12.5px; color:var(--ink-soft); line-height:1.5;
   display:flex; gap:8px; align-items:flex-start;
-}
-.porch-note .bulb{
-  width:14px; height:14px; margin-top:2px; flex:none; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
 }
 
 /* ============ OUT OF AREA ============ */
@@ -362,11 +350,6 @@ main.screen-root{
   font-size:14px; font-weight:700; color:var(--ink); margin:22px 0 4px;
   display:flex; align-items:center; gap:8px;
 }
-.section-title .bulb-sm{
-  width:13px; height:13px; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
-}
 .section-sub{ font-size:12.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.5; }
 .expect-note{ font-size:13.5px; color:var(--ink); line-height:1.6; margin:0; }
 
@@ -383,11 +366,6 @@ main.screen-root{
 .g-avatar::before{
   content:""; position:absolute; inset:0; border-radius:16px; overflow:hidden;
   background-image:repeating-linear-gradient(135deg, rgba(255,255,255,0.12) 0 2px, transparent 2px 8px);
-}
-.g-avatar .lamp{
-  position:absolute; right:-3px; bottom:-3px; width:15px; height:15px; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 8px 3px rgba(217,164,65,0.7); border:2px solid var(--card);
 }
 .g-avatar span{ position:relative; z-index:1; }
 .g-avatar.a1{ background:linear-gradient(160deg,var(--clay-glow),var(--clay-deep)); }
@@ -443,11 +421,6 @@ main.screen-root{
   display:flex; align-items:center; gap:7px; margin-top:11px;
   font-size:12px; font-weight:700; color:var(--clay-deep);
 }
-.greeter-count .bulb{
-  width:12px; height:12px; flex:none; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 8px 2px rgba(217,164,65,0.6);
-}
 
 /* ============ PLAN / CONFIRMATION ============ */
 .plan{ padding:6px 24px 34px; }
@@ -497,11 +470,6 @@ main.screen-root{
   font-size:10.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
   color:var(--clay-deep); margin-bottom:6px;
 }
-.resume-card .rc-eyebrow .bulb{
-  width:12px; height:12px; border-radius:50%; flex:none;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 8px 2px rgba(217,164,65,0.7);
-}
 .resume-card p{ font-size:13.5px; color:var(--ink); line-height:1.5; margin:0 0 10px; font-weight:500; }
 .resume-actions{ display:flex; gap:8px; }
 .resume-btn{
@@ -514,11 +482,6 @@ main.screen-root{
 .greeter-stub{
   background:var(--card); border:1.5px dashed var(--line); border-radius:20px;
   padding:18px; text-align:center;
-}
-.greeter-stub .bulb-lg{
-  width:32px; height:32px; margin:0 auto 12px; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, #ffe9b8, var(--gold) 70%);
-  box-shadow:0 0 12px 4px rgba(217,164,65,0.5);
 }
 .greeter-stub p{ font-size:13px; color:var(--ink-soft); line-height:1.6; margin:0; }
 .greeter-stub .stub-label{
@@ -948,7 +911,7 @@ function greeterCardHtml(church, g){
   var idx = greeterIndex(church.id, g);
   return '<div class="greeter-card">' +
     '<div class="g-head">' +
-      '<div class="g-avatar a' + g.av + '" aria-hidden="true"><span>' + escapeHtml(g.initials) + '</span><span class="lamp"></span></div>' +
+      '<div class="g-avatar a' + g.av + '" aria-hidden="true"><span>' + escapeHtml(g.initials) + '</span></div>' +
       '<div class="g-id"><div class="g-name">' + escapeHtml(g.name) + '</div><div class="g-meta">' + escapeHtml(g.meta) + '</div></div>' +
       '<button class="report-flag" type="button" data-report="' + escapeHtml(church.id + ":" + idx) + '" aria-label="Report ' + escapeHtml(g.name) + '’s profile">Report</button>' +
     '</div>' +
@@ -969,7 +932,7 @@ function renderIntro(){
     if (planChurch && planGreeter) {
       resumeHtml =
         '<div class="resume-card">' +
-          '<div class="rc-eyebrow"><span class="bulb" aria-hidden="true"></span>The light’s still on</div>' +
+          '<div class="rc-eyebrow">Your Sunday plan</div>' +
           '<p>You’re expected at ' + escapeHtml(planChurch.name) + ' on ' + escapeHtml(nextServiceDateLabel(planChurch)) + '. ' + escapeHtml(planGreeter.sign) + ' will meet you at ' + escapeHtml(planGreeter.spot) + '.</p>' +
           '<div class="resume-actions">' +
             '<button class="resume-btn" id="resumeViewBtn" type="button">See my plan</button>' +
@@ -992,7 +955,7 @@ function renderIntro(){
       '<button class="use-location" id="useLocationBtn" type="button"><span class="pin" aria-hidden="true"></span>Use my location instead</button>' +
       (state.usedLocation ? '<div class="location-status">Got it, we’ll use where you are.</div>' : '') +
       '<button class="cta-btn" id="startBtn" type="button">Start the questions</button>' +
-      '<div class="porch-note"><span class="bulb" aria-hidden="true"></span>Nobody sees your answers but you. This just helps us find where you’ll feel at home this Sunday.</div>' +
+      '<div class="porch-note">Nobody sees your answers but you. This just helps us find where you’ll feel at home this Sunday.</div>' +
     '</div>';
 
   var resumeViewBtn = document.getElementById("resumeViewBtn");
@@ -1207,7 +1170,7 @@ function renderResults(){
           ? '<div class="pc-addr">' + escapeHtml(shortAddress(church)) + '</div>'
           : '<div class="pc-addr unset">Address not listed on their site yet</div>') +
         (meta ? '<p class="pc-meta">' + escapeHtml(meta) + '</p>' : '') +
-        (gCount ? '<div class="greeter-count"><span class="bulb" aria-hidden="true"></span>' + gCount + (gCount === 1 ? ' greeter ready' : ' greeters ready') + ' to meet you at the door</div>' : '') +
+        (gCount ? '<div class="greeter-count">' + gCount + (gCount === 1 ? ' greeter ready' : ' greeters ready') + ' to meet you at the door</div>' : '') +
         (isTop ? '<div class="expand-hint">See more</div>' : '') +
       '</button>';
     }).join("");
@@ -1300,15 +1263,14 @@ function renderExpanded(){
       directionsHtml(church) +
       (church.parkingNote ? '<div class="info-grid" style="grid-template-columns:1fr;">' + infoCell("Parking", church.parkingNote) + '</div>' : '') +
       (church.whatToExpectNote ?
-        '<div class="section-title"><span class="bulb-sm" aria-hidden="true"></span>What to expect</div>' +
+        '<div class="section-title">What to expect</div>' +
         '<p class="expect-note">' + escapeHtml(church.whatToExpectNote) + '</p>' : '') +
-      '<div class="section-title"><span class="bulb-sm" aria-hidden="true"></span>Visit with someone</div>' +
+      '<div class="section-title">Visit with someone</div>' +
       '<p class="section-sub">These are demo personas, invented to show how this will work, so you can see what walking in with someone would feel like. Meet ups always start at a public spot.</p>' +
       (greeters.length
         ? greeters.map(function(g){ return greeterCardHtml(church, g); }).join("")
         : '<div class="greeter-stub">' +
-            '<div class="bulb-lg" aria-hidden="true"></div>' +
-            '<div class="stub-label">No greeters shown</div>' +
+                        '<div class="stub-label">No greeters shown</div>' +
             '<p>You’ve hidden the greeter profiles for ' + escapeHtml(church.name) + '. Thanks for looking out.</p>' +
           '</div>') +
       '<div class="safety-link-row"><button class="safety-link" id="safetyLinkBtn" type="button">How we keep meeting up safe</button></div>' +
@@ -1367,8 +1329,7 @@ function renderPlan(){
 
   root.innerHTML =
     '<div class="plan">' +
-      '<div class="porch-glow" aria-hidden="true"></div>' +
-      '<h2 class="heading-font">The light’s on. You’re expected.</h2>' +
+      '<h2 class="heading-font">' + escapeHtml(greeter.sign) + ' is expecting you.</h2>' +
       '<p class="sub">Here’s your plan for ' + escapeHtml(dateLabel) + '. It’s saved on this phone, so it’ll be right here when you open the app in the car.</p>' +
       '<div class="plan-card">' +
         '<div class="plan-when">' + escapeHtml(dateLabel) + '</div>' +

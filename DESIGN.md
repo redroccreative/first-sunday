@@ -38,7 +38,7 @@ Copy these tokens verbatim into `:root`.
 --clay-deep:#9c4620;  /* button gradient bottom, pressed states, emphasis text */
 --clay-glow:#e8a86b;  /* the lit edge, quote rules, accents on dark */
 --sage:#6f7d54;       /* SAFETY AND LOCATION ONLY, see rule below */
---gold:#d9a441;       /* the porch light, top match, "someone is waiting" */
+--gold:#d9a441;       /* top match, plan card, warm accents */
 --oxblood:#8a2f1f;    /* SIGNAL ONLY, see rule below */
 --line:#dcc9a6;       /* hairlines and borders */
 --shadow:rgba(58,32,14,0.28);
@@ -122,14 +122,28 @@ progresses from pre dawn to full daylight as the user moves through the app.
 .sky-4{ background:linear-gradient(90deg,#eccf94,#ffe9b8,#fff6e4); } /* expanded */
 ```
 
-The interface enacts the morning instead of describing it. The mockup ties each
-frame to a real clock time (6:50 AM before you leave, through 9:15 AM doors
-open). Keep that idea. It is what a judge remembers.
+The interface enacts the morning instead of describing it. The sky strip still
+carries that progression across screens.
 
-The second warmth device is the **porch light**, a small gold radial dot with a
-glow, used at the intro, on the top match, on section headings, and as a badge
-on greeter avatars. It means "someone is expecting you." Use it sparingly enough
-that it stays meaningful.
+**RETIRED 2026-08-15, the porch light.** An earlier version paired the sky with
+a scripted clock (6:50 AM before you leave, through 9:15 AM doors open) and a
+gold radial dot used at the intro, on the top match, on section headings, and as
+a badge on greeter avatars. Both are gone.
+
+The clock was removed first: the dusk-to-Sunday-morning story it told was not
+legible to readers, and on a real phone it stacked a second clock under the
+operating system's own.
+
+The dot followed. Brian's call, and the reasoning is worth keeping: it read as
+decorative rather than meaningful, and a motif that has to be explained is not
+earning its place. Every trace went with it, the 64px glowing ball on the plan
+screen, all five small dots, and the copy that referenced it. "The light's on.
+You're expected." became "[Greeter] is expecting you.", which is warmer and more
+specific because it names the actual person. "The light's still on" became "Your
+Sunday plan".
+
+Do not reintroduce a glowing dot as a section marker. If a marker is wanted
+later, draw something that carries meaning on its own.
 
 ---
 
@@ -300,11 +314,11 @@ Everything this section used to list open is now decided and shipped in
   screen. Sage blocks for place rules, oxblood blocks for report and demo
   disclosure, and the closing rule: a good greeter never rushes you,
   pressures you, or asks for money.
-- **Confirmation screen:** built as the "plan" screen. "The light's on.
+- **Confirmation screen:** built as the "plan" screen. "[Greeter] is expecting you."
   You're expected." with a gold plan card (real date of the next service
   day, greeter and public spot, service times, address, parking, dress),
   an unmissable oxblood demo disclosure, and a persistent resume card on
-  the intro screen ("The light's still on") so the plan is one tap away
+  the intro screen ("Your Sunday plan") so the plan is one tap away
   when the app reopens in the car.
 - **Greeters:** live, two fictional demo personas per church (40 total) in
   the locked card structure from section 6, mirrored to
