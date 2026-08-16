@@ -680,10 +680,111 @@ main.screen-root{
   pointer-events:none;
 }
 
+/* ============ THE DOORWAY ============
+   Beat zero of the arrival. You open on the doors themselves, close enough that
+   the arch is above your eyeline, and they swing inward to let you through.
+
+   Drawn in CSS rather than as an image, in the same ink-on-paper language as the
+   glyphs, so it cannot drift from the rest of the art.
+
+   The whole thing is CSS animation with fill-mode forwards, so the doors open
+   and clear even if the script never runs. JS only removes the node afterwards
+   and handles the skip. A doorway that could get stuck shut is not worth it. */
+.doorway{
+  position:fixed; inset:0; z-index:60;
+  background:var(--paper);
+  animation:doorwayOut 0.34s ease-in 0.70s forwards;
+}
+.doorway-inner{
+  position:relative; height:100%; max-width:480px; margin:0 auto;
+  perspective:680px; perspective-origin:50% 46%;
+  overflow:hidden;
+}
+/* The light waiting on the other side. */
+.doorway-glow{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 54% 42% at 50% 46%, #fffdf6, #fff2d4 26%, #f2cd8e 58%, #d99b52 88%);
+  opacity:0; animation:doorGlow 0.5s ease-out 0.06s forwards;
+}
+.door-leaf{
+  position:absolute; top:0; bottom:0; width:50.4%;
+  backface-visibility:hidden; will-change:transform;
+  background-color:var(--paper-deep);
+  box-shadow:0 0 44px -6px rgba(58,32,14,0.45);
+}
+/* Plank seams. Uneven spacing on purpose, since evenly ruled lines read as a
+   garage door rather than something a person built. */
+.door-leaf::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(58,32,14,0.22) 0 1.2px, transparent 1.2px),
+    repeating-linear-gradient(90deg, transparent 0 43px, rgba(58,32,14,0.20) 43px 44.2px);
+  background-size:66px 100%, auto;
+}
+/* HALF of one arch each, so the pair reads as a single arched double door
+   rather than two separate doors standing next to each other. The inner edge
+   of each panel is left open, and the seam of light closes the shape. */
+.door-leaf::after{
+  content:""; position:absolute; top:52px; bottom:46px;
+  border:2px solid rgba(107,89,67,0.55);
+  background:linear-gradient(180deg, rgba(217,164,65,0.13), rgba(217,164,65,0.03));
+  box-shadow:inset 0 0 34px -16px rgba(58,32,14,0.65);
+}
+.door-left::after{
+  left:20px; right:0; border-right:none;
+  border-radius:100% 0 0 10px / 34% 0 0 10px;
+}
+.door-right::after{
+  right:20px; left:0; border-left:none;
+  border-radius:0 100% 10px 0 / 0 34% 10px 0;
+}
+.door-left{
+  left:0; transform-origin:left center;
+  background-image:linear-gradient(90deg, rgba(58,32,14,0.16), rgba(58,32,14,0) 46%);
+  animation:doorSwingL 0.86s cubic-bezier(0.42,0,0.18,1) 0.08s forwards;
+}
+.door-right{
+  right:0; transform-origin:right center;
+  background-image:linear-gradient(270deg, rgba(58,32,14,0.16), rgba(58,32,14,0) 46%);
+  animation:doorSwingR 0.86s cubic-bezier(0.42,0,0.18,1) 0.08s forwards;
+}
+/* Two ring handles at the meeting edge. */
+.door-handle{
+  position:absolute; top:54%; width:30px; height:30px; border-radius:50%;
+  border:2.5px solid var(--ink-soft);
+  box-shadow:0 3px 8px -4px rgba(58,32,14,0.7);
+}
+.door-left .door-handle{ right:16px; }
+.door-right .door-handle{ left:16px; }
+/* A hairline of light down the seam before anything moves. */
+.doorway-seam{
+  position:absolute; left:50%; top:0; bottom:0; width:3px; transform:translateX(-50%);
+  background:linear-gradient(180deg, transparent, #ffe9b8 16%, #fff6e4 50%, #ffe9b8 84%, transparent);
+  filter:blur(1.5px);
+  animation:doorSeam 0.42s ease-out 0.06s forwards;
+}
+@keyframes doorSwingL{ from{ transform:rotateY(0); } to{ transform:rotateY(-84deg); } }
+@keyframes doorSwingR{ from{ transform:rotateY(0); } to{ transform:rotateY(84deg); } }
+@keyframes doorGlow{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes doorSeam{ from{ opacity:1; } to{ opacity:0; } }
+@keyframes doorwayOut{ from{ opacity:1; } to{ opacity:0; visibility:hidden; } }
+
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+/* Motion sensitivity turned on means no doorway at all, not a doorway frozen
+   shut. The blanket rule above kills the animations, so hide it outright. */
+@media (prefers-reduced-motion: reduce){ .doorway{ display:none !important; } }
 </style>
 </head>
 <body>
+<div class="doorway" id="doorway" aria-hidden="true">
+  <div class="doorway-inner">
+    <div class="doorway-glow"></div>
+    <div class="door-leaf door-left"><span class="door-handle"></span></div>
+    <div class="door-leaf door-right"><span class="door-handle"></span></div>
+    <div class="doorway-seam"></div>
+  </div>
+</div>
 <div class="app">
   <div class="sky-strip sky-intro" id="skyStrip"></div>
   <main class="screen-root" id="screenRoot"></main>
@@ -1055,6 +1156,28 @@ function allLanguages(){
 }
 
 /* ---------------- Rendering ---------------- */
+/* ---------------- The doorway ----------------
+   The opening animation is pure CSS so it cannot get stuck shut. This only
+   clears the node afterwards, and lets any tap cut it short. */
+(function(){
+  var doorway = document.getElementById("doorway");
+  if (!doorway) return;
+  var timer = null;
+  function clearDoorway(){
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (doorway && doorway.parentNode) doorway.parentNode.removeChild(doorway);
+    doorway = null;
+    document.removeEventListener("keydown", clearDoorway);
+  }
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { clearDoorway(); return; }
+  /* A tap means "get out of my way", so it cuts instantly rather than easing. */
+  doorway.addEventListener("click", clearDoorway);
+  doorway.addEventListener("touchstart", clearDoorway, { passive: true });
+  document.addEventListener("keydown", clearDoorway);
+  timer = setTimeout(clearDoorway, 1120);
+})();
+
 var root = document.getElementById("screenRoot");
 var skyStrip = document.getElementById("skyStrip");
 var fabRail = document.getElementById("fabRail");
@@ -1246,8 +1369,8 @@ function renderIntro(){
       '<img class="intro-hero" src="' + HERO_IMG + '" alt="" aria-hidden="true" />' +
       resumeHtml +
       glyphSvg(1) +
-      '<h2 class="heading-font">Let’s plan your first Sunday.</h2>' +
-      '<p class="sub">Five quick questions, about a minute, so when you walk in this Sunday morning, someone already knows to expect you.</p>' +
+      '<h2 class="heading-font">Let’s help you find a church</h2>' +
+      '<p class="sub">Five quick questions, about a minute, so when you walk in this Sunday morning, you’ll already feel welcomed.</p>' +
       '<div class="field-group">' +
         '<div class="field-label">Where should we look</div>' +
         '<input class="zip-input" id="zipInput" inputmode="numeric" maxlength="5" placeholder="Enter your zip code" value="' + escapeHtml(state.zip) + '" />' +

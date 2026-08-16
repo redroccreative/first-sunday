@@ -181,12 +181,26 @@ Order within the card, top to bottom:
 
 Warm, faith-forward, plain. Speak like a friend who already goes there.
 
-Real copy anchors from the winning mockup, use these as the tuning fork:
+Real copy anchors, use these as the tuning fork:
 
-> Let's plan your first Sunday.
+> Let's help you find a church
+
+**The intro headline changed 2026-08-15**, Brian's call. It was "Let's plan your
+first Sunday." for the whole tournament and the first build. The new line says
+plainly what the app does for someone who has not decided to go anywhere yet,
+where the old one assumed they already had a Sunday in mind. Note it carries no
+full stop, deliberately. The old line is recorded here so a session reading an
+older doc does not treat it as a regression and put it back.
 
 > Five quick questions, about a minute, so when you walk in this Sunday morning,
-> someone already knows to expect you.
+> you'll already feel welcomed.
+
+**Also changed 2026-08-15**, same call. The promise moved from what the app
+arranges ("someone already knows to expect you") to what the visitor feels
+("you'll already feel welcomed"), which is the actual thing being sold. The
+"Five quick questions, about a minute" opening is unchanged and is still the
+anchor tied to the five-question count in section 10, and "this Sunday morning"
+still carries the motif the headline used to carry.
 
 > No wrong answer here, we just want you comfortable walking in.
 
@@ -475,3 +489,42 @@ The greeter count ("2 greeters ready to meet you at the door") came off every
 card. All twenty churches have exactly two greeters, so the line was identical
 twenty times and carried no signal. It still matters in the expanded view, where
 the greeters are actually shown.
+
+---
+
+## 15. The doorway, 2026-08-15
+
+Beat zero of the arrival story. The app opens on two arched doors filling the
+screen, close enough that the arch is above your eyeline, with a hairline of warm
+light down the seam. They swing inward, the way you would push them, and light
+floods out as they go. About one second, then the home page.
+
+**Drawn in CSS, not as an image.** Roughly 3KB of gradients and borders instead
+of another hundred KB of picture, and it cannot drift from the illustration the
+way a second generated image would. Same reasoning as section 12.
+
+One arch spanning BOTH leaves, not an arch on each. Each panel is half of one
+shape, with its inner edge left open and the seam of light closing it. Two
+separate arches read as two doors standing beside each other, which is a
+different and worse picture.
+
+### Three rules that are not negotiable
+
+1. **The animation is pure CSS with `animation-fill-mode: forwards`.** It opens
+   and clears even if the script never runs. JavaScript only removes the node
+   afterwards and handles the skip. A front door that can get stuck shut is not
+   worth any amount of polish.
+2. **A tap anywhere skips it instantly**, not with an eased fast-forward. A tap
+   means get out of my way.
+3. **`prefers-reduced-motion` hides it outright** with `display:none`, a second
+   rule after the blanket transition kill. Without that second rule the blanket
+   rule freezes the doors SHUT and locks the reader out, which is worse than no
+   accessibility handling at all. Prove that direction if you ever touch it.
+
+### It plays on every load, on purpose
+
+Brian was offered first-visit-only and chose every time, having been told the
+cost: someone opening the plan in the church parking lot sits through it too.
+That is why it is about a second rather than the two or three a splash screen
+usually takes, and why the skip exists. If it ever needs to become first-visit-
+only, that is a localStorage flag and two lines, not a redesign.
