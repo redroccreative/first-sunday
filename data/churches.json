@@ -1,30 +1,29 @@
 {
   "vocabulary": {
-    "note": "Fixed answer sets used so the quiz can match on these values directly. dressNorm vocabulary is locked by DESIGN.md; musicStyle, meetingSpace, and kidsDuringService are provisional, defined this session to keep the ranking matchable. sizeBand was removed 2026-08-15 after a research pass found only 1 of 20 churches states a real Sunday attendance number; replaced by meetingSpace (quiz question 5) and languageOptions (a lighter filter/badge, not a full quiz question).",
+    "note": "Fixed answer sets so the quiz can match on these values directly. Rewritten 2026-08-15 into plain phrases a first time visitor would actually say, replacing shorthand like \"Own class during service\" and \"Business casual\". dressNorm no longer carries \"No preference\": a church whose answer is \"anything goes\" is a different thing from a visitor who has no preference, and the quiz appends the neutral option itself. sizeBand was removed 2026-08-15 after a research pass found only 1 of 20 churches states a real Sunday attendance number; replaced by meetingSpace (quiz question 5) and languageOptions (a lighter filter/badge, not a full quiz question).",
     "musicStyle": [
       "Full band, modern worship",
-      "Blended, some hymns some contemporary",
+      "A mix of hymns and newer songs",
       "Traditional hymns, organ or piano",
-      "Choir led, traditional",
-      "Chant and liturgical music",
-      "Varies by service"
+      "A traditional choir",
+      "Chanting and liturgy",
+      "Depends on which service you go to"
     ],
     "dressNorm": [
       "Jeans and t-shirts",
-      "Business casual",
-      "Sunday best",
-      "Really varies",
-      "No preference"
+      "Khakis and collared shirts",
+      "Sunday best, suits and dresses",
+      "It really varies"
     ],
     "kidsDuringService": [
-      "Own class during service",
-      "Kids classes sorted by age",
-      "Stay in the main service",
-      "Cry room or nursery available, no separate class"
+      "Kids have their own class during the service",
+      "Kids classes, split up by age",
+      "Kids stay with you the whole time",
+      "A nursery or quiet room, but no kids class"
     ],
     "meetingSpace": [
-      "Dedicated church building",
-      "Shared or rented space"
+      "Their own church building",
+      "A rented space, like a school"
     ],
     "languageOptions": "Free-text array of languages a service is offered in or interpreted into (not a fixed vocabulary), e.g. [\"English\"], [\"English\", \"Spanish\"]."
   },
@@ -46,8 +45,8 @@
         "Sunday 12:45 PM"
       ],
       "musicStyle": "Full band, modern worship",
-      "dressNorm": "No preference",
-      "kidsDuringService": "Kids classes sorted by age",
+      "dressNorm": "Anything goes",
+      "kidsDuringService": "Kids classes, split up by age",
       "meetingSpace": null,
       "languageOptions": [
         "English",
@@ -75,10 +74,10 @@
       "serviceTimes": [
         "Sunday 9:30 AM"
       ],
-      "musicStyle": "Blended, some hymns some contemporary",
-      "dressNorm": "Business casual",
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Shared or rented space",
+      "musicStyle": "A mix of hymns and newer songs",
+      "dressNorm": "Khakis and collared shirts",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": null,
       "parkingNote": "Use the school's main parking lot, with signage directing attendees to the cafeteria where the church meets.",
       "whatToExpectNote": "You will gather in the cafeteria of Laureate Park Elementary School, where complimentary coffee and refreshments are offered before the service. Seating is either in chairs or on benches in the back for families with young children, and the service follows a structured order including a welcome, several songs, a time of confession, a roughly 30 minute sermon, pastoral prayer, and a closing benediction. Nursery care is available for ages 0 to 4, and kids in kindergarten through second grade can go to story time in the library during the sermon, with coloring pages and children's bulletins available for those who stay in the service.",
@@ -104,9 +103,9 @@
         "Sunday 10:00 AM"
       ],
       "musicStyle": "Full band, modern worship",
-      "dressNorm": "No preference",
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Shared or rented space",
+      "dressNorm": "Anything goes",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": [
         "English",
         "Spanish (translation available)"
@@ -164,9 +163,9 @@
         "Sunday 10:30 AM Worship Service",
         "Sunday 6:00 PM Bible Application"
       ],
-      "musicStyle": "Blended, some hymns some contemporary",
+      "musicStyle": "A mix of hymns and newer songs",
       "dressNorm": null,
-      "kidsDuringService": "Own class during service",
+      "kidsDuringService": "Kids have their own class during the service",
       "meetingSpace": null,
       "languageOptions": null,
       "parkingNote": null,
@@ -190,9 +189,9 @@
         "Sunday 9:45 AM (Small Groups)",
         "Sunday 11:00 AM (Worship Service)"
       ],
-      "musicStyle": "Blended, some hymns some contemporary",
+      "musicStyle": "A mix of hymns and newer songs",
       "dressNorm": null,
-      "kidsDuringService": "Kids classes sorted by age",
+      "kidsDuringService": "Kids classes, split up by age",
       "meetingSpace": null,
       "languageOptions": [
         "English"
@@ -221,9 +220,9 @@
         "Sunday 11:30 AM",
         "Sunday 3:30 PM (Spanish language)"
       ],
-      "musicStyle": "Varies by service",
-      "dressNorm": "No preference",
-      "kidsDuringService": "Kids classes sorted by age",
+      "musicStyle": "Depends on which service you go to",
+      "dressNorm": "Anything goes",
+      "kidsDuringService": "Kids classes, split up by age",
       "meetingSpace": null,
       "languageOptions": [
         "English",
@@ -256,9 +255,9 @@
         "Sunday 10:30 AM"
       ],
       "musicStyle": null,
-      "dressNorm": "Really varies",
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Dedicated church building",
+      "dressNorm": "It really varies",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "Their own church building",
       "languageOptions": null,
       "parkingNote": "Parking is free and always available right on campus, park in any open spot and greeters near the entrance will point you in the right direction.",
       "whatToExpectNote": "You will arrive to a Welcome Table with greeters and name tags, then can grab coffee or a snack at the Cafe before the 10:30 AM service. Kids ages 6 months through VPK can go to the nursery and grades K through 5 start in Sunday School, then rejoin the family in the sanctuary for the sermon and communion. There is no formal check in and dress ranges from jeans and t-shirts to business casual, so you come as you are.",
@@ -284,10 +283,10 @@
         "Sunday 9:30 AM",
         "Sunday 11:00 AM"
       ],
-      "musicStyle": "Varies by service",
+      "musicStyle": "Depends on which service you go to",
       "dressNorm": null,
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Dedicated church building",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "Their own church building",
       "languageOptions": null,
       "parkingNote": "For Sunday worship: the Seaside parking garage at Jackson and Magnolia (closes at 1 pm), an underground garage beneath the building with 70 spaces, and a surface lot at the Wesley Center on Jackson Street for those with limited mobility or families with young children.",
       "whatToExpectNote": "A first time visitor can choose between a 9:30 AM Modern Worship service with a praise band in the Contemporary Worship Center on the second floor, or an 11:00 AM Traditional Worship service in the Sanctuary with choirs, instrumental ensembles, and organ. Children from birth through preschool can go to nursery care, and Pre-K through 5th graders start in Kid's Chapel before moving to age based groups in the Children's Ministry wing. Communion is offered at both services on the first Sunday of each month.",
@@ -312,10 +311,10 @@
       "serviceTimes": [
         "Sunday 10:00 AM"
       ],
-      "musicStyle": "Blended, some hymns some contemporary",
-      "dressNorm": "Really varies",
-      "kidsDuringService": "Cry room or nursery available, no separate class",
-      "meetingSpace": "Shared or rented space",
+      "musicStyle": "A mix of hymns and newer songs",
+      "dressNorm": "It really varies",
+      "kidsDuringService": "A nursery or quiet room, but no kids class",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": null,
       "parkingNote": null,
       "whatToExpectNote": "Worship lasts about an hour and blends a couple of classic hymns with contemporary worship songs using simple instrumentation, along with some ancient forms of liturgy. Greeters are stationed near the main entrance of Lake Nona Middle School and will walk you to the right room. Communion is offered monthly, and background checked staff care for preschool age children in an adjacent windowed room during the service.",
@@ -341,9 +340,9 @@
         "Sunday 10:30 AM"
       ],
       "musicStyle": null,
-      "dressNorm": "Business casual",
+      "dressNorm": "Khakis and collared shirts",
       "kidsDuringService": null,
-      "meetingSpace": "Shared or rented space",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": null,
       "parkingNote": null,
       "whatToExpectNote": "You will worship on Sunday morning at 10:30 AM at the Pioneers Campus just off Narcoossee Road near 417. The church describes itself as a casual congregation, and dress is casual, think jeans paired with a button down shirt or blouse.",
@@ -369,7 +368,7 @@
       "musicStyle": null,
       "dressNorm": null,
       "kidsDuringService": null,
-      "meetingSpace": "Dedicated church building",
+      "meetingSpace": "Their own church building",
       "languageOptions": null,
       "parkingNote": null,
       "whatToExpectNote": "Sunday worship is once a week at this address, and the church describes its congregation as diverse and family like, welcoming to all who enter. The site itself lists two different start times for the Sunday service, 9:00 AM on the homepage and worship page, 9:30 AM on the visit and about pages, so a first time visitor should call ahead to confirm the exact time.",
@@ -393,10 +392,10 @@
         "Sunday 10:15 AM",
         "Sunday 6:00 PM"
       ],
-      "musicStyle": "Varies by service",
+      "musicStyle": "Depends on which service you go to",
       "dressNorm": null,
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Dedicated church building",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "Their own church building",
       "languageOptions": [
         "English"
       ],
@@ -425,8 +424,8 @@
       ],
       "musicStyle": null,
       "dressNorm": null,
-      "kidsDuringService": "Own class during service",
-      "meetingSpace": "Shared or rented space",
+      "kidsDuringService": "Kids have their own class during the service",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": null,
       "parkingNote": null,
       "whatToExpectNote": "Adoration Church is an Anglican parish that gathers for worship on Sunday mornings at 10am at the Kress Memorial Seventh Day Adventist Church Building in Winter Park. Kids ages 1 to 11 stay with their families for part of the service, then background checked volunteers lead them in age appropriate teaching during the sermon before they rejoin their families. A pre-service prayer gathering is also offered on Sundays at 9am for those who want to attend.",
@@ -455,7 +454,7 @@
       "musicStyle": null,
       "dressNorm": null,
       "kidsDuringService": null,
-      "meetingSpace": "Shared or rented space",
+      "meetingSpace": "A rented space, like a school",
       "languageOptions": [
         "English",
         "Spanish",
@@ -489,7 +488,7 @@
       "musicStyle": null,
       "dressNorm": null,
       "kidsDuringService": null,
-      "meetingSpace": "Dedicated church building",
+      "meetingSpace": "Their own church building",
       "languageOptions": [
         "English",
         "Spanish"
@@ -520,7 +519,7 @@
       ],
       "musicStyle": null,
       "dressNorm": null,
-      "kidsDuringService": "Own class during service",
+      "kidsDuringService": "Kids have their own class during the service",
       "meetingSpace": null,
       "languageOptions": [
         "English",
@@ -550,9 +549,9 @@
         "Sunday 2:00 PM (Spanish language)"
       ],
       "musicStyle": "Full band, modern worship",
-      "dressNorm": "Really varies",
-      "kidsDuringService": "Kids classes sorted by age",
-      "meetingSpace": "Dedicated church building",
+      "dressNorm": "It really varies",
+      "kidsDuringService": "Kids classes, split up by age",
+      "meetingSpace": "Their own church building",
       "languageOptions": [
         "English",
         "Spanish"

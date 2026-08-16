@@ -278,16 +278,31 @@ other.
 
 **Answer vocabulary**, matching what `data/churches.json`'s `vocabulary`
 block uses for ranking:
-- **Dress** (locked): "Jeans and t-shirts," "Business casual," "Sunday
-  best," "Really varies," "No preference"
-- **Music** (provisional): "Full band, modern worship," "Blended, some
-  hymns some contemporary," "Traditional hymns, organ or piano," "Choir led,
-  traditional," "Chant and liturgical music," "Varies by service"
-- **Meeting space** (provisional): "Dedicated church building," "Shared or
-  rented space"
-- **Kids during service** (provisional): "Own class during service," "Kids
-  classes sorted by age," "Stay in the main service," "Cry room or nursery
-  available, no separate class"
+**Rewritten into plain phrases 2026-08-15**, on Brian's call, after "Own class
+during service" and "Business casual" showed up on the cards as shorthand a
+first time visitor would have to decode. The old wording is listed beside each
+one so a future session can recognise a stale reference:
+
+- **Dress**: "Jeans and t-shirts," "Khakis and collared shirts" (was "Business
+  casual"), "Sunday best, suits and dresses," "It really varies"
+- **Music**: "Full band, modern worship," "A mix of hymns and newer songs" (was
+  "Blended, some hymns some contemporary"), "Traditional hymns, organ or piano,"
+  "A traditional choir," "Chanting and liturgy," "Depends on which service you
+  go to"
+- **Where they meet**: "Their own church building," "A rented space, like a
+  school"
+- **Kids**: "Kids have their own class during the service," "Kids classes, split
+  up by age," "Kids stay with you the whole time," "A nursery or quiet room, but
+  no kids class"
+
+**Dress no longer carries "No preference".** A church whose answer is "anything
+goes" and a visitor who has no preference are two different statements, and they
+used to share one string. The quiz appends the neutral option itself, so the
+visitor still gets "No preference" and it still scores full weight everywhere.
+
+Changing this vocabulary changes the shape of a saved answer, so it took the
+`STORAGE_KEY` bump to `firstSunday.state.v3`. A v2 answer matches nothing in the
+catalog and would have scored every church identically without saying so.
 - **Denomination**: whatever denomination string is on the church record,
   not a fixed list, this one is closer to a filter than a matched vibe axis
 
@@ -421,3 +436,42 @@ is covered. Bump the key only when the shape of an existing answer changes.
 (`sky-results`), so it carries results' mark, the closed door. That is right on
 its own terms: on the compare screen you are still outside, weighing which door.
 A sixth mark would have broken the five-beat count in section 12.
+
+---
+
+## 14. Saving must not move the page, 2026-08-15
+
+Saving a church used to call `render()`. That rebuilds `#screenRoot` and resets
+the scroll, so tapping save on the twelfth card threw the reader back to the top
+of the list. It is the worst possible answer to a tap that means "yes, keep this
+one."
+
+So the save button and the shortlist counter **repaint in place and never call
+`render()`**:
+
+- `saveBtnHtml()` emits an empty button. `paintSaveBtn()` fills in its class,
+  label, mark, and `aria-pressed`, and is called both on first render and on
+  every toggle. Rebuilding the element instead would drop its click listener.
+- `paintShortlistFab()` updates the counter, which lives OUTSIDE `#screenRoot`
+  precisely so a screen re-render cannot disturb it.
+
+Anything else added to a result card follows the same pattern. If a control on a
+long list calls `render()`, it is a bug.
+
+### The counter is a fixed rail, not a header chip
+
+It sits bottom right and rides along as you scroll, because a count in the
+header is invisible exactly when you are using it. `.fab-rail` is
+`position:fixed` but carries the app's own `max-width:480px; margin:0 auto`, so
+on a desktop window the button stays inside the phone column instead of pinning
+itself to the window edge. It shows only on the results screen and only once
+something is saved.
+
+The mark is a drawn church in the same ink language as the section 12 glyphs.
+
+### Dropped from the result card
+
+The greeter count ("2 greeters ready to meet you at the door") came off every
+card. All twenty churches have exactly two greeters, so the line was identical
+twenty times and carried no signal. It still matters in the expanded view, where
+the greeters are actually shown.
